@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SaleBookApp</string>
+<string-array name="option">
+        <item>Seller</item>
+        <item>Buyer</item>
+    </string-array>
 </resources>
