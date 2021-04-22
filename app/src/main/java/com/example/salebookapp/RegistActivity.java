@@ -70,18 +70,8 @@ public class RegistActivity extends AppCompatActivity {
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String hoTen = edtFullName.getText().toString();
-                String username = edtUserName.getText().toString();
-                String password = edtPassword.getText().toString();
-                String soDT = edtCellPhone.getText().toString();
-                String diaChi = edtAddress.getText().toString();
-                String loai_acc = spRole.getSelectedItem().toString();
-
-                boolean checkAddAcc = db.addAccount(username, password, loai_acc);
-                boolean checkAddKH = db.addKhachHang(hoTen, soDT, diaChi);
-
                 if (awesomeValidation.validate()) {
-                    Intent intent = new Intent(RegistActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
