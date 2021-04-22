@@ -72,7 +72,7 @@ public class RegistActivity extends AppCompatActivity {
             public void onClick (View v){
 
                 if (awesomeValidation.validate()) {
-                    Intent intent = new Intent(RegistActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
