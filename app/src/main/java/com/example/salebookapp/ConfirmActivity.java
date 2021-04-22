@@ -45,9 +45,12 @@ public class ConfirmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isConfirmTrue()){
-                    edtResult.setText("Thành Công");
+                    Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ConfirmActivity.this, LoginActivity.class);
+                    startActivity(intent);
+
                 }else {
-                    edtResult.setText("Khônng Thành Công");
+                    Toast.makeText(ConfirmActivity.this, "Xác thực không thành công", Toast.LENGTH_LONG).show();
                 }
             }
         } );
