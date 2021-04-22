@@ -40,8 +40,9 @@ public class RegistActivity extends AppCompatActivity {
     CheckBox cbAgree;
     Button btnCreate;
     Spinner spRole;
-
     AwesomeValidation awesomeValidation;
+    DBHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,20 +66,30 @@ public class RegistActivity extends AppCompatActivity {
                 }
             }
         });
+
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(awesomeValidation.validate()){
-                    Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
+                String hoTen = edtFullName.getText().toString();
+                String username = edtUserName.getText().toString();
+                String password = edtPassword.getText().toString();
+                String soDT = edtCellPhone.getText().toString();
+                String diaChi = edtAddress.getText().toString();
+                String loai_acc = spRole.getSelectedItem().toString();
+
+                boolean checkAddAcc = db.addAccount(username, password, loai_acc);
+                boolean checkAddKH = db.addKhachHang(hoTen, soDT, diaChi);
+
+                if (awesomeValidation.validate()) {
+                    Intent intent = new Intent(RegistActivity.this, HomeActivity.class);
                     startActivity(intent);
+                } else {
+                    Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
                 }
-
             }
-
         });
-
-
     }
+
     private void addValidation(){
         awesomeValidation = new AwesomeValidation(BASIC);
         awesomeValidation.addValidation(RegistActivity.this, R.id.edt_fullname, RegexTemplate.NOT_EMPTY ,R.string.err_fullname);
