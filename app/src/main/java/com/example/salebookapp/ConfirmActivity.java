@@ -39,7 +39,8 @@ public class ConfirmActivity extends AppCompatActivity {
         actionBar.setTitle("CONFIRM");
         actionBar.setDisplayHomeAsUpEnabled(true);
         Anhxa();
-        confirmCode = randomCode()+"";
+
+        sendMail();
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +51,15 @@ public class ConfirmActivity extends AppCompatActivity {
                 }
             }
         } );
+    }
+
+    private void sendMail() {
+        confirmCode = randomCode()+"";
+
+        JavaMailAPI javaMailAPI = null;
+            javaMailAPI = new JavaMailAPI(this,"huynhnguyenbacgiang@gmail.com","Send code",confirmCode);
+            javaMailAPI.execute();
+
     }
 
     private void Anhxa() {
@@ -69,4 +79,5 @@ public class ConfirmActivity extends AppCompatActivity {
         System.out.println("input: "+edtConfirmCode.getText().toString()+ edtConfirmCode.getText().toString().contains(confirmCode));
         return edtConfirmCode.getText().toString().contains(confirmCode);
     }
+
 }
