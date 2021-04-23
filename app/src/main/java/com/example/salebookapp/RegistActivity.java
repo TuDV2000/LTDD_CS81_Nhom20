@@ -41,7 +41,8 @@ public class RegistActivity extends AppCompatActivity {
     Button btnCreate;
     Spinner spRole;
     AwesomeValidation awesomeValidation;
-    DBHelper db;
+    private AccountService accService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class RegistActivity extends AppCompatActivity {
         actionBar.setTitle("REGIST");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //Điều khoản
         cbAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -70,10 +72,22 @@ public class RegistActivity extends AppCompatActivity {
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
-
+                // Kiểm tra tính đúng đắn của đầu vào
                 if (awesomeValidation.validate()) {
-                    Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
-                    startActivity(intent);
+                    accService = new AccountService(RegistActivity.this);
+                    Account acc =  new Account();
+
+                    acc.setUsername(edtUserName.getText().toString());
+                    acc.setPassword(edtPassword.getText().toString());
+                    acc.setTypeAcc(spRole.getSelectedItem().toString());
+                    if (accService.addAccount(acc)) {
+                        //
+                        //Chuyển activity tại đây
+                        //Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
+                        //startActivity(intent);
+                        //
+                        Toast.makeText(RegistActivity.this, "Regist Account success", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
                 }
@@ -150,5 +164,17 @@ public class RegistActivity extends AppCompatActivity {
     public void onClick(View v) {
         Intent intent = new Intent(RegistActivity.this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        accService.open();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        accService.close();
+        super.onPause();
     }
 }
