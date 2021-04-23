@@ -77,7 +77,9 @@ public class RegistActivity extends AppCompatActivity {
                     intent.putExtra(EXTRA_TEXT,email);
                     startActivity(intent);
                 }
+
             }
+
         });
 
 

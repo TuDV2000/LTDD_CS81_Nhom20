@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SaleBookApp">
-        <activity android:name=".ConfirmActivity" android:parentActivityName=".RegistActivity"></activity>
+        <activity
+            android:name=".ConfirmActivity"
+            android:parentActivityName=".RegistActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:parentActivityName=".HomeActivity" />
@@ -19,8 +21,10 @@
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
