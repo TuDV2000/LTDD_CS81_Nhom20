@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -34,8 +35,9 @@ import static com.basgeekball.awesomevalidation.ValidationStyle.TEXT_INPUT_LAYOU
 import static com.basgeekball.awesomevalidation.ValidationStyle.UNDERLABEL;
 
 public class RegistActivity extends AppCompatActivity {
+    public static final String EXTRA_TEXT ="com.example.salebookapp.EXTRA_TEXT";
 
-    EditText edtFullName, edtUserName, edtPassword,edtCellPhone,edtAddress;
+    EditText edtFullName, edtUserName, edtPassword,edtCellPhone,edtAddress,edtConfirmPass;
     TextView txtChangeLogin;
     CheckBox cbAgree;
     Button btnCreate;
@@ -68,13 +70,14 @@ public class RegistActivity extends AppCompatActivity {
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String email = edtUserName.getText().toString();
+                System.out.println(email);
                 if(awesomeValidation.validate()){
                     Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
+                    intent.putExtra(EXTRA_TEXT,email);
                     startActivity(intent);
                 }
-
             }
-
         });
 
 
@@ -124,6 +127,7 @@ public class RegistActivity extends AppCompatActivity {
         String regexPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
         awesomeValidation.addValidation(RegistActivity.this,R.id.edt_password, regexPassword,R.string
                 .err_password);
+        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_confirmpassword,R.id.edt_password,R.string.err_confirmpassword);
     }
 
     private void setItem() {
@@ -137,6 +141,7 @@ public class RegistActivity extends AppCompatActivity {
         edtFullName = findViewById(R.id.edt_fullname);
         edtUserName = findViewById(R.id.edt_username);
         edtPassword = findViewById(R.id.edt_password);
+        edtConfirmPass= findViewById(R.id.edt_confirmpassword);
         edtCellPhone = findViewById(R.id.edt_cellphone);
         edtAddress = findViewById(R.id.edt_address);
         txtChangeLogin = findViewById(R.id.txt_change_login);

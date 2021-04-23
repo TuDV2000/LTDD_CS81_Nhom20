@@ -8,38 +8,34 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.util.Properties;
 import java.util.Random;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+
 
 public class ConfirmActivity extends AppCompatActivity {
 
+    TextView tvEmail;
     EditText edtConfirmCode, edtResult;
     Button btnSubmit, btnResend;
-    String confirmCode;
+    String confirmCode, email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
 
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("CONFIRM");
         actionBar.setDisplayHomeAsUpEnabled(true);
+
         Anhxa();
 
+        Intent intent = getIntent();
+        email = intent.getStringExtra(RegistActivity.EXTRA_TEXT);
+
+        tvEmail.setText(email);
         sendMail();
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,14 +54,12 @@ public class ConfirmActivity extends AppCompatActivity {
 
     private void sendMail() {
         confirmCode = randomCode()+"";
-
-        JavaMailAPI javaMailAPI = null;
-            javaMailAPI = new JavaMailAPI(this,"huynhnguyenbacgiang@gmail.com","Send code",confirmCode);
+        JavaMailAPI javaMailAPI = new JavaMailAPI(this,email,"Send code",confirmCode);
             javaMailAPI.execute();
-
     }
 
     private void Anhxa() {
+        tvEmail = findViewById(R.id.tv_email);
         edtConfirmCode = findViewById(R.id.edt_code);
         edtResult = findViewById(R.id.edt_result);
         btnSubmit = findViewById(R.id.btn_submit);

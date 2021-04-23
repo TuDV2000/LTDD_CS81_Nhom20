@@ -4,9 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
-
-import com.example.salebookapp.Utils;
-
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
