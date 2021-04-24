@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
         app:boxBackgroundColor="@color/white"
         app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
@@ -62,6 +62,24 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:hint="Password"
+            android:textSize="20dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        app:startIconDrawable="@drawable/ic_baseline_https_24"
+        app:hintAnimationEnabled="false">
+
+        <EditText
+            android:id="@+id/edt_confirmpassword"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:hint="Confirm Password"
             android:textSize="20dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
