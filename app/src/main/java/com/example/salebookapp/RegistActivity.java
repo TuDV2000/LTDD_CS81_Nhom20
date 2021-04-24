@@ -26,9 +26,8 @@ import com.basgeekball.awesomevalidation.utility.custom.CustomErrorReset;
 import com.basgeekball.awesomevalidation.utility.custom.CustomValidation;
 import com.basgeekball.awesomevalidation.utility.custom.CustomValidationCallback;
 import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
-
-import java.util.Objects;
-import java.util.regex.Pattern;
+import com.example.salebookapp.entities.Account;
+import com.example.salebookapp.service.AccountService;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 import static com.basgeekball.awesomevalidation.ValidationStyle.TEXT_INPUT_LAYOUT;
@@ -44,7 +43,8 @@ public class RegistActivity extends AppCompatActivity {
     Spinner spRole;
 
     AwesomeValidation awesomeValidation;
-    DBHelper db;
+    private AccountService accService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,7 @@ public class RegistActivity extends AppCompatActivity {
         actionBar.setTitle("REGIST");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //Điều khoản
         cbAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -72,13 +73,22 @@ public class RegistActivity extends AppCompatActivity {
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v){
+                // Kiểm tra tính đúng đắn của đầu vào
                 String email = edtUserName.getText().toString();
-                System.out.println(email);
-                if(awesomeValidation.validate()){
-                    Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
-                    intent.putExtra(EXTRA_TEXT,email);
-                    startActivity(intent);
+                if (awesomeValidation.validate()) {
+                    accService = new AccountService(RegistActivity.this);
+                    Account acc =  new Account();
+
+                    acc.setUsername(edtUserName.getText().toString());
+                    acc.setPassword(edtPassword.getText().toString());
+                    acc.setTypeAcc(spRole.getSelectedItem().toString());
+                    if (accService.addAccount(acc)) {
+                        Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
+                        intent.putExtra(EXTRA_TEXT,email);
+                        startActivity(intent);
+                        Toast.makeText(RegistActivity.this, "Regist Account success", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
                 }
@@ -161,4 +171,5 @@ public class RegistActivity extends AppCompatActivity {
         Intent intent = new Intent(RegistActivity.this, LoginActivity.class);
         startActivity(intent);
     }
+
 }
