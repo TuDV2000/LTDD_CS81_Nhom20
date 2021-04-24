@@ -1,12 +1,16 @@
-package com.example.salebookapp;
+package com.example.salebookapp.service;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 //print console debug
 import android.util.Log;
+
+import com.example.salebookapp.DBHelper;
+import com.example.salebookapp.entities.Account;
 //
 
 public class AccountService {
@@ -20,6 +24,7 @@ public class AccountService {
     }
 
     public boolean addAccount(Account account) {
+        open();
         ContentValues cv = new ContentValues();
 
         cv.put(allColumns[1], account.getUsername());
@@ -27,6 +32,7 @@ public class AccountService {
         cv.put(allColumns[3], account.getTypeAcc());
 
         long result = db.insert(DBHelper.TABLE_ACCOUNT, null, cv);
+        close();
 
         if (result == -1) {
             Log.d("Add account", "False");
@@ -37,9 +43,11 @@ public class AccountService {
         }
     }
 
-//    public boolean deleteAccount(int accountID) {
-//
-//    }
+    public Cursor getAccount(String[] username) {
+        Cursor c = db.rawQuery("select * from account where ?", username);
+
+        return c;
+    }
 
     public void open() throws SQLException {
         db = dbHelper.getWritableDatabase();

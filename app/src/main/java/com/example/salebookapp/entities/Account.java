@@ -1,4 +1,4 @@
-package com.example.salebookapp;
+package com.example.salebookapp.entities;
 
 
 import androidx.room.Entity;

@@ -2,7 +2,6 @@ package com.example.salebookapp;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -25,13 +24,10 @@ import com.basgeekball.awesomevalidation.utility.custom.CustomErrorReset;
 import com.basgeekball.awesomevalidation.utility.custom.CustomValidation;
 import com.basgeekball.awesomevalidation.utility.custom.CustomValidationCallback;
 import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
-
-import java.util.Objects;
-import java.util.regex.Pattern;
+import com.example.salebookapp.entities.Account;
+import com.example.salebookapp.service.AccountService;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
-import static com.basgeekball.awesomevalidation.ValidationStyle.TEXT_INPUT_LAYOUT;
-import static com.basgeekball.awesomevalidation.ValidationStyle.UNDERLABEL;
 
 public class RegistActivity extends AppCompatActivity {
 
@@ -81,11 +77,8 @@ public class RegistActivity extends AppCompatActivity {
                     acc.setPassword(edtPassword.getText().toString());
                     acc.setTypeAcc(spRole.getSelectedItem().toString());
                     if (accService.addAccount(acc)) {
-                        //
-                        //Chuyển activity tại đây
-                        //Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
-                        //startActivity(intent);
-                        //
+                        Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
+                        startActivity(intent);
                         Toast.makeText(RegistActivity.this, "Regist Account success", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -166,15 +159,4 @@ public class RegistActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    protected void onResume() {
-        accService.open();
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        accService.close();
-        super.onPause();
-    }
 }
