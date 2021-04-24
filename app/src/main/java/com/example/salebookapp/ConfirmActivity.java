@@ -44,12 +44,24 @@ public class ConfirmActivity extends AppCompatActivity {
                     Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(ConfirmActivity.this, LoginActivity.class);
                     startActivity(intent);
-
                 }else {
                     Toast.makeText(ConfirmActivity.this, "Xác thực không thành công", Toast.LENGTH_LONG).show();
                 }
             }
         } );
+        btnResend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMail();
+                if(isConfirmTrue()){
+                    Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ConfirmActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(ConfirmActivity.this, "Xác thực không thành công", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void sendMail() {
