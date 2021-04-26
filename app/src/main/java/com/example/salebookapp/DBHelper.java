@@ -11,11 +11,11 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     //Table Account
-    public static final String TABLE_ACCOUNT = "account";
+    public static final String TABLE_ACCOUNT = "accounts";
     public static final String ACCOUNT_COLUMN_ID = "acc_id";
     public static final String ACCOUNT_COLUMN_USER = "username";
     public static final String ACCOUNT_COLUMN_PASS = "password";
-    public static final String ACCOUNT_COLUMN_TYPEACC = "loai_acc";
+    public static final String ACCOUNT_COLUMN_TYPEACC = "acc_type";
     private final String CREATE_TABLE_ACC = "create table " + TABLE_ACCOUNT + "(" + ACCOUNT_COLUMN_ID + " integer primary key autoincrement, "
                                             + ACCOUNT_COLUMN_USER + " text not null, "
                                             + ACCOUNT_COLUMN_PASS + " text not null, "

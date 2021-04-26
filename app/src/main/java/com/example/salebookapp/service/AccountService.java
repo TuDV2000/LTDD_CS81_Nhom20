@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.salebookapp.DBHelper;
-import com.example.salebookapp.entities.Account;
+import com.example.salebookapp.entities.Accounts;
 //
 
 public class AccountService {
@@ -23,7 +23,7 @@ public class AccountService {
         dbHelper = new DBHelper(context);
     }
 
-    public boolean addAccount(Account account) {
+    public boolean addAccount(Accounts account) {
         open();
         ContentValues cv = new ContentValues();
 

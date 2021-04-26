@@ -1,16 +1,17 @@
 package com.example.salebookapp.entities;
 
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
-public class Account {
-    @PrimaryKey
+@Entity(tableName = "accounts")
+public class Accounts {
+    @PrimaryKey(autoGenerate = true)
     private int accID;
     private String username;
     private String password;
-    private String typeAcc;
+    private String accType;
 
     public int getAccID() {
         return accID;
@@ -36,11 +37,11 @@ public class Account {
         this.password = password;
     }
 
-    public String getTypeAcc() {
-        return typeAcc;
+    public String getAccType() {
+        return accType;
     }
 
-    public void setTypeAcc(String typeAcc) {
-        this.typeAcc = typeAcc;
+    public void setAccType(String accType) {
+        this.accType = accType;
     }
 }

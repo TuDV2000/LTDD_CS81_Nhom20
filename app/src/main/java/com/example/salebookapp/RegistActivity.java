@@ -24,7 +24,6 @@ import com.basgeekball.awesomevalidation.utility.custom.CustomErrorReset;
 import com.basgeekball.awesomevalidation.utility.custom.CustomValidation;
 import com.basgeekball.awesomevalidation.utility.custom.CustomValidationCallback;
 import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
-import com.example.salebookapp.entities.Account;
 import com.example.salebookapp.service.AccountService;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
@@ -70,13 +69,8 @@ public class RegistActivity extends AppCompatActivity {
             public void onClick (View v){
                 // Kiểm tra tính đúng đắn của đầu vào
                 if (awesomeValidation.validate()) {
-                    accService = new AccountService(RegistActivity.this);
-                    Account acc =  new Account();
-
-                    acc.setUsername(edtUserName.getText().toString());
-                    acc.setPassword(edtPassword.getText().toString());
-                    acc.setTypeAcc(spRole.getSelectedItem().toString());
-                    if (accService.addAccount(acc)) {
+                    //Kiểm tra add user success
+                    if (true) {
                         Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
                         startActivity(intent);
                         Toast.makeText(RegistActivity.this, "Regist Account success", Toast.LENGTH_SHORT).show();

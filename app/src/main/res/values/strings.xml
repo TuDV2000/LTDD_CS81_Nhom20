@@ -6,7 +6,6 @@
     <string name="err_password">Minimum eight characters, at least one uppercase letter, one lowercase letter and one number</string>
     <string name="err_value">Please enter value</string>
     <string-array name="option">
-        <item></item>
         <item>Seller</item>
         <item>Buyer</item>
     </string-array>
