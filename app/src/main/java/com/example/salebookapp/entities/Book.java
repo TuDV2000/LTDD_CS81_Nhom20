@@ -1,37 +1,11 @@
 package com.example.salebookapp.entities;
 
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
-
 import java.util.Date;
 
-import static androidx.room.ForeignKey.CASCADE;
-
-@Entity(tableName = "books")
-public class Books {
-    @PrimaryKey(autoGenerate = true)
+public class Book {
     private int bookID;
-    @ForeignKey (
-            entity = BookType.class,
-            parentColumns = "typeID",
-            childColumns = "idFKBookType",
-            onDelete = CASCADE
-    )
     private int fkBookTypeID;
-    @ForeignKey (
-            entity = Authors.class,
-            parentColumns = "authorID",
-            childColumns = "idFKAuthor",
-            onDelete = CASCADE
-    )
     private int fkAuthorID;
-    @ForeignKey (
-            entity = Publishers.class,
-            parentColumns = "publisherID",
-            childColumns = "idFKPublisher",
-            onDelete = CASCADE
-    )
     private int fkPublisherID;
     private String bookName;
     private Date PublicationDate;

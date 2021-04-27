@@ -1,13 +1,9 @@
 package com.example.salebookapp.entities;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
 import java.util.Date;
 
-@Entity(tableName = "bills")
-public class Bills {
-    @PrimaryKey(autoGenerate = true)
+public class Bill {
+
     private int billID;
     private int fkCusID;
     private double total;

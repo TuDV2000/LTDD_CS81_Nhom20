@@ -24,7 +24,10 @@ import com.basgeekball.awesomevalidation.utility.custom.CustomErrorReset;
 import com.basgeekball.awesomevalidation.utility.custom.CustomValidation;
 import com.basgeekball.awesomevalidation.utility.custom.CustomValidationCallback;
 import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
-import com.example.salebookapp.service.AccountService;
+import com.example.salebookapp.entities.Account;
+import com.example.salebookapp.entities.Customer;
+
+import java.util.List;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 
@@ -36,8 +39,8 @@ public class RegistActivity extends AppCompatActivity {
     Button btnCreate;
     Spinner spRole;
     AwesomeValidation awesomeValidation;
-    private AccountService accService;
-
+    AppDatabase appDatabase;
+//    private AccountDataSource accountDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class RegistActivity extends AppCompatActivity {
         setup();
         setItem();
         addValidation();
+//        accountDataSource = new AccountDataSource(RegistActivity.this);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("REGIST");
@@ -69,12 +73,24 @@ public class RegistActivity extends AppCompatActivity {
             public void onClick (View v){
                 // Kiểm tra tính đúng đắn của đầu vào
                 if (awesomeValidation.validate()) {
-                    //Kiểm tra add user success
-                    if (true) {
-                        Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
-                        startActivity(intent);
-                        Toast.makeText(RegistActivity.this, "Regist Account success", Toast.LENGTH_SHORT).show();
-                    }
+                    String user = edtUserName.getText().toString();
+                    String pass = edtPassword.getText().toString();
+                    String type = spRole.getSelectedItem().toString();
+                    String fullName = edtFullName.getText().toString();
+                    String phone = edtCellPhone.getText().toString();
+                    String address = edtAddress.getText().toString();
+
+                    Customer cus = new Customer(fullName, phone, address);
+//                    Account acc = new Account(, user, pass, type);
+//                    long resultAddAcc = appDatabase.dao().accountInsert(acc);
+//
+//                    if (true) {
+//                        Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
+//                        startActivity(intent);
+//                        System.out.println("Regist Account success");
+//                        Toast.makeText(RegistActivity.this, "Regist Account success", Toast.LENGTH_SHORT).show();
+//                    }
+                    System.out.println("=================================" + cus.cusID);
                 } else {
                     Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
                 }
@@ -152,5 +168,16 @@ public class RegistActivity extends AppCompatActivity {
         Intent intent = new Intent(RegistActivity.this, LoginActivity.class);
         startActivity(intent);
     }
-
+//
+//    @Override
+//    protected void onResume() {
+//        accountDataSource.openToWrite();
+//        super.onResume();
+//    }
+//
+//    @Override
+//    protected void onPause() {
+//        accountDataSource.close();
+//        super.onPause();
+//    }
 }

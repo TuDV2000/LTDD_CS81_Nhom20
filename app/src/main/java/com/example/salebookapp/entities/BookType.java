@@ -1,11 +1,7 @@
 package com.example.salebookapp.entities;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "booktype")
 public class BookType {
-    @PrimaryKey(autoGenerate = true)
     private int typeID;
     private String typeName;
     private String describe;

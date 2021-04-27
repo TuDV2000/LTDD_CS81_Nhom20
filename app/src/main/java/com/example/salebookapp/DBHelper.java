@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
     //Database name
-    private static final String DATABASE_NAME = "salebook";
+    private static final String DATABASE_NAME = "salebook.db";
     private static final int DATABASE_VERSION = 1;
 
     //Table Account
@@ -20,6 +20,9 @@ public class DBHelper extends SQLiteOpenHelper {
                                             + ACCOUNT_COLUMN_USER + " text not null, "
                                             + ACCOUNT_COLUMN_PASS + " text not null, "
                                             + ACCOUNT_COLUMN_TYPEACC + " text not null);";
+
+    //Table Customer
+
     //Another tables
     // ...
 
