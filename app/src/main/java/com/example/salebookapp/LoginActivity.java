@@ -31,11 +31,10 @@ public class LoginActivity extends AppCompatActivity {
         AnhXa();
         ControlButton();
 
-        awesomeValidation.addValidation(LoginActivity.this, R.id.edt_username, Patterns.EMAIL_ADDRESS,R.string
-                .err_email);
-        String regexPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
-        awesomeValidation.addValidation(LoginActivity.this,R.id.edt_password, regexPassword, R.string
-                .err_password);
+//        awesomeValidation.addValidation(LoginActivity.this, R.id.edt_username, Patterns.EMAIL_ADDRESS,R.string.err_email);
+//        String regexPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+//        awesomeValidation.addValidation(LoginActivity.this,R.id.edt_password, regexPassword, R.string
+//                .err_password);
 
     }
 
@@ -67,11 +66,16 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = edt_pass.getText().toString();
 
                 if (user.length() != 0 && pass.length() != 0){
-                    if (awesomeValidation.validate()) {
-                        if (AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user).size() > 0) {
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivity(intent);
-                        }
+                    if (true) {
+                        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user).size() > 0) {
+                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
                     }
                 } else {
                     Toast.makeText(LoginActivity.this,"Mời bạn nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
