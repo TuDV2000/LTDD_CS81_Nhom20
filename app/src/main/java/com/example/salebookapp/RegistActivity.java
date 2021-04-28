@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -47,7 +48,7 @@ public class RegistActivity extends AppCompatActivity {
 
         setup();
         setItem();
-//        addValidation();
+        addValidation();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("REGIST");
@@ -69,93 +70,85 @@ public class RegistActivity extends AppCompatActivity {
             @Override
             public void onClick (View v){
                 // Kiểm tra tính đúng đắn của đầu vào
-//                if (awesomeValidation.validate()) {
-                    String user = edtUserName.getText().toString();
-                    String pass = edtPassword.getText().toString();
-                    String type = spRole.getSelectedItem().toString();
-                    String fullName = edtFullName.getText().toString();
-                    String phone = edtCellPhone.getText().toString();
-                    String address = edtAddress.getText().toString();
-//
-//                    Customer cus = new Customer(fullName, phone, address);
-                    Account acc = new Account(user, pass, type);
-//                    if (true) {
-//                        Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
-//                        startActivity(intent);
-//                        System.out.println("Regist Account success");
-//                        Toast.makeText(RegistActivity.this, "Regist Account success", Toast.LENGTH_SHORT).show();
-//                    }
-//                    AppDatabase.databaseWriteExecutor.execute(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            AppDatabase.getDatabase(getApplicationContext()).dao().accountInsert(acc);
-//                        }
-//                    });
+               if (awesomeValidation.validate()) {
+                   String user = edtUserName.getText().toString();
+                   String pass = edtPassword.getText().toString();
+                   String type = spRole.getSelectedItem().toString();
+                   String fullName = edtFullName.getText().toString();
+                   String phone = edtCellPhone.getText().toString();
+                   String address = edtAddress.getText().toString();
 
-//                } else {
-//                    Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
-//                }
-                AppDatabase.databaseWriteExecutor.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        AppDatabase.getDatabase(getApplicationContext()).dao().accountInsert(acc);
-                        List<Account> accounts = AppDatabase.getDatabase(getApplicationContext()).dao().getAllAccount();
-                        for (Account acc:accounts) {
-                            System.out.println(acc.accID);
-                        }
+                   Customer cus = new Customer(fullName, phone, address);
+                   Account acc = new Account(user, pass, type);
 
-                    }
-                });
+                   try {
+                       AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                           @Override
+                           public void run() {
+                               AppDatabase.getDatabase(getApplicationContext()).dao().customerInsert(cus);
+                               AppDatabase.getDatabase(getApplicationContext()).dao().accountInsert(acc);
+                           }
+                       });
+                       Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
+                       startActivity(intent);
+                       Toast.makeText(RegistActivity.this, "Regist Account success", Toast.LENGTH_SHORT).show();
+                   } catch (Exception ex) {
+                       Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
+                   }
+
+               } else {
+                   Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
+               }
             }
         });
     }
 
-//    private void addValidation(){
-//        awesomeValidation = new AwesomeValidation(BASIC);
-//        awesomeValidation.addValidation(RegistActivity.this, R.id.edt_fullname, RegexTemplate.NOT_EMPTY ,R.string.err_fullname);
-//        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_address,RegexTemplate.NOT_EMPTY,R.string.err_value);
-//        awesomeValidation.addValidation(RegistActivity.this, R.id.sp_role, new CustomValidation() {
-//            @Override
-//            public boolean compare(ValidationHolder validationHolder) {
-//                if (((Spinner) validationHolder.getView()).getSelectedItem().toString().equals("")) {
-//                    return false;
-//                } else {
-//                    return true;
-//                }
-//            }
-//        }, new CustomValidationCallback() {
-//            @Override
-//            public void execute(ValidationHolder validationHolder) {
-//                TextView textViewError = (TextView) ((Spinner) validationHolder.getView()).getSelectedView();
-//                textViewError.setError(validationHolder.getErrMsg());
-//                textViewError.setTextColor(Color.RED);
-//            }
-//        }, new CustomErrorReset() {
-//            @Override
-//            public void reset(ValidationHolder validationHolder) {
-//                TextView textViewError = (TextView) ((Spinner) validationHolder.getView()).getSelectedView();
-//                textViewError.setError(null);
-//                textViewError.setTextColor(Color.BLACK);
-//            }
-//        }, R.id.sp_role);
-//        awesomeValidation.addValidation(RegistActivity.this, R.id.edt_cellphone, RegexTemplate.TELEPHONE + RegexTemplate.NOT_EMPTY , R.string
-//                .err_phone);
-//        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_cellphone,new SimpleCustomValidation() {
-//            @Override
-//            public boolean compare(String s) {
-//                if (s.length() < 8 || s.length() > 13){
-//                    return false;
-//                }else {
-//                    return true;
-//                }
-//            }
-//        },R.string.err_value);
-//        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_username, Patterns.EMAIL_ADDRESS,R.string
-//                .err_email);
-//        String regexPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
-//        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_password, regexPassword,R.string
-//                .err_password);
-//    }
+    private void addValidation(){
+        awesomeValidation = new AwesomeValidation(BASIC);
+        awesomeValidation.addValidation(RegistActivity.this, R.id.edt_fullname, RegexTemplate.NOT_EMPTY ,R.string.err_fullname);
+        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_address,RegexTemplate.NOT_EMPTY,R.string.err_value);
+        awesomeValidation.addValidation(RegistActivity.this, R.id.sp_role, new CustomValidation() {
+            @Override
+            public boolean compare(ValidationHolder validationHolder) {
+                if (((Spinner) validationHolder.getView()).getSelectedItem().toString().equals("")) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }, new CustomValidationCallback() {
+            @Override
+            public void execute(ValidationHolder validationHolder) {
+                TextView textViewError = (TextView) ((Spinner) validationHolder.getView()).getSelectedView();
+                textViewError.setError(validationHolder.getErrMsg());
+                textViewError.setTextColor(Color.RED);
+            }
+        }, new CustomErrorReset() {
+            @Override
+            public void reset(ValidationHolder validationHolder) {
+                TextView textViewError = (TextView) ((Spinner) validationHolder.getView()).getSelectedView();
+                textViewError.setError(null);
+                textViewError.setTextColor(Color.BLACK);
+            }
+        }, R.id.sp_role);
+        awesomeValidation.addValidation(RegistActivity.this, R.id.edt_cellphone, RegexTemplate.TELEPHONE + RegexTemplate.NOT_EMPTY , R.string
+                .err_phone);
+        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_cellphone,new SimpleCustomValidation() {
+            @Override
+            public boolean compare(String s) {
+                if (s.length() < 8 || s.length() > 13){
+                    return false;
+                }else {
+                    return true;
+                }
+            }
+        },R.string.err_value);
+        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_username, Patterns.EMAIL_ADDRESS,R.string
+                .err_email);
+        String regexPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_password, regexPassword,R.string
+                .err_password);
+    }
 
     private void setItem() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(RegistActivity.this,

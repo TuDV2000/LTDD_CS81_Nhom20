@@ -1,14 +1,40 @@
 package com.example.salebookapp.entities;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+
 import java.util.Date;
 
-public class Bill {
+import static androidx.room.ForeignKey.CASCADE;
 
+@Entity(tableName = "bills",
+        foreignKeys = @ForeignKey(
+                entity = Customer.class,
+                parentColumns = "cus_id",
+                childColumns = "fk_cus_id",
+                onDelete = CASCADE,
+                onUpdate = CASCADE)
+)
+public class Bill {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "bill_id")
     private int billID;
+    @ColumnInfo(name = "fk_cus_id")
     private int fkCusID;
+    @ColumnInfo(name = "total")
     private double total;
+    @ColumnInfo(name = "date_of_export")
     private Date dateOfExport;
 
+    public Bill(int fkCusID, double total, Date dateOfExport) {
+        this.fkCusID = fkCusID;
+        this.total = total;
+        this.dateOfExport = dateOfExport;
+    }
+
+    //get and set
     public int getBillID() {
         return billID;
     }

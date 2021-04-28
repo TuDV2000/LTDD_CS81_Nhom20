@@ -9,8 +9,9 @@ import com.example.salebookapp.entities.Customer;
 public class AccountAndCustomer {
     @Embedded public Customer customer;
     @Relation(
-            parentColumn = "cusID",
-            entityColumn = "cusID"
+            parentColumn = "cus_id",
+            entityColumn = "acc_id",
+            entity = Account.class
     )
     public Account account;
 }

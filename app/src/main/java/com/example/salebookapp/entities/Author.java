@@ -1,11 +1,28 @@
 package com.example.salebookapp.entities;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "authors")
 public class Author {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "author_id")
     private int authorID;
+    @ColumnInfo(name = "fullname")
     private String fullName;
+    @ColumnInfo(name = "sex")
     private String sex;
+    @ColumnInfo(name = "dob")
     private String dob;
 
+    public Author(String fullName, String sex, String dob) {
+        this.fullName = fullName;
+        this.sex = sex;
+        this.dob = dob;
+    }
+
+    //get and set
     public int getAuthorID() {
         return authorID;
     }

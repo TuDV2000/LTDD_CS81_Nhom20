@@ -1,19 +1,74 @@
 package com.example.salebookapp.entities;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+
 import java.util.Date;
 
+import static androidx.room.ForeignKey.CASCADE;
+
+@Entity(tableName = "books",
+        foreignKeys = {
+            @ForeignKey(
+                    entity = BookType.class,
+                    parentColumns = "type_id",
+                    childColumns = "fk_book_type_id",
+                    onDelete = CASCADE,
+                    onUpdate = CASCADE),
+            @ForeignKey(
+                    entity = Author.class,
+                    parentColumns = "author_id",
+                    childColumns = "fk_author_id",
+                    onDelete = CASCADE,
+                    onUpdate = CASCADE),
+            @ForeignKey(
+                    entity = Publisher.class,
+                    parentColumns = "publisher_id",
+                    childColumns = "fk_publisher_id",
+                    onDelete = CASCADE,
+                    onUpdate = CASCADE)
+        }
+)
 public class Book {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "book_id")
     private int bookID;
+    @ColumnInfo(name = "fk_book_type_id")
     private int fkBookTypeID;
+    @ColumnInfo(name = "fk_author_id")
     private int fkAuthorID;
+    @ColumnInfo(name = "fk_publisher_id")
     private int fkPublisherID;
+    @ColumnInfo(name = "book_name")
     private String bookName;
+    @ColumnInfo(name = "publication_date")
     private Date PublicationDate;
+    @ColumnInfo(name = "price")
     private double price;
+    @ColumnInfo(name = "republish")
     private int republish;
+    @ColumnInfo(name = "quantities")
     private int quantities;
+    @ColumnInfo(name = "image")
+    private String image;
 
 
+    public Book(int fkBookTypeID, int fkAuthorID, int fkPublisherID, String bookName,
+                Date publicationDate, double price, int republish, int quantities, String image) {
+        this.fkBookTypeID = fkBookTypeID;
+        this.fkAuthorID = fkAuthorID;
+        this.fkPublisherID = fkPublisherID;
+        this.bookName = bookName;
+        PublicationDate = publicationDate;
+        this.price = price;
+        this.republish = republish;
+        this.quantities = quantities;
+        this.image = image;
+    }
+
+    //get and set
     public int getBookID() {
         return bookID;
     }
