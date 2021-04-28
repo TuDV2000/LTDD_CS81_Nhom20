@@ -23,4 +23,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                AppDatabase.getDatabase(getApplicationContext());
+            }
+        });
+        super.onResume();
+    }
 }

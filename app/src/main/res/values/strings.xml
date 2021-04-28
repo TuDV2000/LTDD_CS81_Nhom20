@@ -7,7 +7,6 @@
     <string name="err_value">Please enter value</string>
     <string name="err_confirmpassword">Those passwords didn’t match. Try again.</string>
     <string-array name="option">
-        <item></item>
         <item>Seller</item>
         <item>Buyer</item>
     </string-array>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -26,9 +27,10 @@ import com.basgeekball.awesomevalidation.utility.custom.CustomErrorReset;
 import com.basgeekball.awesomevalidation.utility.custom.CustomValidation;
 import com.basgeekball.awesomevalidation.utility.custom.CustomValidationCallback;
 import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
+import com.example.salebookapp.entities.Account;
+import com.example.salebookapp.entities.Customer;
 
-import java.util.Objects;
-import java.util.regex.Pattern;
+import java.util.List;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 import static com.basgeekball.awesomevalidation.ValidationStyle.TEXT_INPUT_LAYOUT;
@@ -42,8 +44,8 @@ public class RegistActivity extends AppCompatActivity {
     CheckBox cbAgree;
     Button btnCreate;
     Spinner spRole;
-
     AwesomeValidation awesomeValidation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,7 @@ public class RegistActivity extends AppCompatActivity {
         actionBar.setTitle("REGIST");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //Điều khoản
         cbAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -67,23 +70,46 @@ public class RegistActivity extends AppCompatActivity {
                 }
             }
         });
+
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String email = edtUserName.getText().toString();
-                System.out.println(email);
-                if(awesomeValidation.validate()){
-                    Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
-                    intent.putExtra(EXTRA_TEXT,email);
-                    startActivity(intent);
-                }
+            public void onClick (View v){
+                // Kiểm tra tính đúng đắn của đầu vào
+               if (awesomeValidation.validate()) {
+                   String user = edtUserName.getText().toString();
+                   String pass = edtPassword.getText().toString();
+                   String type = spRole.getSelectedItem().toString();
+                   String fullName = edtFullName.getText().toString();
+                   String phone = edtCellPhone.getText().toString();
+                   String address = edtAddress.getText().toString();
 
+                   Customer cus = new Customer(fullName, phone, address);
+                   Account acc = new Account(user, pass, type);
+
+                   try {
+                       AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                           @Override
+                           public void run() {
+                               AppDatabase.getDatabase(getApplicationContext()).dao().customerInsert(cus);
+                               AppDatabase.getDatabase(getApplicationContext()).dao().accountInsert(acc);
+                           }
+                       });
+                       Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
+                       intent.putExtra(EXTRA_TEXT,user);
+                       startActivity(intent);
+                       Toast.makeText(RegistActivity.this, "Regist Account success", Toast.LENGTH_SHORT).show();
+                   } catch (Exception ex) {
+                       Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
+                   }
+
+               } else {
+                   Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
+               }
             }
-
         });
-
-
     }
+
+
     private void addValidation(){
         awesomeValidation = new AwesomeValidation(BASIC);
         awesomeValidation.addValidation(RegistActivity.this, R.id.edt_fullname, RegexTemplate.NOT_EMPTY ,R.string.err_fullname);
