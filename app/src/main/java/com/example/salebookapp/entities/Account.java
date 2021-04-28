@@ -1,17 +1,37 @@
 package com.example.salebookapp.entities;
 
-
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity
-public class Account {
-    @PrimaryKey
-    private int accID;
-    private String username;
-    private String password;
-    private String typeAcc;
+import static androidx.room.ForeignKey.CASCADE;
 
+@Entity(tableName = "accounts",
+    foreignKeys = @ForeignKey(
+            entity = Customer.class,
+            parentColumns = "cus_id",
+            childColumns = "acc_id",
+            onDelete = CASCADE,
+            onUpdate = CASCADE)
+)
+public class Account {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "acc_id")
+    private int accID;
+    @ColumnInfo(name = "username")
+    private String username;
+    @ColumnInfo(name = "password")
+    private String password;
+    @ColumnInfo(name = "acc_type")
+    private String accType;
+
+    public Account(String username, String password, String accType) {
+        this.setUsername(username);
+        this.setPassword(password);
+        this.setAccType(accType);
+    }
+    //GET AND SET
     public int getAccID() {
         return accID;
     }
@@ -36,11 +56,11 @@ public class Account {
         this.password = password;
     }
 
-    public String getTypeAcc() {
-        return typeAcc;
+    public String getAccType() {
+        return accType;
     }
 
-    public void setTypeAcc(String typeAcc) {
-        this.typeAcc = typeAcc;
+    public void setAccType(String accType) {
+        this.accType = accType;
     }
 }
