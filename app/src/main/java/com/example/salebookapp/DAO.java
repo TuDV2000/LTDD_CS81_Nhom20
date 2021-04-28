@@ -10,8 +10,8 @@ import com.example.salebookapp.entities.Account;
 public interface DAO {
 
     //AccountDao
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     public void accountInsert(Account account);
 
-
+    //
 }

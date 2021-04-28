@@ -40,7 +40,6 @@ public class RegistActivity extends AppCompatActivity {
     Spinner spRole;
     AwesomeValidation awesomeValidation;
     AppDatabase appDatabase;
-//    private AccountDataSource accountDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,16 +80,24 @@ public class RegistActivity extends AppCompatActivity {
                     String address = edtAddress.getText().toString();
 
                     Customer cus = new Customer(fullName, phone, address);
-//                    Account acc = new Account(, user, pass, type);
-//                    long resultAddAcc = appDatabase.dao().accountInsert(acc);
-//
+                    Account acc = new Account(1, user, pass, type);
 //                    if (true) {
 //                        Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
 //                        startActivity(intent);
 //                        System.out.println("Regist Account success");
 //                        Toast.makeText(RegistActivity.this, "Regist Account success", Toast.LENGTH_SHORT).show();
 //                    }
-                    System.out.println("=================================" + cus.cusID);
+                    try {
+                        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                AppDatabase.getDatabase(getApplicationContext()).dao().accountInsert(acc);
+                            }
+                        });
+                    } catch (Exception ex) {
+                        System.out.println("Something faile");
+                    }
+
                 } else {
                     Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
                 }

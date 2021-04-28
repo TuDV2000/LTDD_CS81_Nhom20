@@ -10,7 +10,7 @@ public class AccountAndCustomer {
     @Embedded public Customer customer;
     @Relation(
             parentColumn = "cusID",
-            entityColumn = "accID"
+            entityColumn = "cusID"
     )
     public Account account;
 }

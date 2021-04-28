@@ -5,8 +5,9 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Account {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int accID;
+    public int cusID;
     public String username;
     public String password;
     public String accType;

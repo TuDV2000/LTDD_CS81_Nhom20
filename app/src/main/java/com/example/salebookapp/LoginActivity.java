@@ -15,14 +15,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
-import com.example.salebookapp.service.AccountService;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText edt_user, edt_pass;
     Button btn_signin, btn_signup, btn_quit;
     AwesomeValidation awesomeValidation;
-    AccountService accountService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,20 +68,20 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("password", password);
                 if (username.length() != 0 && password.length() != 0){
 //                    if (awesomeValidation.validate()) {
-                        String[] user = {username};
-                        accountService = new AccountService(LoginActivity.this);
-                        Cursor c = accountService.getAccount(user);
-                        c.moveToPosition(-1);
-
-                        while (c.moveToNext()) {
-                            if (username == c.getString(c.getColumnIndex("username"))
-                                    && password == c.getString(c.getColumnIndex("password"))) {
-                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Login Faile", Toast.LENGTH_SHORT).show();
-                            }
-                        }
+//                        String[] user = {username};
+//                        accountService = new AccountService(LoginActivity.this);
+//                        Cursor c = accountService.getAccount(user);
+//                        c.moveToPosition(-1);
+//
+//                        while (c.moveToNext()) {
+//                            if (username == c.getString(c.getColumnIndex("username"))
+//                                    && password == c.getString(c.getColumnIndex("password"))) {
+//                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                                startActivity(intent);
+//                            } else {
+//                                Toast.makeText(LoginActivity.this, "Login Faile", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
 //                    }
                 }else {
                     Toast.makeText(LoginActivity.this,"Mời bạn nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
