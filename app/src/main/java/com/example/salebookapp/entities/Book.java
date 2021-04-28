@@ -5,8 +5,6 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "books",
@@ -44,7 +42,7 @@ public class Book {
     @ColumnInfo(name = "book_name")
     private String bookName;
     @ColumnInfo(name = "publication_date")
-    private Date PublicationDate;
+    private String publicationDate;
     @ColumnInfo(name = "price")
     private double price;
     @ColumnInfo(name = "republish")
@@ -56,16 +54,16 @@ public class Book {
 
 
     public Book(int fkBookTypeID, int fkAuthorID, int fkPublisherID, String bookName,
-                Date publicationDate, double price, int republish, int quantities, String image) {
+                String publicationDate, double price, int republish, int quantities, String image) {
         this.fkBookTypeID = fkBookTypeID;
         this.fkAuthorID = fkAuthorID;
         this.fkPublisherID = fkPublisherID;
         this.bookName = bookName;
-        PublicationDate = publicationDate;
+        this.setPublicationDate(publicationDate);
         this.price = price;
         this.republish = republish;
         this.quantities = quantities;
-        this.image = image;
+        this.setImage(image);
     }
 
     //get and set
@@ -83,14 +81,6 @@ public class Book {
 
     public void setBookName(String bookName) {
         this.bookName = bookName;
-    }
-
-    public Date getPublicationDate() {
-        return PublicationDate;
-    }
-
-    public void setPublicationDate(Date publicationDate) {
-        PublicationDate = publicationDate;
     }
 
     public double getPrice() {
@@ -139,5 +129,21 @@ public class Book {
 
     public void setFkPublisherID(int fkPublisherID) {
         this.fkPublisherID = fkPublisherID;
+    }
+
+    public String getPublicationDate() {
+        return publicationDate;
+    }
+
+    public void setPublicationDate(String publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

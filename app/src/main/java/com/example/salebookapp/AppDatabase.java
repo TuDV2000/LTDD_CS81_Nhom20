@@ -10,9 +10,20 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.salebookapp.entities.Account;
+import com.example.salebookapp.entities.Author;
+import com.example.salebookapp.entities.Bill;
+import com.example.salebookapp.entities.BillDetail;
+import com.example.salebookapp.entities.Book;
+import com.example.salebookapp.entities.BookType;
 import com.example.salebookapp.entities.Customer;
+import com.example.salebookapp.entities.Publisher;
 
-@Database(entities = {Account.class, Customer.class}, version = 16, exportSchema = false)
+@Database(
+        entities = {Account.class, Customer.class, Bill.class,
+                BillDetail.class, Book.class, BookType.class, Author.class, Publisher.class},
+        version = 16,
+        exportSchema = false
+)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract DAO dao();
 

@@ -5,8 +5,6 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "bills",
@@ -26,9 +24,9 @@ public class Bill {
     @ColumnInfo(name = "total")
     private double total;
     @ColumnInfo(name = "date_of_export")
-    private Date dateOfExport;
+    private String dateOfExport;
 
-    public Bill(int fkCusID, double total, Date dateOfExport) {
+    public Bill(int fkCusID, double total, String dateOfExport) {
         this.fkCusID = fkCusID;
         this.total = total;
         this.dateOfExport = dateOfExport;
@@ -59,11 +57,11 @@ public class Bill {
         this.total = total;
     }
 
-    public Date getDateOfExport() {
+    public String getDateOfExport() {
         return dateOfExport;
     }
 
-    public void setDateOfExport(Date dateOfExport) {
+    public void setDateOfExport(String dateOfExport) {
         this.dateOfExport = dateOfExport;
     }
 }

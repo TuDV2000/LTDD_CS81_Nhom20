@@ -11,7 +11,7 @@ import static androidx.room.ForeignKey.CASCADE;
         foreignKeys = {
             @ForeignKey(
                 entity = Bill.class,
-                parentColumns = "billID",
+                parentColumns = "bill_id",
                 childColumns = "fk_bill_id",
                 onDelete = CASCADE,
                 onUpdate = CASCADE),
@@ -21,13 +21,12 @@ import static androidx.room.ForeignKey.CASCADE;
                 childColumns = "fk_book_id",
                 onDelete = CASCADE,
                 onUpdate = CASCADE)
-        }
+        },
+        primaryKeys = {"fk_bill_id", "fk_book_id"}
 )
 public class BillDetail {
-    @PrimaryKey
     @ColumnInfo(name = "fk_bill_id")
     private int fkBillID;
-    @PrimaryKey
     @ColumnInfo(name = "fk_book_id")
     private int fkBookID;
     @ColumnInfo(name = "price")
