@@ -52,6 +52,10 @@ public class Book {
     @ColumnInfo(name = "image")
     private String image;
 
+    //them
+    private String describe;
+    private boolean addToCart;
+
 
     public Book(int fkBookTypeID, int fkAuthorID, int fkPublisherID, String bookName,
                 String publicationDate, double price, int republish, int quantities, String image) {
@@ -65,6 +69,7 @@ public class Book {
         this.quantities = quantities;
         this.setImage(image);
     }
+
 
     //get and set
     public int getBookID() {
@@ -145,5 +150,21 @@ public class Book {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public boolean isAddToCart() {
+        return addToCart;
+    }
+
+    public void setAddToCart(boolean addToCart) {
+        this.addToCart = addToCart;
     }
 }
