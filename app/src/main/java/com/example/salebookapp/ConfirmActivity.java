@@ -60,7 +60,7 @@ public class ConfirmActivity extends AppCompatActivity {
         confirmCode = randomCode()+"";
 
         JavaMailAPI javaMailAPI = null;
-            javaMailAPI = new JavaMailAPI(this,"huynhnguyenbacgiang@gmail.com","Send code",confirmCode);
+            javaMailAPI = new JavaMailAPI(this,"1851050177tu@ou.edu.vn","Send code",confirmCode);
             javaMailAPI.execute();
 
     }

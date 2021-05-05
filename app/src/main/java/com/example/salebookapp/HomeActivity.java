@@ -5,6 +5,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -99,4 +101,8 @@ public class HomeActivity extends AppCompatActivity {
     public int getCountBook() {
         return mCountBook;
     }
+
+//    public Context getHomeContext() {
+//        return HomeActivity.this;
+//    }
 }
