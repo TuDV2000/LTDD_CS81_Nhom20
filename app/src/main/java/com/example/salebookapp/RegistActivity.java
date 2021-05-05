@@ -90,8 +90,9 @@ public class RegistActivity extends AppCompatActivity {
                            }
                        });
                        Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
+                       intent.putExtra("email", user);
                        startActivity(intent);
-                       Toast.makeText(RegistActivity.this, "Regist Account success", Toast.LENGTH_SHORT).show();
+
                    } catch (Exception ex) {
                        Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
                    }

@@ -29,12 +29,14 @@ public class ConfirmActivity extends AppCompatActivity {
     EditText edtConfirmCode, edtResult;
     Button btnSubmit, btnResend;
     String confirmCode;
+    Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
 
-
+        intent = getIntent();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("CONFIRM");
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -60,7 +62,7 @@ public class ConfirmActivity extends AppCompatActivity {
         confirmCode = randomCode()+"";
 
         JavaMailAPI javaMailAPI = null;
-            javaMailAPI = new JavaMailAPI(this,"huynhnguyenbacgiang@gmail.com","Send code",confirmCode);
+            javaMailAPI = new JavaMailAPI(this,intent.getExtras().getString("email"),"Send code",confirmCode);
             javaMailAPI.execute();
 
     }

@@ -19,13 +19,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
-            android:id="@+id/edt_username"
+            android:id="@+id/edt_fusername"
             android:layout_marginTop="20dp"
             android:hint="Email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
-            android:id="@+id/edt_password"
+            android:id="@+id/edt_fpassword"
             android:layout_marginTop="20dp"
             android:hint="Password"
             android:inputType="textPassword"
@@ -39,18 +39,18 @@
             android:layout_height="wrap_content" >
             <Button
                 android:layout_marginRight="35dp"
-                android:id="@+id/btn_signin"
+                android:id="@+id/btn_fsignin"
                 android:text="Sign In"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <Button
-                android:id="@+id/btn_signup"
+                android:id="@+id/btn_fsignup"
                 android:text="Sign Up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <Button
-            android:id="@+id/btn_quit"
+            android:id="@+id/btn_fquit"
             android:layout_marginTop="100dp"
             android:text="Quit"
             android:layout_width="wrap_content"

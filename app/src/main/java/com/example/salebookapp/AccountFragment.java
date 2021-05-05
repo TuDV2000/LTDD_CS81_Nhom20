@@ -26,12 +26,18 @@ public class AccountFragment extends Fragment {
     EditText edt_user, edt_pass;
     Button btn_signin, btn_signup, btn_quit;
     AwesomeValidation awesomeValidation;
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_account, container, false);
+
+        setUp();
+        ControlButton();
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false);
+        return view;
     }
 
     private void ControlButton() {
@@ -61,6 +67,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+
             }
         });
         btn_signup.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +79,14 @@ public class AccountFragment extends Fragment {
         });
     }
 
+    void setUp() {
+        edt_user = view.findViewById(R.id.edt_fusername);
+        edt_pass = view.findViewById(R.id.edt_fpassword);
 
+        btn_signup = view.findViewById(R.id.btn_fsignup);
+        btn_signin = view.findViewById(R.id.btn_fsignin);
+        btn_quit = view.findViewById(R.id.btn_fquit);
+    }
 
 
 
