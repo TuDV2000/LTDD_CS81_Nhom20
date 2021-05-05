@@ -71,34 +71,16 @@ public class RegistActivity extends AppCompatActivity {
             public void onClick (View v){
                 // Kiểm tra tính đúng đắn của đầu vào
                if (awesomeValidation.validate()) {
-                   String user = edtUserName.getText().toString();
-                   String pass = edtPassword.getText().toString();
-                   String type = spRole.getSelectedItem().toString();
-                   String fullName = edtFullName.getText().toString();
-                   String phone = edtCellPhone.getText().toString();
-                   String address = edtAddress.getText().toString();
+                   Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
 
-                   Customer cus = new Customer(fullName, phone, address);
-                   Account acc = new Account(user, pass, type);
+                   intent.putExtra("email", edtUserName.getText().toString());
+                   intent.putExtra("pass", edtPassword.getText().toString());
+                   intent.putExtra("type", spRole.getSelectedItem().toString());
+                   intent.putExtra("fullName", edtFullName.getText().toString());
+                   intent.putExtra("phone", edtCellPhone.getText().toString());
+                   intent.putExtra("address", edtAddress.getText().toString());
 
-                   try {
-                       AppDatabase.databaseWriteExecutor.execute(new Runnable() {
-                           @Override
-                           public void run() {
-                               AppDatabase.getDatabase(getApplicationContext()).dao().customerInsert(cus);
-                               AppDatabase.getDatabase(getApplicationContext()).dao().accountInsert(acc);
-                           }
-                       });
-                       Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
-                       intent.putExtra("email", user);
-                       startActivity(intent);
-
-                   } catch (Exception ex) {
-                       Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
-                   }
-
-               } else {
-                   Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
+                   startActivity(intent);
                }
             }
         });

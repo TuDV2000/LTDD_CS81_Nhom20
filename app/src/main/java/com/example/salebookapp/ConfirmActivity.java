@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.salebookapp.entities.Account;
+import com.example.salebookapp.entities.Customer;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
@@ -38,19 +41,40 @@ public class ConfirmActivity extends AppCompatActivity {
 
         intent = getIntent();
         ActionBar actionBar = getSupportActionBar();
+
         actionBar.setTitle("CONFIRM");
         actionBar.setDisplayHomeAsUpEnabled(true);
         Anhxa();
 
         sendMail();
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(isConfirmTrue()){
-                    Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(ConfirmActivity.this, LoginActivity.class);
-                    startActivity(intent);
+                    String user = intent.getExtras().getString("email");
+                    String pass = intent.getExtras().getString("pass");
+                    String type = intent.getExtras().getString("type");
+                    String fullName = intent.getExtras().getString("fullName");
+                    String phone = intent.getExtras().getString("phone");
+                    String address = intent.getExtras().getString("address");
+                    Customer cus = new Customer(fullName, phone, address);
+                    Account acc = new Account(user, pass, type);
 
+                    try {
+                        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                            AppDatabase.getDatabase(getApplicationContext()).dao().customerInsert(cus);
+                            AppDatabase.getDatabase(getApplicationContext()).dao().accountInsert(acc);
+                            }
+                        });
+                        Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(ConfirmActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    } catch (Exception ex) {
+
+                    }
                 }else {
                     Toast.makeText(ConfirmActivity.this, "Xác thực không thành công", Toast.LENGTH_LONG).show();
                 }
@@ -62,7 +86,7 @@ public class ConfirmActivity extends AppCompatActivity {
         confirmCode = randomCode()+"";
 
         JavaMailAPI javaMailAPI = null;
-            javaMailAPI = new JavaMailAPI(this,intent.getExtras().getString("email"),"Send code",confirmCode);
+            javaMailAPI = new JavaMailAPI(this, intent.getExtras().getString("email"),"Send code",confirmCode);
             javaMailAPI.execute();
 
     }

@@ -15,10 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.salebookapp.entities.Account;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
+
+import java.util.List;
 
 
 public class AccountFragment extends Fragment {
@@ -27,6 +30,7 @@ public class AccountFragment extends Fragment {
     Button btn_signin, btn_signup, btn_quit;
     AwesomeValidation awesomeValidation;
     View view;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,8 +70,17 @@ public class AccountFragment extends Fragment {
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        List<Account> l = AppDatabase.getDatabase(getContext()).dao().getAccount(edt_user.getText().toString());
+                        if (l.size() > 0) {
+                            if (edt_pass.getText().toString().equals(l.get(0).getPassword())) {
+                                Toast.makeText(getContext(), "Login success !!!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
             }
         });
         btn_signup.setOnClickListener(new View.OnClickListener() {
