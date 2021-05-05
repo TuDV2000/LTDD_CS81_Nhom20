@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.salebookapp.entities.Account;
@@ -18,17 +19,11 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+
 
 public class ConfirmActivity extends AppCompatActivity {
 
+    TextView tvEmail;
     EditText edtConfirmCode, edtResult;
     Button btnSubmit, btnResend;
     String confirmCode;
@@ -41,7 +36,6 @@ public class ConfirmActivity extends AppCompatActivity {
 
         intent = getIntent();
         ActionBar actionBar = getSupportActionBar();
-
         actionBar.setTitle("CONFIRM");
         actionBar.setDisplayHomeAsUpEnabled(true);
         Anhxa();
@@ -80,6 +74,19 @@ public class ConfirmActivity extends AppCompatActivity {
                 }
             }
         } );
+        btnResend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMail();
+                if(isConfirmTrue()){
+                    Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ConfirmActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(ConfirmActivity.this, "Xác thực không thành công", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void sendMail() {

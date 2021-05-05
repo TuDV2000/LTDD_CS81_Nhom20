@@ -2,11 +2,13 @@ package com.example.salebookapp;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -31,10 +33,12 @@ import com.example.salebookapp.entities.Customer;
 import java.util.List;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
+import static com.basgeekball.awesomevalidation.ValidationStyle.TEXT_INPUT_LAYOUT;
+import static com.basgeekball.awesomevalidation.ValidationStyle.UNDERLABEL;
 
 public class RegistActivity extends AppCompatActivity {
 
-    EditText edtFullName, edtUserName, edtPassword, edtCellPhone, edtAddress;
+    EditText edtFullName, edtUserName, edtPassword,edtCellPhone,edtAddress,edtConfirmPass;
     TextView txtChangeLogin;
     CheckBox cbAgree;
     Button btnCreate;
@@ -131,6 +135,7 @@ public class RegistActivity extends AppCompatActivity {
         String regexPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
         awesomeValidation.addValidation(RegistActivity.this,R.id.edt_password, regexPassword,R.string
                 .err_password);
+        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_confirmpassword,R.id.edt_password,R.string.err_confirmpassword);
     }
 
     private void setItem() {
@@ -144,6 +149,7 @@ public class RegistActivity extends AppCompatActivity {
         edtFullName = findViewById(R.id.edt_fullname);
         edtUserName = findViewById(R.id.edt_username);
         edtPassword = findViewById(R.id.edt_password);
+        edtConfirmPass= findViewById(R.id.edt_confirmpassword);
         edtCellPhone = findViewById(R.id.edt_cellphone);
         edtAddress = findViewById(R.id.edt_address);
         txtChangeLogin = findViewById(R.id.txt_change_login);
