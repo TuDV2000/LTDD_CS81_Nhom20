@@ -5,6 +5,7 @@
     <string name="err_email">Please enter valid Email</string>
     <string name="err_password">Minimum eight characters, at least one uppercase letter, one lowercase letter and one number</string>
     <string name="err_value">Please enter value</string>
+    <string name="err_confirmpassword">Those passwords didn’t match. Try again.</string>
     <string-array name="option">
         <item>Seller</item>
         <item>Buyer</item>

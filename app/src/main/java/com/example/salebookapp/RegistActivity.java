@@ -2,11 +2,13 @@ package com.example.salebookapp;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -31,10 +33,12 @@ import com.example.salebookapp.entities.Customer;
 import java.util.List;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
+import static com.basgeekball.awesomevalidation.ValidationStyle.TEXT_INPUT_LAYOUT;
+import static com.basgeekball.awesomevalidation.ValidationStyle.UNDERLABEL;
 
 public class RegistActivity extends AppCompatActivity {
 
-    EditText edtFullName, edtUserName, edtPassword, edtCellPhone, edtAddress;
+    EditText edtFullName, edtUserName, edtPassword,edtCellPhone,edtAddress,edtConfirmPass;
     TextView txtChangeLogin;
     CheckBox cbAgree;
     Button btnCreate;
@@ -71,33 +75,16 @@ public class RegistActivity extends AppCompatActivity {
             public void onClick (View v){
                 // Kiểm tra tính đúng đắn của đầu vào
                if (awesomeValidation.validate()) {
-                   String user = edtUserName.getText().toString();
-                   String pass = edtPassword.getText().toString();
-                   String type = spRole.getSelectedItem().toString();
-                   String fullName = edtFullName.getText().toString();
-                   String phone = edtCellPhone.getText().toString();
-                   String address = edtAddress.getText().toString();
+                   Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
 
-                   Customer cus = new Customer(fullName, phone, address);
-                   Account acc = new Account(user, pass, type);
+                   intent.putExtra("email", edtUserName.getText().toString());
+                   intent.putExtra("pass", edtPassword.getText().toString());
+                   intent.putExtra("type", spRole.getSelectedItem().toString());
+                   intent.putExtra("fullName", edtFullName.getText().toString());
+                   intent.putExtra("phone", edtCellPhone.getText().toString());
+                   intent.putExtra("address", edtAddress.getText().toString());
 
-                   try {
-                       AppDatabase.databaseWriteExecutor.execute(new Runnable() {
-                           @Override
-                           public void run() {
-                               AppDatabase.getDatabase(getApplicationContext()).dao().customerInsert(cus);
-                               AppDatabase.getDatabase(getApplicationContext()).dao().accountInsert(acc);
-                           }
-                       });
-                       Intent intent = new Intent(RegistActivity.this, ConfirmActivity.class);
-                       startActivity(intent);
-                       Toast.makeText(RegistActivity.this, "Regist Account success", Toast.LENGTH_SHORT).show();
-                   } catch (Exception ex) {
-                       Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
-                   }
-
-               } else {
-                   Toast.makeText(RegistActivity.this, "Regist Account Failed", Toast.LENGTH_SHORT).show();
+                   startActivity(intent);
                }
             }
         });
@@ -148,6 +135,7 @@ public class RegistActivity extends AppCompatActivity {
         String regexPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
         awesomeValidation.addValidation(RegistActivity.this,R.id.edt_password, regexPassword,R.string
                 .err_password);
+        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_confirmpassword,R.id.edt_password,R.string.err_confirmpassword);
     }
 
     private void setItem() {
@@ -161,6 +149,7 @@ public class RegistActivity extends AppCompatActivity {
         edtFullName = findViewById(R.id.edt_fullname);
         edtUserName = findViewById(R.id.edt_username);
         edtPassword = findViewById(R.id.edt_password);
+        edtConfirmPass= findViewById(R.id.edt_confirmpassword);
         edtCellPhone = findViewById(R.id.edt_cellphone);
         edtAddress = findViewById(R.id.edt_address);
         txtChangeLogin = findViewById(R.id.txt_change_login);
