@@ -58,7 +58,7 @@ public class Book {
 
     public Book(String bookName, String publicationDate, double price, int republish, int quantities, String image) {
         this.bookName = bookName;
-        this.publicationDate =publicationDate;
+        this.publicationDate = publicationDate;
         this.price = price;
         this.republish = republish;
         this.quantities = quantities;

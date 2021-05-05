@@ -22,8 +22,7 @@ import java.util.Random;
 
 
 public class ConfirmActivity extends AppCompatActivity {
-
-    TextView tvEmail;
+    
     EditText edtConfirmCode, edtResult;
     Button btnSubmit, btnResend;
     String confirmCode;
