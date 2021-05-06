@@ -35,6 +35,8 @@ public class ConfirmActivity extends AppCompatActivity {
 
         intent = getIntent();
         ActionBar actionBar = getSupportActionBar();
+
+
         actionBar.setTitle("CONFIRM");
         actionBar.setDisplayHomeAsUpEnabled(true);
         Anhxa();
