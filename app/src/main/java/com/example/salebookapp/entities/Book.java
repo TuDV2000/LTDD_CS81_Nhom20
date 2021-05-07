@@ -50,11 +50,11 @@ public class Book {
     private int quantities;
     @ColumnInfo(name = "image")
     private String image;
-
-    //them
+    @ColumnInfo(name = "describe")
     private String describe;
     private boolean addToCart;
 
+    public Book() {};
 
     public Book(String bookName, String publicationDate, double price, int republish, int quantities, String image) {
         this.bookName = bookName;

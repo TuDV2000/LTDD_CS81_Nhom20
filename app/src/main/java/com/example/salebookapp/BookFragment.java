@@ -1,5 +1,6 @@
 package com.example.salebookapp;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -77,6 +78,16 @@ public class BookFragment extends Fragment {
 
     private List<Book> getListBook(){
         List<Book> list = new ArrayList<>();
+
+        list.add(new Book("Vượt qua tất cả", "20-02-2002",
+                            100000.0, 1, 10,
+                            Uri.parse("android.resource://" + R.class.getPackage().getName() + "/" + R.drawable.book1).toString())
+        );
+
+        list.add(new Book("English for Life", "20-02-2002",
+                120000.0, 1, 10,
+                Uri.parse("android.resource://" + R.class.getPackage().getName() + "/" + R.drawable.book2).toString())
+        );
 
         return list;
     }
