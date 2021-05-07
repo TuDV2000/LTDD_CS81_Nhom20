@@ -26,11 +26,11 @@ public class Bill {
     @ColumnInfo(name = "date_of_export")
     private String dateOfExport;
 
-    public Bill(int fkCusID, double total, String dateOfExport) {
-        this.fkCusID = fkCusID;
-        this.total = total;
-        this.dateOfExport = dateOfExport;
-    }
+//    public Bill(int fkCusID, double total, String dateOfExport) {
+//        this.fkCusID = fkCusID;
+//        this.total = total;
+//        this.dateOfExport = dateOfExport;
+//    }
 
     //get and set
     public int getBillID() {

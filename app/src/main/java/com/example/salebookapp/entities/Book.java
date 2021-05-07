@@ -5,6 +5,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.sql.Blob;
+
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "books")
@@ -49,14 +51,14 @@ public class Book {
     @ColumnInfo(name = "quantities")
     private int quantities;
     @ColumnInfo(name = "image")
-    private String image;
+    private byte[] image;
 
     //them
     private String describe;
     private boolean addToCart;
 
 
-    public Book(String bookName, String publicationDate, double price, int republish, int quantities, String image) {
+    public Book(String bookName, String publicationDate, double price, int republish, int quantities, byte[] image) {
         this.bookName = bookName;
         this.publicationDate =publicationDate;
         this.price = price;
@@ -64,6 +66,7 @@ public class Book {
         this.quantities = quantities;
         this.image = image;
     }
+
 
 
     //get and set
@@ -115,11 +118,11 @@ public class Book {
         this.publicationDate = publicationDate;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

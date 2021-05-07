@@ -17,9 +17,6 @@ import com.example.salebookapp.entities.Customer;
 import com.example.salebookapp.entities.Publisher;
 import com.example.salebookapp.relationships.AccountAndCustomer;
 import com.example.salebookapp.relationships.BillAndDetail;
-import com.example.salebookapp.relationships.BookAndAuthor;
-import com.example.salebookapp.relationships.BookAndPublisher;
-import com.example.salebookapp.relationships.BookAndType;
 import com.example.salebookapp.relationships.CustomerAndBill;
 
 import java.util.List;
@@ -68,9 +65,9 @@ public interface DAO {
     public void typeDelete(BookType bookType);
     @Query("select * from booktypes")
     public List<BookType> getAllType();
-    @Transaction
-    @Query("select * from booktypes where type_id = :id")
-    public List<BookAndType> getBooksByTypeId(int id);
+//    @Transaction
+//    @Query("select * from booktypes where type_id = :id")
+//    public List<BookAndType> getBooksByTypeId(int id);
 
 
     //AuthorDao
@@ -80,9 +77,9 @@ public interface DAO {
     public void authorDelete(Author author);
     @Query("select * from authors")
     public List<Author> getAllAuthor();
-    @Transaction
-    @Query("select * from authors where author_id = :id")
-    public List<BookAndAuthor> getBooksByAuthorId(int id);
+//    @Transaction
+//    @Query("select * from authors where author_id = :id")
+//    public List<BookAndAuthor> getBooksByAuthorId(int id);
 
 
     //PublisherDao
@@ -92,9 +89,9 @@ public interface DAO {
     public void publisherDelete(Publisher publisher);
     @Query("select * from publishers")
     public List<Publisher> getAllPublisher();
-    @Transaction
-    @Query("select * from publishers where publisher_id = :id")
-    public List<BookAndPublisher> getBooksByPublisherId(int id);
+//    @Transaction
+//    @Query("select * from publishers where publisher_id = :id")
+//    public List<BookAndPublisher> getBooksByPublisherId(int id);
 
 
     //BookDao

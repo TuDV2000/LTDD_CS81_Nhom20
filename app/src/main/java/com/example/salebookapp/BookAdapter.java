@@ -44,7 +44,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         }
         holder.imgBook.setImageResource(book.getBookID());
         holder.tvBookName.setText(book.getBookName());
-        holder.tvDescription.setText(book.getDescribe());
+        holder.tvPrice.setText(book.getDescribe());
 
         if (book.isAddToCart()){
             holder.imgAddToCart.setBackgroundResource(R.drawable.bg_gray_conner_6);
@@ -75,7 +75,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         private ImageView imgBook;
         private TextView tvBookName;
-        private TextView tvDescription;
+        private TextView tvPrice;
         private ImageView imgAddToCart;
 
         public BookViewHolder(@NonNull View itemView) {
@@ -83,7 +83,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
             imgBook = itemView.findViewById(R.id.img_book);
             tvBookName = itemView.findViewById(R.id.tv_book_name);
-            tvDescription = itemView.findViewById(R.id.tv_description);
+            tvPrice = itemView.findViewById(R.id.tv_price);
             imgAddToCart = itemView.findViewById(R.id.img_add_to_cart);
         }
     }
