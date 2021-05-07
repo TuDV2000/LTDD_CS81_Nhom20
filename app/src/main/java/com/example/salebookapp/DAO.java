@@ -11,6 +11,7 @@ import androidx.room.Update;
 import com.example.salebookapp.entities.Account;
 import com.example.salebookapp.entities.Author;
 import com.example.salebookapp.entities.Bill;
+import com.example.salebookapp.entities.BillDetail;
 import com.example.salebookapp.entities.Book;
 import com.example.salebookapp.entities.BookType;
 import com.example.salebookapp.entities.Customer;
@@ -46,7 +47,9 @@ public interface DAO {
     @Transaction
     @Query("select * from customers where cus_id = :id")
     public List<CustomerAndBill> getBillbyCustomerId(int id);
-
+    @Transaction
+    @Query("select * from bills where fk_cus_id = :id")
+    public List<Bill> getBillbyCus(int id);
 
     //BillDao
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -57,6 +60,11 @@ public interface DAO {
     @Query("select * from bills where bill_id = :id")
     public List<BillAndDetail> getDetailByBillId(int id);
 
+    //BillDetailDao
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public void billDetailInsert(BillDetail billDetail);
+
+
 
     //BookTypeDao
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -65,6 +73,10 @@ public interface DAO {
     public void typeDelete(BookType bookType);
     @Query("select * from booktypes")
     public List<BookType> getAllType();
+    @Query("select * from books where book_id = :id")
+    public Book getBookByID(int id);
+    @Query("update books set quantities =: newQuantities where book_id  =: id")
+    public void updateQuantitiesOfBook(int newQuantities, int id);
 //    @Transaction
 //    @Query("select * from booktypes where type_id = :id")
 //    public List<BookAndType> getBooksByTypeId(int id);

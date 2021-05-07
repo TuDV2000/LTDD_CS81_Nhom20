@@ -13,6 +13,9 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
+import com.example.salebookapp.entities.Bill;
+import com.example.salebookapp.entities.BillDetail;
+import com.example.salebookapp.entities.Book;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -76,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+        fakeBillDb();
     }
 
     public View getViewEndAnimation() {
@@ -98,5 +102,35 @@ public class HomeActivity extends AppCompatActivity {
 
     public int getCountBook() {
         return mCountBook;
+    }
+
+    public void fakeBillDb(){
+        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                String bookName = "Dat Ngu";
+                String publicationDate = "abc";
+                double price = 12.3;
+                int republish = 1;
+                int quantities = 1;
+                String image ="1";
+                Book book = new Book(bookName, publicationDate, price, republish,quantities,image);
+                AppDatabase.getDatabase(getApplicationContext()).dao().bookInsert(book);
+
+                int fkCusID = 1;
+                double total =87654;
+                String dateOfExport = "29/09/2000";
+                Bill bill = new Bill(fkCusID,total,dateOfExport);
+
+                AppDatabase.getDatabase(getApplicationContext()).dao().billInsert(bill);
+
+                int idBill = AppDatabase.getDatabase(getApplicationContext()).dao().getBillbyCus(1).get(0).getBillID();
+                int fkBookID =  AppDatabase.getDatabase(getApplicationContext()).dao().getAllBook().get(0).getBookID();
+                double pricesale = 12.7;
+
+                BillDetail billDetail = new BillDetail(idBill,fkBookID,price);
+                AppDatabase.getDatabase(getApplicationContext()).dao().billDetailInsert(billDetail);
+            }
+        });
     }
 }
