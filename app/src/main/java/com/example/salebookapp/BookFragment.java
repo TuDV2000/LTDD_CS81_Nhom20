@@ -80,12 +80,12 @@ public class BookFragment extends Fragment {
         List<Book> list = new ArrayList<>();
 
         list.add(new Book("Vượt qua tất cả", "20-02-2002",
-                            100000.0, 1, 10,
+                            100000.0, 1, 10, "Sách hay lắm đó !!!",
                             Uri.parse("android.resource://" + R.class.getPackage().getName() + "/" + R.drawable.book1).toString())
         );
 
         list.add(new Book("English for Life", "20-02-2002",
-                120000.0, 1, 10,
+                120000.0, 1, 10, "English good for you !!!",
                 Uri.parse("android.resource://" + R.class.getPackage().getName() + "/" + R.drawable.book2).toString())
         );
 

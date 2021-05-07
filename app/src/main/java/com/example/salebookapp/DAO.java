@@ -46,6 +46,8 @@ public interface DAO {
     @Transaction
     @Query("select * from customers where cus_id = :id")
     public List<CustomerAndBill> getBillbyCustomerId(int id);
+    @Query("update customers set address = :newaddress, phone_number = :newPhone where cus_id = :id")
+    public void changeCusProfile(String newaddress, String newPhone, int id);
 
 
     //BillDao

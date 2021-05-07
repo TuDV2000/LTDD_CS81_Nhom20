@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.salebookapp.entities.Book;
 
+import java.io.File;
+import java.sql.SQLOutput;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
@@ -42,7 +44,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         if (book == null){
             return;
         }
-        holder.imgBook.setImageResource(book.getBookID());
+
+        holder.imgBook.setImageResource(Integer.parseInt(book.getImage().substring(book.getImage().lastIndexOf('/') + 1)));
         holder.tvBookName.setText(book.getBookName());
         holder.tvDescription.setText(book.getDescribe());
 
