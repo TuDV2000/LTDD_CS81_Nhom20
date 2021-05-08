@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 if (AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user).size() > 0) {
+                                    Utils.accLogin = AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user).get(0);
                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                     startActivity(intent);
                                 }

@@ -83,8 +83,11 @@ public class RegistActivity extends AppCompatActivity {
                    intent.putExtra("fullName", edtFullName.getText().toString());
                    intent.putExtra("phone", edtCellPhone.getText().toString());
                    intent.putExtra("address", edtAddress.getText().toString());
-
-                   startActivity(intent);
+                   if (AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(edtUserName.getText().toString()).size() == 0) {
+                       startActivity(intent);
+                   } else {
+                       Toast.makeText(RegistActivity.this, "Tài khoản đã được sử dụng", Toast.LENGTH_SHORT).show();
+                   }
                }
             }
         });
