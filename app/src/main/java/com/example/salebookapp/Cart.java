@@ -2,56 +2,30 @@ package com.example.salebookapp;
 
 import com.example.salebookapp.entities.Book;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cart {
-    private Book[] listBooks;
-    private int itemCount;
+    private List<Book> listBooks;
+    private int bookCount;
     private double totalPrice;
-    private int capacity;
 
     public Cart() {
-        listBooks = new Book[capacity];
-        itemCount = 0;
+        listBooks = new ArrayList<>();
         totalPrice = 0.0;
-        capacity = 5;
     }
 
-    public void addToCart(Book book, int quantity) {
+    public boolean addToCart(Book book, int quantity) {
+        if (quantity != 0) {
+            totalPrice += (book.getPrice() * quantity);
+            listBooks.add(book);
 
-        totalPrice += (book.getPrice() * quantity);
-        listBooks[itemCount] = book;
-        itemCount += 1;
-
-        if(itemCount == capacity) {
-            increaseSize();
+            return true;
         }
+        return false;
     }
 
-    private void increaseSize() {
-        Book[] temp = new Book[capacity + 3];
 
-        for (int i = 0; i < capacity; i++) {
-            temp[i] = listBooks[i];
-        }
-        listBooks = temp;
-        temp = null;
-        capacity = listBooks.length;
-    }
-
-    public Book[] getListBooks() {
-        return listBooks;
-    }
-
-    public void setCart(Book[] listBooks) {
-        this.listBooks = listBooks;
-    }
-
-    public int getItemCount() {
-        return itemCount;
-    }
-
-    public void setItemCount(int itemCount) {
-        this.itemCount = itemCount;
-    }
 
     public double getTotalPrice() {
         return totalPrice;
@@ -61,11 +35,15 @@ public class Cart {
         this.totalPrice = totalPrice;
     }
 
-    public int getCapacity() {
-        return capacity;
+    public List<Book> getListBooks() {
+        return listBooks;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public int getBookCount() {
+        return bookCount;
+    }
+
+    public void setBookCount(int bookCount) {
+        this.bookCount = bookCount;
     }
 }

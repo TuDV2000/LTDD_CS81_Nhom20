@@ -19,7 +19,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new CartFragment();
             case 2:
-
                 return new AccountFragment();
             default:
                 return new BookFragment();

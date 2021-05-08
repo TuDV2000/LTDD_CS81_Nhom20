@@ -26,10 +26,6 @@ public class Customer {
         return cusID;
     }
 
-    public void setCusID(int cusID) {
-        this.cusID = cusID;
-    }
-
     public String getFullName() {
         return fullName;
     }
@@ -52,5 +48,9 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setCusID(int cusID) {
+        this.cusID = cusID;
     }
 }

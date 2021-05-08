@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +20,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     private IClickAddToCartListener  iClickAddToCartListener;
 
     public interface IClickAddToCartListener{
-        void onClickAddToCart(ImageView imgAddToCart, Book book);
+        void onClickAddToCart(ImageView imgBook, Book book);
 
     }
 
@@ -42,23 +43,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         if (book == null){
             return;
         }
-        holder.imgBook.setImageResource(book.getBookID());
+
+        holder.imgBook.setImageResource(Integer.parseInt(book.getImage().substring(book.getImage().lastIndexOf('/') + 1)));
         holder.tvBookName.setText(book.getBookName());
         holder.tvDescription.setText(book.getDescribe());
+        holder.tvPrice.setText(String.valueOf(book.getPrice()));
 
-        if (book.isAddToCart()){
-            holder.imgAddToCart.setBackgroundResource(R.drawable.bg_gray_conner_6);
-        }else {
-            holder.imgAddToCart.setBackgroundResource(R.drawable.bg_red_conner_6);
-        }
-
-        holder.imgAddToCart.setOnClickListener(new View.OnClickListener() {
+        holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!book.isAddToCart()){
-                    iClickAddToCartListener.onClickAddToCart(holder.imgAddToCart, book);
-                }
-
+                iClickAddToCartListener.onClickAddToCart(holder.imgBook, book);
             }
         });
     }
@@ -76,15 +70,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         private ImageView imgBook;
         private TextView tvBookName;
         private TextView tvDescription;
-        private ImageView imgAddToCart;
+        private TextView tvPrice;
+        private RelativeLayout item;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            item = itemView.findViewById(R.id.book_item);
             imgBook = itemView.findViewById(R.id.img_book);
             tvBookName = itemView.findViewById(R.id.tv_book_name);
             tvDescription = itemView.findViewById(R.id.tv_description);
-            imgAddToCart = itemView.findViewById(R.id.img_add_to_cart);
+            tvPrice = itemView.findViewById(R.id.tv_price);
         }
     }
 }

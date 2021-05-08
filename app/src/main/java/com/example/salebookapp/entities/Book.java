@@ -48,20 +48,21 @@ public class Book {
     private int republish;
     @ColumnInfo(name = "quantities")
     private int quantities;
-    @ColumnInfo(name = "image")
-    private String image;
     @ColumnInfo(name = "describe")
     private String describe;
+    @ColumnInfo(name = "image")
+    private String image;
     private boolean addToCart;
 
     public Book() {};
 
-    public Book(String bookName, String publicationDate, double price, int republish, int quantities, String image) {
+    public Book(String bookName, String publicationDate, double price, int republish, int quantities, String describe, String image) {
         this.bookName = bookName;
         this.publicationDate = publicationDate;
         this.price = price;
         this.republish = republish;
         this.quantities = quantities;
+        this.describe = describe;
         this.image = image;
     }
 

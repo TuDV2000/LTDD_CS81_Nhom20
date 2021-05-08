@@ -8,9 +8,10 @@
     android:layout_marginEnd="10dp">
 
     <RelativeLayout
+        android:id="@+id/book_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/img_book"
@@ -23,14 +24,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/img_book"
-            android:layout_toStartOf="@+id/img_add_to_cart"
             android:layout_marginStart="10dp"
             android:layout_centerVertical="true"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_book_name"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
                 android:textSize="16dp"
@@ -38,22 +38,31 @@
 
             <TextView
                 android:id="@+id/tv_description"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
                 android:textSize="14sp"
                 android:textColor="@android:color/darker_gray"/>
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/img_add_to_cart"
-            android:layout_width="60dp"
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_red_conner_6"
-            android:src="@drawable/ic_cart"
             android:padding="5dp"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:text="120000đ"
+            android:textAlignment="textEnd"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/img_add_to_cart"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/bg_red_conner_6"-->
+<!--            android:src="@drawable/ic_cart"-->
+<!--            android:padding="5dp"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_centerVertical="true"/>-->
 
 
     </RelativeLayout>
