@@ -51,6 +51,8 @@ public interface DAO {
     public void changeCusProfile(String newaddress, String newPhone, int id);
     @Query("select * from bills where fk_cus_id = :id")
     public List<Bill> getBillbyCus(int id);
+    @Query("select * from customers where cus_id = :id")
+    public Customer getCusById(int id);
 
     //BillDao
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -74,9 +76,7 @@ public interface DAO {
     public void typeDelete(BookType bookType);
     @Query("select * from booktypes")
     public List<BookType> getAllType();
-    @Query("select * from books where book_id = :id")
-    public Book getBookByID(int id);
-    @Query("update books set quantities =: newQuantities where book_id  =: id")
+    @Query("update books set quantities =  :newQuantities where book_id  = :id")
     public void updateQuantitiesOfBook(int newQuantities, int id);
 //    @Transaction
 //    @Query("select * from booktypes where type_id = :id")
@@ -116,4 +116,6 @@ public interface DAO {
     public void bookUpdate(Book book);
     @Query("select * from books")
     public List<Book> getAllBook();
+    @Query("select * from books where book_id = :id")
+    public Book getBookByID(int id);
 }

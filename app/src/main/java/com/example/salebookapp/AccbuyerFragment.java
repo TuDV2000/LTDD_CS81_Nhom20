@@ -15,12 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.example.salebookapp.entities.Account;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.example.salebookapp.entities.Customer;
 
 import java.util.List;
 
@@ -31,8 +33,10 @@ public class AccbuyerFragment extends Fragment {
 
     Button btnEdit, btnLogout, btnSaveEdit;
     EditText edtEditAddress, edtEditPhone;
+    TextView tvAccountName, tvAccountEmail;
     View view;
     AwesomeValidation awesomeValidation;
+
 
 
     @Override
@@ -41,14 +45,16 @@ public class AccbuyerFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_accbuyer, container, false);
 
         setUp();
+        setData();
+        addValidation();
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 edtEditAddress.setEnabled(true);
-                edtEditAddress.setText("");
-                edtEditPhone.setText("");
+                //edtEditAddress.setText("");
+                //edtEditPhone.setText("");
                 edtEditPhone.setEnabled(true);
-                btnEdit.setAlpha(1);
+                btnSaveEdit.setAlpha(1);
             }
         });
         btnSaveEdit.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +63,20 @@ public class AccbuyerFragment extends Fragment {
                 if (awesomeValidation.validate()){
                     String newAddress = edtEditAddress.getText().toString();
                     String newPhone = edtEditPhone.getText().toString();
-
+                    int cusID = Utils.accLogin.getAccID();
+                    AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            AppDatabase.getDatabase(getContext()).dao().changeCusProfile(newAddress,newPhone,cusID);
+                        }
+                    });
+                    }
                 }
+        });
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
@@ -72,6 +90,8 @@ public class AccbuyerFragment extends Fragment {
         btnSaveEdit = view.findViewById(R.id.btn_saveEdit);
         edtEditAddress = view.findViewById(R.id.edt_addressEdit);
         edtEditPhone = view.findViewById(R.id.edt_phoneEdit);
+        tvAccountEmail = view.findViewById(R.id.tv_accountEmail);
+        tvAccountName = view.findViewById(R.id.tv_accountName);
     }
     private void addValidation(){
         awesomeValidation = new AwesomeValidation(BASIC);
@@ -79,6 +99,20 @@ public class AccbuyerFragment extends Fragment {
         awesomeValidation.addValidation(getActivity(), R.id.edt_phoneEdit, RegexTemplate.TELEPHONE + RegexTemplate.NOT_EMPTY , R.string
                 .err_phone);
 
+    }
+    private void setData(){
+        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                int cusID = LoginActivity.LOGIN_ID;
+                Customer customer = AppDatabase.getDatabase(getContext()).dao().getCusById(Utils.accLogin.getAccID());
+                tvAccountName.setText(customer.getFullName());
+                tvAccountEmail.setText(Utils.accLogin.getUsername());
+                edtEditAddress.setText(customer.getAddress());
+                edtEditPhone.setText(customer.getPhoneNumber());
+
+            }
+        });
     }
 
 

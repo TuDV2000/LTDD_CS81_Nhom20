@@ -22,9 +22,10 @@
             android:text="Tên"
             android:layout_gravity="center"/>
         <TextView
+            android:id="@+id/tv_accountName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Huynh Nguyen Bac Giang"
+            android:text=""
             android:textSize="24dp"
             android:textStyle="bold"
             android:layout_gravity="center"/>
@@ -40,9 +41,10 @@
             android:text="Email"
             android:layout_gravity="center"/>
         <TextView
+            android:id="@+id/tv_accountEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1851050037giang@ou.edu.vn"
+            android:text=""
             android:textSize="24dp"
             android:textStyle="bold"
             android:layout_gravity="center"/>
@@ -61,11 +63,13 @@
             android:id="@+id/edt_addressEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1851050037giang@ou.edu.vn"
+            android:text=""
             android:textSize="24dp"
+            android:hint="nhập địa chỉ mới"
             android:textStyle="bold"
             android:enabled="false"
             android:layout_gravity="center"
+            android:textAlignment="center"
             android:background="@null"/>
     </LinearLayout>
     <LinearLayout
@@ -82,10 +86,12 @@
             android:id="@+id/edt_phoneEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1851050037"
+            android:text=""
             android:textSize="24dp"
+            android:hint="nhập sdt mới"
             android:textStyle="bold"
             android:layout_gravity="center"
+            android:textAlignment="center"
             android:enabled="false"
             android:background="@null"/>
     </LinearLayout>
@@ -98,7 +104,7 @@
         android:text="Chỉnh sửa"
         android:textSize="25dp"
         android:backgroundTint="#6495ED"
-        android:enabled="false" />
+        android:enabled="true" />
     <Button
         android:id="@+id/btn_saveEdit"
         android:layout_marginTop="20dp"
@@ -108,7 +114,7 @@
         android:text="Lưu"
         android:textSize="25dp"
         android:backgroundTint="#6495ED"
-        android:enabled="false"
+        android:enabled="true"
         android:alpha="0.0"/>
     <Button
         android:id="@+id/btn_logOut"

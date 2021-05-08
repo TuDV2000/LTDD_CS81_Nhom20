@@ -76,7 +76,10 @@ public class AccountFragment extends Fragment {
                         List<Account> l = AppDatabase.getDatabase(getContext()).dao().getAccount(edt_user.getText().toString());
                         if (l.size() > 0) {
                             if (edt_pass.getText().toString().equals(l.get(0).getPassword())) {
-                                Toast.makeText(getContext(), "Login success !!!", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(), "Login success !!!", Toast.LENGTH_SHORT).show();
+                                Utils.accLogin = AppDatabase.getDatabase(getContext()).dao().getAccount(edt_user.getText().toString()).get(0);
+                                getActivity().finish();
+                                startActivity(new Intent(getContext(),HomeActivity.class));
                             }
                         }
                     }

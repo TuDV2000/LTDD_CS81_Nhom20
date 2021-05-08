@@ -113,24 +113,25 @@ public class HomeActivity extends AppCompatActivity {
                 double price = 12.3;
                 int republish = 1;
                 int quantities = 1;
+                String describe ="jsaijdoaisj";
                 String image ="1";
-                Book book = new Book(bookName, publicationDate, price, republish,quantities,image);
+                Book book = new Book(bookName, publicationDate, price, republish,quantities,describe,image);
                 AppDatabase.getDatabase(getApplicationContext()).dao().bookInsert(book);
 
                 int fkCusID = 1;
                 double total =87654;
                 String dateOfExport = "29/09/2000";
                 Bill bill = new Bill(fkCusID,total,dateOfExport);
-
                 AppDatabase.getDatabase(getApplicationContext()).dao().billInsert(bill);
 
                 int idBill = AppDatabase.getDatabase(getApplicationContext()).dao().getBillbyCus(1).get(0).getBillID();
                 int fkBookID =  AppDatabase.getDatabase(getApplicationContext()).dao().getAllBook().get(0).getBookID();
                 double pricesale = 12.7;
-
                 BillDetail billDetail = new BillDetail(idBill,fkBookID,price);
                 AppDatabase.getDatabase(getApplicationContext()).dao().billDetailInsert(billDetail);
+
             }
         });
     }
+
 }
