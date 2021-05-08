@@ -56,7 +56,7 @@
         android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="xem kho hàng"
+        android:text="thêm sách"
         android:textSize="25dp"
         android:backgroundTint="#00BCD4"
         android:enabled="true" />
