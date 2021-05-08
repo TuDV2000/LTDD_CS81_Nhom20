@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SaleBookApp">
-        <activity android:name=".PaymentActivity"></activity>
+        <activity android:name=".BuyerBillsActivity"></activity>
+        <activity android:name=".PaymentActivity" />
         <activity
             android:name=".ConfirmActivity"
             android:parentActivityName=".RegistActivity" />

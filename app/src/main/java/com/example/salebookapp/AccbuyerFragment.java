@@ -31,7 +31,7 @@ import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 
 public class AccbuyerFragment extends Fragment {
 
-    Button btnEdit, btnLogout, btnSaveEdit;
+    Button btnEdit, btnLogout, btnSaveEdit, btnBuyerBill;
     EditText edtEditAddress, edtEditPhone;
     TextView tvAccountName, tvAccountEmail;
     View view;
@@ -47,6 +47,12 @@ public class AccbuyerFragment extends Fragment {
         setUp();
         setData();
         addValidation();
+        btnBuyerBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +82,9 @@ public class AccbuyerFragment extends Fragment {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Utils.accLogin = null;
+                getActivity().finish();
+                startActivity(new Intent(getContext(),HomeActivity.class));
             }
         });
 
@@ -88,10 +96,12 @@ public class AccbuyerFragment extends Fragment {
         btnEdit = view.findViewById(R.id.btn_editAcc);
         btnLogout = view.findViewById(R.id.btn_logOut);
         btnSaveEdit = view.findViewById(R.id.btn_saveEdit);
+        btnBuyerBill = view.findViewById(R.id.btn_salerBill);
         edtEditAddress = view.findViewById(R.id.edt_addressEdit);
         edtEditPhone = view.findViewById(R.id.edt_phoneEdit);
         tvAccountEmail = view.findViewById(R.id.tv_accountEmail);
         tvAccountName = view.findViewById(R.id.tv_accountName);
+
     }
     private void addValidation(){
         awesomeValidation = new AwesomeValidation(BASIC);
@@ -104,13 +114,11 @@ public class AccbuyerFragment extends Fragment {
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                int cusID = LoginActivity.LOGIN_ID;
                 Customer customer = AppDatabase.getDatabase(getContext()).dao().getCusById(Utils.accLogin.getAccID());
                 tvAccountName.setText(customer.getFullName());
                 tvAccountEmail.setText(Utils.accLogin.getUsername());
                 edtEditAddress.setText(customer.getAddress());
                 edtEditPhone.setText(customer.getPhoneNumber());
-
             }
         });
     }

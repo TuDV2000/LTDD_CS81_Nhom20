@@ -96,6 +96,16 @@
             android:background="@null"/>
     </LinearLayout>
     <Button
+        android:id="@+id/btn_buyerBill"
+        android:layout_marginTop="20dp"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Kiểm tra đơn hàng"
+        android:textSize="20dp"
+        android:backgroundTint="#00BCD4"
+        android:enabled="true" />
+    <Button
         android:id="@+id/btn_editAcc"
         android:layout_marginTop="20dp"
         android:layout_width="290dp"

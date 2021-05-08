@@ -8,7 +8,77 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Saler account profile">
-    </TextView>
+        android:text="Thông tin cá nhân"
+        android:textSize="30dp"
+        android:textAlignment="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/tv_accountName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/tv_accountEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_store"
+        android:layout_marginTop="20dp"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="xem kho hàng"
+        android:textSize="25dp"
+        android:backgroundTint="#00BCD4"
+        android:enabled="true" />
+    <Button
+        android:id="@+id/btn_salerBill"
+        android:layout_marginTop="20dp"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Xem đơn hàng"
+        android:textSize="25dp"
+        android:backgroundTint="#6495ED"
+        android:enabled="true" />
+    <Button
+        android:id="@+id/btn_logOut"
+        android:layout_marginTop="20dp"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Đăng xuất"
+        android:textSize="25dp"
+        android:backgroundTint="#ED646F"/>
 
 </LinearLayout>
+
