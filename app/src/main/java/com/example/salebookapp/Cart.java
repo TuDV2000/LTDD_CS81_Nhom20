@@ -7,22 +7,21 @@ import java.util.List;
 
 public class Cart {
     private List<Book> listBooks;
-    private int bookCount;
     private double totalPrice;
 
     public Cart() {
-        listBooks = new ArrayList<>();
+        listBooks = new ArrayList<Book>();
         totalPrice = 0.0;
     }
 
-    public boolean addToCart(Book book, int quantity) {
-        if (quantity != 0) {
-            totalPrice += (book.getPrice() * quantity);
-            listBooks.add(book);
-
-            return true;
+    public void addToCart(Book book, int quantity){
+        for (Book b : listBooks) {
+            if (b.getBookID() == book.getBookID()) {
+                b.setAmount(b.getAmount() + quantity);
+                return;
+            }
         }
-        return false;
+        listBooks.add(book);
     }
 
 
@@ -39,11 +38,4 @@ public class Cart {
         return listBooks;
     }
 
-    public int getBookCount() {
-        return bookCount;
-    }
-
-    public void setBookCount(int bookCount) {
-        this.bookCount = bookCount;
-    }
 }

@@ -24,7 +24,7 @@ public class CartFragment extends Fragment {
     private View mView;
     private HomeActivity mainActivity;
     private BookAdapter bookAdapter;
-    private TextView tvTotalPrice;
+    private TextView tvTotalPrice, tvPrice;
 
     public CartFragment() {
 
@@ -36,6 +36,7 @@ public class CartFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_cart, container, false);
         rcvCart = mView.findViewById(R.id.rcv_cart);
         tvTotalPrice = mView.findViewById(R.id.tv_total_price);
+        tvPrice = mView.findViewById(R.id.tv_price);
 
         return mView;
     }

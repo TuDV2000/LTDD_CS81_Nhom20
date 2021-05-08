@@ -53,6 +53,7 @@ public class Book {
     @ColumnInfo(name = "image")
     private String image;
     private boolean addToCart;
+    private int amount = 0;
 
     public Book() {};
 
@@ -64,6 +65,7 @@ public class Book {
         this.quantities = quantities;
         this.describe = describe;
         this.image = image;
+
     }
 
 
@@ -138,5 +140,13 @@ public class Book {
 
     public void setAddToCart(boolean addToCart) {
         this.addToCart = addToCart;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }
