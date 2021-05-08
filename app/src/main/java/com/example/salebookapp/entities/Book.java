@@ -52,8 +52,7 @@ public class Book {
     private String describe;
     @ColumnInfo(name = "image")
     private String image;
-    private boolean addToCart;
-    private int amount = 0;
+    private int amount;
 
     public Book() {};
 
@@ -65,7 +64,6 @@ public class Book {
         this.quantities = quantities;
         this.describe = describe;
         this.image = image;
-
     }
 
 
@@ -132,14 +130,6 @@ public class Book {
 
     public void setDescribe(String describe) {
         this.describe = describe;
-    }
-
-    public boolean isAddToCart() {
-        return addToCart;
-    }
-
-    public void setAddToCart(boolean addToCart) {
-        this.addToCart = addToCart;
     }
 
     public int getAmount() {

@@ -1,21 +1,30 @@
 package com.example.salebookapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.example.salebookapp.entities.Book;
+
+import java.util.List;
 
 
 public class CartFragment extends Fragment {
@@ -25,18 +34,33 @@ public class CartFragment extends Fragment {
     private HomeActivity mainActivity;
     private BookAdapter bookAdapter;
     private TextView tvTotalPrice, tvPrice;
+    private Button btnPayment;
 
     public CartFragment() {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_cart, container, false);
+    private void setUp() {
         rcvCart = mView.findViewById(R.id.rcv_cart);
         tvTotalPrice = mView.findViewById(R.id.tv_total_price);
         tvPrice = mView.findViewById(R.id.tv_price);
+        btnPayment = mView.findViewById(R.id.btn_payment);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        mView = inflater.inflate(R.layout.fragment_cart, container, false);
+
+        setUp();
+
+        btnPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+            }
+        });
 
         return mView;
     }
@@ -52,9 +76,9 @@ public class CartFragment extends Fragment {
 
         bookAdapter = new BookAdapter();
 
-        bookAdapter.setData(Utils.cart.getListBooks(), new BookAdapter.IClickAddToCartListener() {
+        bookAdapter.setData(Utils.cart.getCartItemAll(), new BookAdapter.IClickAddToCartListener() {
             @Override
-            public void onClickAddToCart(ImageView imgAddToCart, Book book) {
+            public void onClickAddToCart(ImageView imgAddToCart, Book book, BookAdapter.BookViewHolder holder) {
 
             }
         });

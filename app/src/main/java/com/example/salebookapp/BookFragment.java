@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.salebookapp.entities.Book;
 import com.example.salebookapp.entities.Customer;
@@ -48,27 +49,30 @@ public class BookFragment extends Fragment {
 
         bookAdapter.setData(HomeActivity.bookList, new BookAdapter.IClickAddToCartListener() {
             @Override
-            public void onClickAddToCart(ImageView imgBook, Book book) {
-                Utils.cart.addToCart(book, 1);
+            public void onClickAddToCart(ImageView imgBook, Book book, BookAdapter.BookViewHolder holder) {
+                Utils.cart.addToCart(book);
 
-                AnimationUtil.translateAnimation(mainActivity.getViewAnimation(), imgBook,
-                    mainActivity.getViewEndAnimation(), new Animation.AnimationListener() {
-                        @Override
-                        public void onAnimationStart(Animation animation) {
+                holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
 
-                        }
 
-                        @Override
-                        public void onAnimationEnd(Animation animation) {
-                            bookAdapter.notifyDataSetChanged();
-                            mainActivity.setCountProductInCart(mainActivity.getCountBook() + 1);
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animation animation) {
-
-                        }
-                });
+//                AnimationUtil.translateAnimation(mainActivity.getViewAnimation(), imgBook,
+//                    mainActivity.getViewEndAnimation(), new Animation.AnimationListener() {
+//                        @Override
+//                        public void onAnimationStart(Animation animation) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onAnimationEnd(Animation animation) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onAnimationRepeat(Animation animation) {
+//                            bookAdapter.notifyDataSetChanged();
+//                            mainActivity.setCountProductInCart(mainActivity.getCountBook() + 1);
+//                        }
+//                });
             }
         });
 
