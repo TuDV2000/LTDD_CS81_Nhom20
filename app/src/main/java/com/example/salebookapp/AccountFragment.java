@@ -54,7 +54,7 @@ public class AccountFragment extends Fragment {
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //onBackPressed();
+
                         getActivity().finish();
                         System.exit(0);
                     }
@@ -70,20 +70,25 @@ public class AccountFragment extends Fragment {
         btn_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppDatabase.databaseWriteExecutor.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        List<Account> l = AppDatabase.getDatabase(getContext()).dao().getAccount(edt_user.getText().toString());
-                        if (l.size() > 0) {
-                            if (edt_pass.getText().toString().equals(l.get(0).getPassword())) {
-                                //Toast.makeText(getContext(), "Login success !!!", Toast.LENGTH_SHORT).show();
-                                Utils.accLogin = AppDatabase.getDatabase(getContext()).dao().getAccount(edt_user.getText().toString()).get(0);
+                String user = edt_user.getText().toString();
+                String pass = edt_pass.getText().toString();
+
+                if (user.length() != 0 && pass.length() != 0){
+                    AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            List<Account> l = AppDatabase.getDatabase(getContext().getApplicationContext())
+                                    .dao().getAccount(user);
+                            if (l.size() > 0) {
+                                Utils.accLogin = l.get(0);
                                 getActivity().finish();
-                                startActivity(new Intent(getContext(),HomeActivity.class));
+                                startActivity(new Intent(getContext(), HomeActivity.class));
                             }
                         }
-                    }
-                });
+                    });
+                } else {
+                    Toast.makeText(getContext(),"Mời bạn nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         btn_signup.setOnClickListener(new View.OnClickListener() {

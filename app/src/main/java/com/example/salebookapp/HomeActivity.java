@@ -117,6 +117,15 @@ public class HomeActivity extends AppCompatActivity {
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
+                if (AppDatabase.getDatabase(getApplicationContext())
+                        .dao().getAccount("admin@gmail.com").size() == 0) {
+                    AppDatabase.getDatabase(getApplicationContext())
+                            .dao().customerInsert(new Customer("Admin", "0123456789"
+                            , "371 Nguyễn kiệm, Q.Gò Vấp, TPHCM"));
+                    AppDatabase.getDatabase(getApplicationContext())
+                            .dao().accountInsert(new Account("admin@gmail.com", "Admin123", "Saler"));
+                }
+
                 if (AppDatabase.getDatabase(getApplicationContext()).dao().getAllBook().size() == 0) {
                     AppDatabase.getDatabase(getApplicationContext())
                             .dao().bookInsert(new Book("Vượt qua tất cả", "20-02-2002",

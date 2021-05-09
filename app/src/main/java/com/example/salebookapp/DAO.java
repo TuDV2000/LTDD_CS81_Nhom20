@@ -63,9 +63,11 @@ public interface DAO {
     public void billInsert(Bill bill);
     @Delete
     public void billDelete(Bill bill);
-    @Transaction
     @Query("select * from bills where bill_id = :id")
-    public List<BillAndDetail> getDetailByBillId(int id);
+    public Bill getBillById(int id);
+//    @Transaction
+//    @Query("select * from bills where bill_id = :id")
+//    public List<BillAndDetail> getDetailByBillId(int id);
 
 
     //BookTypeDao

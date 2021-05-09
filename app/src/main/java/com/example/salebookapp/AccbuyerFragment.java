@@ -46,13 +46,13 @@ public class AccbuyerFragment extends Fragment {
 
         setUp();
         setData();
-        addValidation();
-        btnBuyerBill.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+//        btnBuyerBill.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,13 +101,6 @@ public class AccbuyerFragment extends Fragment {
         edtEditPhone = view.findViewById(R.id.edt_phoneEdit);
         tvAccountEmail = view.findViewById(R.id.tv_accountEmail);
         tvAccountName = view.findViewById(R.id.tv_accountName);
-
-    }
-    private void addValidation(){
-        awesomeValidation = new AwesomeValidation(BASIC);
-        awesomeValidation.addValidation(getActivity(),R.id.edt_addressEdit, RegexTemplate.NOT_EMPTY,R.string.err_value);
-        awesomeValidation.addValidation(getActivity(), R.id.edt_phoneEdit, RegexTemplate.TELEPHONE + RegexTemplate.NOT_EMPTY , R.string
-                .err_phone);
 
     }
     private void setData(){
