@@ -10,13 +10,13 @@
     <RelativeLayout
         android:id="@+id/book_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:padding="5dp">
 
         <ImageView
             android:id="@+id/img_book"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:src="@drawable/book1"/>
 
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/img_book"
             android:layout_marginStart="10dp"
-            android:layout_centerVertical="true"
+
             android:orientation="vertical">
 
             <TextView
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:textSize="16dp"
+                android:textSize="20dp"
                 android:textColor="@android:color/black"/>
 
             <TextView
@@ -49,10 +49,10 @@
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
             android:padding="5dp"
             android:text="120000đ"
+            android:layout_alignParentRight="true"
             android:textAlignment="textEnd" />
         <TextView
             android:id="@+id/tv_quantity"
@@ -63,7 +63,29 @@
             android:textSize="15dp"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/tv_price"/>
+        <Button
+            android:id="@+id/btn_minus"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:textSize="25dp"
+            android:text="-"
+            android:textStyle="bold"
+            android:backgroundTint="#00BCD4"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_quantity"/>
+        <Button
+            android:id="@+id/btn_plus"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:textSize="25dp"
+            android:text="+"
+            android:backgroundTint="#00BCD4"
+            android:layout_below="@id/tv_quantity"
+            android:layout_toLeftOf="@id/btn_minus"
+            android:layout_marginHorizontal="5dp"
+            />
     </RelativeLayout>
+
 
 
 </androidx.cardview.widget.CardView>

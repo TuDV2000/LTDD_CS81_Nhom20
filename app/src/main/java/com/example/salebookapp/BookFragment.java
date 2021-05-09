@@ -1,5 +1,6 @@
 package com.example.salebookapp;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.salebookapp.entities.Book;
@@ -52,27 +54,41 @@ public class BookFragment extends Fragment {
             public void onClickAddToCart(ImageView imgBook, Book book, BookAdapter.BookViewHolder holder) {
                 Utils.cart.addToCart(book);
 
-                holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
-
+//                holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
 
                 AnimationUtil.translateAnimation(mainActivity.getViewAnimation(), imgBook,
-                    mainActivity.getViewEndAnimation(), new Animation.AnimationListener() {
-                        @Override
-                        public void onAnimationStart(Animation animation) {
+                        mainActivity.getViewEndAnimation(), new Animation.AnimationListener() {
+                            @Override
+                            public void onAnimationStart(Animation animation) {
 
-                        }
+                            }
 
-                        @Override
-                        public void onAnimationEnd(Animation animation) {
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
 
-                        }
+                            }
 
-                        @Override
-                        public void onAnimationRepeat(Animation animation) {
-                            bookAdapter.notifyDataSetChanged();
-                            mainActivity.setCountProductInCart(mainActivity.getCountBook() + 1);
-                        }
-                });
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
+                                bookAdapter.notifyDataSetChanged();
+                                mainActivity.setCountProductInCart(mainActivity.getCountBook() + 1);
+                            }
+                        });
+            }
+        }, new BookAdapter.IClickGoToDetailListener() {
+            @Override
+            public void onClickGoToDetail(Book book) {
+                Intent intent = new Intent(getContext(), BookDetailActivity.class);
+
+                intent.putExtra("bookID", book.getBookID());
+//                intent.putExtra("amount", Utils.cart.getCart().get(book.getBookID()).getAmount());
+
+                startActivity(intent);
+            }
+        }, new BookAdapter.IClickRemoveFromCartListener() {
+            @Override
+            public void onClickRemoveFromCart(Book book, BookAdapter.BookViewHolder holder) {
+                Utils.cart.removeFromCart(book);
             }
         });
 

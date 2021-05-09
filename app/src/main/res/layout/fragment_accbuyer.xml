@@ -88,6 +88,7 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="24dp"
+            android:inputType="number"
             android:hint="nhập sdt mới"
             android:textStyle="bold"
             android:layout_gravity="center"

@@ -38,16 +38,11 @@ import static com.basgeekball.awesomevalidation.ValidationStyle.UNDERLABEL;
 
 public class RegistActivity extends AppCompatActivity {
 
-    private EditText edtFullName;
-    private EditText edtUserName;
-    private EditText edtPassword;
-    private EditText edtCellPhone;
-    private EditText edtAddress;
-    private EditText edtConfirmPass;
-    private TextView txtChangeLogin;
-    private CheckBox cbAgree;
-    private Button btnCreate;
-    private AwesomeValidation awesomeValidation;
+    EditText edtFullName, edtUserName, edtPassword,edtCellPhone,edtAddress,edtConfirmPass;
+    TextView txtChangeLogin;
+    CheckBox cbAgree;
+    Button btnCreate;
+    AwesomeValidation awesomeValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +50,7 @@ public class RegistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_regist);
 
         setup();
+        //setItem();
         addValidation();
 
         ActionBar actionBar = getSupportActionBar();
@@ -91,12 +87,10 @@ public class RegistActivity extends AppCompatActivity {
                    AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                        @Override
                        public void run() {
-                           if (AppDatabase.getDatabase(getApplicationContext())
-                                   .dao().getAccount(edtUserName.getText().toString()).size() == 0) {
+                           if (AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(edtUserName.getText().toString()).size() == 0) {
                                startActivity(intent);
                            } else {
-                               Toast.makeText(RegistActivity.this,
-                                       "Tài khoản đã được sử dụng", Toast.LENGTH_SHORT).show();
+                               Toast.makeText(RegistActivity.this, "Tài khoản đã được sử dụng", Toast.LENGTH_SHORT).show();
                            }
                        }
                    });
@@ -105,24 +99,31 @@ public class RegistActivity extends AppCompatActivity {
         });
     }
 
-    public void addValidation(){
+    private void addValidation(){
         awesomeValidation = new AwesomeValidation(BASIC);
-        awesomeValidation.addValidation(RegistActivity.this, R.id.edt_fullname
-                , RegexTemplate.NOT_EMPTY ,R.string.err_fullname);
-        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_address
-                ,RegexTemplate.NOT_EMPTY,R.string.err_value);
-        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_username
-                , Patterns.EMAIL_ADDRESS,R.string
+        awesomeValidation.addValidation(RegistActivity.this, R.id.edt_fullname, RegexTemplate.NOT_EMPTY ,R.string.err_fullname);
+        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_address,RegexTemplate.NOT_EMPTY,R.string.err_value);
+        awesomeValidation.addValidation(RegistActivity.this, R.id.edt_cellphone, RegexTemplate.TELEPHONE + RegexTemplate.NOT_EMPTY , R.string
+                .err_phone);
+        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_cellphone,new SimpleCustomValidation() {
+            @Override
+            public boolean compare(String s) {
+                if (s.length() < 8 || s.length() > 13){
+                    return false;
+                }else {
+                    return true;
+                }
+            }
+        },R.string.err_value);
+        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_username, Patterns.EMAIL_ADDRESS,R.string
                 .err_email);
         String regexPassword = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
-        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_password
-                , regexPassword,R.string
+        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_password, regexPassword,R.string
                 .err_password);
-        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_confirmpassword
-                ,R.id.edt_password,R.string.err_confirmpassword);
+        awesomeValidation.addValidation(RegistActivity.this,R.id.edt_confirmpassword,R.id.edt_password,R.string.err_confirmpassword);
     }
 
-    public void setup() {
+    private void setup() {
         edtFullName = findViewById(R.id.edt_fullname);
         edtUserName = findViewById(R.id.edt_username);
         edtPassword = findViewById(R.id.edt_password);

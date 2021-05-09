@@ -13,11 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SaleBookApp">
         <activity android:name=".OrderHistoryActivity"></activity>
-        <activity android:name=".BuyerBillsActivity" />
+        <activity android:name=".BookDetailActivity"></activity>
+        <activity android:name=".BuyerBillsActivity"></activity>
         <activity android:name=".PaymentActivity" />
         <activity
             android:name=".ConfirmActivity"
-            android:parentActivityName=".RegistActivity" />
+            android:parentActivityName=".RegistActivity"/>
         <activity
             android:name=".LoginActivity"
             android:parentActivityName=".HomeActivity" />

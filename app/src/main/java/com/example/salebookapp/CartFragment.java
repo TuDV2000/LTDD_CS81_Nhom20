@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,7 +104,21 @@ public class CartFragment extends Fragment {
         bookAdapter.setData(Utils.cart.getCartItemAll(), new BookAdapter.IClickAddToCartListener() {
             @Override
             public void onClickAddToCart(ImageView imgAddToCart, Book book, BookAdapter.BookViewHolder holder) {
+                Utils.cart.addToCart(book);
+                holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
+                tvTotalPrice.setText("Tổng tiền: " + Utils.cart.getTotalPrice());
+            }
+        }, new BookAdapter.IClickGoToDetailListener() {
+            @Override
+            public void onClickGoToDetail(Book book) {
 
+            }
+        }, new BookAdapter.IClickRemoveFromCartListener() {
+            @Override
+            public void onClickRemoveFromCart(Book book, BookAdapter.BookViewHolder holder) {
+                Utils.cart.removeFromCart(book);
+                holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
+                tvTotalPrice.setText("Tổng tiền: " + Utils.cart.getTotalPrice());
             }
         });
 
