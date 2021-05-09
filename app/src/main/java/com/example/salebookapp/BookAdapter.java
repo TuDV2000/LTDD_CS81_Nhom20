@@ -3,7 +3,7 @@ package com.example.salebookapp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,17 +19,28 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     private List<Book> mListBook;
     private IClickAddToCartListener  iClickAddToCartListener;
+    private IClickGoToDetailListener iClickGoToDetailListener;
+    private IClickRemoveFromCartListener iClickRemoveFromCartListener;
 
     public interface IClickAddToCartListener{
         void onClickAddToCart(ImageView imgBook, Book book,BookViewHolder holder);
 
     }
 
+    public interface IClickGoToDetailListener{
+        void onClickGoToDetail(Book book);
+    }
 
+    public interface IClickRemoveFromCartListener{
+        void onClickRemoveFromCart(Book book, BookViewHolder holder);
+    }
 
-    public void setData(List<Book> list, IClickAddToCartListener listener){
+    public void setData(List<Book> list, IClickAddToCartListener listener,
+                        IClickGoToDetailListener listener1, IClickRemoveFromCartListener listener2){
         this.mListBook = list;
         this.iClickAddToCartListener = listener;
+        this.iClickGoToDetailListener = listener1;
+        this.iClickRemoveFromCartListener = listener2;
         notifyDataSetChanged();
     }
 
@@ -44,6 +55,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public void onBindViewHolder(@NonNull final BookViewHolder holder, int position) {
         Book book = mListBook.get(position);
+
         if (book == null){
             return;
         }
@@ -54,10 +66,23 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.tvPrice.setText(String.valueOf(book.getPrice()));
         holder.tvQuantity.setText("X " + String.valueOf(book.getAmount()));
 
-        holder.item.setOnClickListener(new View.OnClickListener() {
+        holder.btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 iClickAddToCartListener.onClickAddToCart(holder.imgBook, book,holder);
+            }
+        });
+
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iClickGoToDetailListener.onClickGoToDetail(book);
+            }
+        });
+        holder.btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iClickRemoveFromCartListener.onClickRemoveFromCart(book, holder);
             }
         });
     }
@@ -76,6 +101,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         private ImageView imgBook;
         private TextView tvBookName, tvDescription, tvPrice, tvQuantity;
+        private Button btnPlus;
+        private Button btnMinus;
         private RelativeLayout item;
 
         public BookViewHolder(@NonNull View itemView) {
@@ -87,6 +114,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             tvDescription = itemView.findViewById(R.id.tv_description);
             tvPrice = itemView.findViewById(R.id.tv_price);
             tvQuantity = itemView.findViewById(R.id.tv_quantity);
+            setBtnPlus(itemView.findViewById(R.id.btn_plus));
+            setBtnMinus(itemView.findViewById(R.id.btn_minus));
         }
 
         public ImageView getImgBook() {
@@ -135,6 +164,22 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         public void setItem(RelativeLayout item) {
             this.item = item;
+        }
+
+        public Button getBtnPlus() {
+            return btnPlus;
+        }
+
+        public void setBtnPlus(Button btnPlus) {
+            this.btnPlus = btnPlus;
+        }
+
+        public Button getBtnMinus() {
+            return btnMinus;
+        }
+
+        public void setBtnMinus(Button btnMinus) {
+            this.btnMinus = btnMinus;
         }
     }
 }

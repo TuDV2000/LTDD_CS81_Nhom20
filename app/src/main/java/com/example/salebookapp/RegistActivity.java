@@ -42,7 +42,6 @@ public class RegistActivity extends AppCompatActivity {
     TextView txtChangeLogin;
     CheckBox cbAgree;
     Button btnCreate;
-    Spinner spRole;
     AwesomeValidation awesomeValidation;
 
     @Override
@@ -51,7 +50,7 @@ public class RegistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_regist);
 
         setup();
-        setItem();
+        //setItem();
         addValidation();
 
         ActionBar actionBar = getSupportActionBar();
@@ -79,7 +78,7 @@ public class RegistActivity extends AppCompatActivity {
 
                    intent.putExtra("email", edtUserName.getText().toString());
                    intent.putExtra("pass", edtPassword.getText().toString());
-                   intent.putExtra("type", spRole.getSelectedItem().toString());
+                   intent.putExtra("type", "Buyer");
                    intent.putExtra("fullName", edtFullName.getText().toString());
                    intent.putExtra("phone", edtCellPhone.getText().toString());
                    intent.putExtra("address", edtAddress.getText().toString());
@@ -104,30 +103,6 @@ public class RegistActivity extends AppCompatActivity {
         awesomeValidation = new AwesomeValidation(BASIC);
         awesomeValidation.addValidation(RegistActivity.this, R.id.edt_fullname, RegexTemplate.NOT_EMPTY ,R.string.err_fullname);
         awesomeValidation.addValidation(RegistActivity.this,R.id.edt_address,RegexTemplate.NOT_EMPTY,R.string.err_value);
-        awesomeValidation.addValidation(RegistActivity.this, R.id.sp_role, new CustomValidation() {
-            @Override
-            public boolean compare(ValidationHolder validationHolder) {
-                if (((Spinner) validationHolder.getView()).getSelectedItem().toString().equals("")) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        }, new CustomValidationCallback() {
-            @Override
-            public void execute(ValidationHolder validationHolder) {
-                TextView textViewError = (TextView) ((Spinner) validationHolder.getView()).getSelectedView();
-                textViewError.setError(validationHolder.getErrMsg());
-                textViewError.setTextColor(Color.RED);
-            }
-        }, new CustomErrorReset() {
-            @Override
-            public void reset(ValidationHolder validationHolder) {
-                TextView textViewError = (TextView) ((Spinner) validationHolder.getView()).getSelectedView();
-                textViewError.setError(null);
-                textViewError.setTextColor(Color.BLACK);
-            }
-        }, R.id.sp_role);
         awesomeValidation.addValidation(RegistActivity.this, R.id.edt_cellphone, RegexTemplate.TELEPHONE + RegexTemplate.NOT_EMPTY , R.string
                 .err_phone);
         awesomeValidation.addValidation(RegistActivity.this,R.id.edt_cellphone,new SimpleCustomValidation() {
@@ -148,13 +123,6 @@ public class RegistActivity extends AppCompatActivity {
         awesomeValidation.addValidation(RegistActivity.this,R.id.edt_confirmpassword,R.id.edt_password,R.string.err_confirmpassword);
     }
 
-    private void setItem() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(RegistActivity.this,
-                R.array.option, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spRole.setAdapter(adapter);
-    }
-
     private void setup() {
         edtFullName = findViewById(R.id.edt_fullname);
         edtUserName = findViewById(R.id.edt_username);
@@ -165,7 +133,6 @@ public class RegistActivity extends AppCompatActivity {
         txtChangeLogin = findViewById(R.id.txt_change_login);
         cbAgree = findViewById(R.id.cb_agree);
         btnCreate = findViewById(R.id.btn_create);
-        spRole = findViewById(R.id.sp_role);
     }
 
     public void onClick(View v) {

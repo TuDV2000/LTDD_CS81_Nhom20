@@ -33,9 +33,9 @@ public class AccbuyerFragment extends Fragment {
 
     Button btnEdit, btnLogout, btnSaveEdit, btnBuyerBill;
     EditText edtEditAddress, edtEditPhone;
+    String oldAddress, oldPhone;
     TextView tvAccountName, tvAccountEmail;
     View view;
-    AwesomeValidation awesomeValidation;
 
 
 
@@ -45,30 +45,34 @@ public class AccbuyerFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_accbuyer, container, false);
 
         setUp();
-        setData();
-        addValidation();
-        btnBuyerBill.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+        setData();
+//        btnBuyerBill.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+
+
+
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                oldAddress = edtEditAddress.getText().toString();
+                oldPhone = edtEditPhone.getText().toString();
                 edtEditAddress.setEnabled(true);
-                //edtEditAddress.setText("");
-                //edtEditPhone.setText("");
                 edtEditPhone.setEnabled(true);
+                btnEdit.setEnabled(false);
                 btnSaveEdit.setAlpha(1);
             }
         });
         btnSaveEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (awesomeValidation.validate()){
-                    String newAddress = edtEditAddress.getText().toString();
-                    String newPhone = edtEditPhone.getText().toString();
+                String newAddress = edtEditAddress.getText().toString();
+                String newPhone = edtEditPhone.getText().toString();
+                if (addValidation(newAddress, newPhone)){
                     int cusID = Utils.accLogin.getAccID();
                     AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                         @Override
@@ -76,6 +80,10 @@ public class AccbuyerFragment extends Fragment {
                             AppDatabase.getDatabase(getContext()).dao().changeCusProfile(newAddress,newPhone,cusID);
                         }
                     });
+                    edtEditAddress.setEnabled(false);
+                    edtEditPhone.setEnabled(false);
+                    btnSaveEdit.setAlpha(0);
+                    btnEdit.setEnabled(true);
                     }
                 }
         });
@@ -103,23 +111,41 @@ public class AccbuyerFragment extends Fragment {
         tvAccountName = view.findViewById(R.id.tv_accountName);
 
     }
-    private void addValidation(){
-        awesomeValidation = new AwesomeValidation(BASIC);
-        awesomeValidation.addValidation(getActivity(),R.id.edt_addressEdit, RegexTemplate.NOT_EMPTY,R.string.err_value);
-        awesomeValidation.addValidation(getActivity(), R.id.edt_phoneEdit, RegexTemplate.TELEPHONE + RegexTemplate.NOT_EMPTY , R.string
-                .err_phone);
-
+    private boolean addValidation(String newAddress, String newPhone){
+        if(newAddress.length()== 0 || newPhone.length() == 0){
+            Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            System.out.println("================Vui lòng nhập đầy đủ thông tin=============");
+            return false;
+        }
+        if (newPhone.length() <= 8 || newPhone.length() >= 13){
+            Toast.makeText(getContext(), "Vui lòng nhập đúng số điện thoại", Toast.LENGTH_SHORT).show();
+            System.out.println("================Vui lòng nhập đúng số điện thoại=============");
+            return false;
+        }
+        if (newAddress.equals(oldAddress)){
+            Toast.makeText(getContext(), "Bạn không thay đổi số điện thoại", Toast.LENGTH_SHORT).show();
+            System.out.println("================Bạn không thay đổi số điện thoại=============");
+            return false;
+        }
+        if(newPhone.equals(oldPhone)){
+            Toast.makeText(getContext(), "Bạn không thay đổi địa chỉ", Toast.LENGTH_SHORT).show();
+            System.out.println("================Bạn không thay đổi địa chỉ=============");
+            return false;
+        }
+        return true;
     }
     private void setData(){
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 Customer customer = AppDatabase.getDatabase(getContext())
-                        .dao().getAccByCusId(Utils.accLogin.getAccID()).get(0).customer;
+                        .dao().getCusById(Utils.accLogin.getAccID());
+
                 tvAccountName.setText(customer.getFullName());
                 tvAccountEmail.setText(Utils.accLogin.getUsername());
                 edtEditAddress.setText(customer.getAddress());
                 edtEditPhone.setText(customer.getPhoneNumber());
+
             }
         });
     }

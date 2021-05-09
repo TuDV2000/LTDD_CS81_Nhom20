@@ -41,12 +41,8 @@ public interface DAO {
     public void customerDelete(Customer customer);
     @Query("select * from customers")
     public List<Customer> getAllCustomer();
-    @Transaction
     @Query("select * from customers where cus_id = :id")
-    public List<AccountAndCustomer> getAccByCusId(int id);
-    @Transaction
-    @Query("select * from customers where cus_id = :id")
-    public List<CustomerAndBill> getBillbyCustomerId(int id);
+    public Customer getCusById(int id);
     @Query("update customers set address = :newaddress, phone_number = :newPhone where cus_id = :id")
     public void changeCusProfile(String newaddress, String newPhone, int id);
 
@@ -77,9 +73,6 @@ public interface DAO {
     public List<BookType> getAllType();
     @Query("update books set quantities =  :newQuantities where book_id  = :id")
     public void updateQuantitiesOfBook(int newQuantities, int id);
-//    @Transaction
-//    @Query("select * from booktypes where type_id = :id")
-//    public List<BookAndType> getBooksByTypeId(int id);
 
 
     //AuthorDao

@@ -56,6 +56,7 @@ public class ConfirmActivity extends AppCompatActivity {
                     String fullName = intent.getExtras().getString("fullName");
                     String phone = intent.getExtras().getString("phone");
                     String address = intent.getExtras().getString("address");
+
                     Customer cus = new Customer(fullName, phone, address);
                     Account acc = new Account(user, pass, type);
 
@@ -97,9 +98,9 @@ public class ConfirmActivity extends AppCompatActivity {
     private void sendMail() {
         confirmCode = randomCode()+"";
 
-//        JavaMailAPI javaMailAPI = null;
-//            javaMailAPI = new JavaMailAPI(this, intent.getExtras().getString("email"),"Send code",confirmCode);
-//            javaMailAPI.execute();
+        JavaMailAPI javaMailAPI = null;
+            javaMailAPI = new JavaMailAPI(this, intent.getExtras().getString("email"),"Send code",confirmCode);
+            javaMailAPI.execute();
 
     }
 

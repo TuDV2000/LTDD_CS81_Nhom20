@@ -31,6 +31,25 @@ public class Cart {
         cart.put(book.getBookID(),book);
     }
 
+    public void removeFromCart(Book book){
+        if(cart.containsKey(book.getBookID())){
+            if(book.getAmount() > 0){
+                book.setAmount(book.getAmount()-1);
+                totalPrice -= book.getPrice();
+                cart.put(book.getBookID(),book);
+                return;
+            }
+            return;
+        }
+    }
+
+    public void addToCart(Book book,int quantities ){
+        Book item = cart.get(book.getBookID());
+        book.setAmount(item.getAmount() + quantities);
+        totalPrice += book.getPrice() * book.getAmount();
+        cart.put(book.getBookID(),book);
+    }
+
 
 
     public double getTotalPrice() {
