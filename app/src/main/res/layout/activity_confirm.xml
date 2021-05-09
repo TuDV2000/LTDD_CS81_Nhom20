@@ -63,11 +63,4 @@
         android:enabled="true"
         android:textSize="25dp"
         android:backgroundTint="#6495ED"/>
-    <EditText
-        android:id="@+id/edt_result"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_gravity="center"
-        android:textSize="30dp"/>
 </LinearLayout>

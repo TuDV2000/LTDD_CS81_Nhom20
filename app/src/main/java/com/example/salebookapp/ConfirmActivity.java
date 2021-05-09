@@ -23,7 +23,8 @@ import java.util.Random;
 
 public class ConfirmActivity extends AppCompatActivity {
     
-    EditText edtConfirmCode, edtResult;
+    EditText edtConfirmCode;
+    TextView tvemail;
     Button btnSubmit, btnResend;
     String confirmCode;
     Intent intent;
@@ -35,9 +36,13 @@ public class ConfirmActivity extends AppCompatActivity {
 
         intent = getIntent();
         ActionBar actionBar = getSupportActionBar();
+
+
         actionBar.setTitle("CONFIRM");
         actionBar.setDisplayHomeAsUpEnabled(true);
         Anhxa();
+
+        tvemail.setText(intent.getExtras().getString("email"));
 
         sendMail();
 
@@ -76,6 +81,7 @@ public class ConfirmActivity extends AppCompatActivity {
         btnResend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                edtConfirmCode.setText("");
                 sendMail();
                 if(isConfirmTrue()){
                     Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
@@ -91,15 +97,15 @@ public class ConfirmActivity extends AppCompatActivity {
     private void sendMail() {
         confirmCode = randomCode()+"";
 
-        JavaMailAPI javaMailAPI = null;
-            javaMailAPI = new JavaMailAPI(this, intent.getExtras().getString("email"),"Send code",confirmCode);
-            javaMailAPI.execute();
+//        JavaMailAPI javaMailAPI = null;
+//            javaMailAPI = new JavaMailAPI(this, intent.getExtras().getString("email"),"Send code",confirmCode);
+//            javaMailAPI.execute();
 
     }
 
     private void Anhxa() {
+        tvemail = findViewById(R.id.tv_email);
         edtConfirmCode = findViewById(R.id.edt_code);
-        edtResult = findViewById(R.id.edt_result);
         btnSubmit = findViewById(R.id.btn_submit);
         btnResend = findViewById(R.id.btn_resend);
     }

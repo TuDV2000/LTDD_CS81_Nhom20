@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edt_user, edt_pass;
     Button btn_signin, btn_signup, btn_quit;
     AwesomeValidation awesomeValidation;
+    public static int LOGIN_ID ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user).size() > 0) {
                                     Utils.accLogin = AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user).get(0);
                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                    LOGIN_ID = AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user).get(0).getAccID();
                                     startActivity(intent);
                                 }
                             }

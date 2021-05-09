@@ -19,9 +19,11 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new CartFragment();
             case 2:
-//                if (Utils.accLogin != null)
-//                    if(Utils.accLogin.getAccType().equals("Buyer"))
-//                        return new
+                if (Utils.accLogin != null)
+                    if(Utils.accLogin.getAccType().equals("Buyer"))
+                        return new AccbuyerFragment();
+                    else
+                        return new AccsalerFragment();
                 return new AccountFragment();
             default:
                 return new BookFragment();
