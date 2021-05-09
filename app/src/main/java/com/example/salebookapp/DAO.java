@@ -11,6 +11,7 @@ import androidx.room.Update;
 import com.example.salebookapp.entities.Account;
 import com.example.salebookapp.entities.Author;
 import com.example.salebookapp.entities.Bill;
+import com.example.salebookapp.entities.BillDetail;
 import com.example.salebookapp.entities.Book;
 import com.example.salebookapp.entities.BookType;
 import com.example.salebookapp.entities.Customer;
@@ -48,6 +49,13 @@ public interface DAO {
     public List<CustomerAndBill> getBillbyCustomerId(int id);
     @Query("update customers set address = :newaddress, phone_number = :newPhone where cus_id = :id")
     public void changeCusProfile(String newaddress, String newPhone, int id);
+
+
+    //BillDetailDao
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public void billDetailInsert(BillDetail billDetail);
+    @Delete
+    public void billDetailDelete(BillDetail billDetail);
 
 
     //BillDao
@@ -96,4 +104,6 @@ public interface DAO {
     public void bookUpdate(Book book);
     @Query("select * from books")
     public List<Book> getAllBook();
+
+
 }
