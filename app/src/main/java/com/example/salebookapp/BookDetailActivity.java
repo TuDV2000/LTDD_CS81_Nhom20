@@ -18,7 +18,7 @@ public class BookDetailActivity extends AppCompatActivity {
     Button btnPlus, btnMinus, btnAddCart;
     Intent intent;
     int bookID;
-    int quantities ;
+    int quantities = 0;
     Book book;
 
     @Override
@@ -29,7 +29,7 @@ public class BookDetailActivity extends AppCompatActivity {
         anhxa();
         intent = getIntent();
         bookID = intent.getIntExtra("bookID", 1);
-        quantities = intent.getIntExtra("amount",0);
+        //quantities = intent.getIntExtra("amount",0);
         setdata();
 
         btnPlus.setOnClickListener(new View.OnClickListener() {

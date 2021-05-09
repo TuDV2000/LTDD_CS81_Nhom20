@@ -43,9 +43,14 @@ public class Cart {
         }
     }
 
-    public void addToCart(Book book,int quantities ){
+    public void addToCart(Book book,int quantities){
         Book item = cart.get(book.getBookID());
-        book.setAmount(item.getAmount() + quantities);
+
+        if (item == null) {
+            book.setAmount(quantities);
+        } else {
+            book.setAmount(item.getAmount() + quantities);
+        }
         totalPrice += book.getPrice() * book.getAmount();
         cart.put(book.getBookID(),book);
     }
