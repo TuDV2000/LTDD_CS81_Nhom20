@@ -21,12 +21,13 @@ public class Cart {
     public void addToCart(Book book){
         if(cart.containsKey(book.getBookID())){
             Book item = cart.get(book.getBookID());
-            totalPrice += book.getPrice();
             item.setAmount(item.getAmount()+1);
+            totalPrice += book.getPrice();
             cart.put(book.getBookID(),item);
             return;
         }
         book.setAmount(1);
+        totalPrice += book.getPrice();
         cart.put(book.getBookID(),book);
     }
 

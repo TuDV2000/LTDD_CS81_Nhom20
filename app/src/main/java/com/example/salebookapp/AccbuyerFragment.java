@@ -114,7 +114,8 @@ public class AccbuyerFragment extends Fragment {
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                Customer customer = AppDatabase.getDatabase(getContext()).dao().getCusById(Utils.accLogin.getAccID());
+                Customer customer = AppDatabase.getDatabase(getContext())
+                        .dao().getAccByCusId(Utils.accLogin.getAccID()).get(0).customer;
                 tvAccountName.setText(customer.getFullName());
                 tvAccountEmail.setText(Utils.accLogin.getUsername());
                 edtEditAddress.setText(customer.getAddress());

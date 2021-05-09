@@ -55,24 +55,24 @@ public class BookFragment extends Fragment {
                 holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
 
 
-//                AnimationUtil.translateAnimation(mainActivity.getViewAnimation(), imgBook,
-//                    mainActivity.getViewEndAnimation(), new Animation.AnimationListener() {
-//                        @Override
-//                        public void onAnimationStart(Animation animation) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onAnimationEnd(Animation animation) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onAnimationRepeat(Animation animation) {
-//                            bookAdapter.notifyDataSetChanged();
-//                            mainActivity.setCountProductInCart(mainActivity.getCountBook() + 1);
-//                        }
-//                });
+                AnimationUtil.translateAnimation(mainActivity.getViewAnimation(), imgBook,
+                    mainActivity.getViewEndAnimation(), new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+                            bookAdapter.notifyDataSetChanged();
+                            mainActivity.setCountProductInCart(mainActivity.getCountBook() + 1);
+                        }
+                });
             }
         });
 

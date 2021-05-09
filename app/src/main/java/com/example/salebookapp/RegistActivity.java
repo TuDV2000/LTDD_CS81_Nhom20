@@ -172,16 +172,5 @@ public class RegistActivity extends AppCompatActivity {
         Intent intent = new Intent(RegistActivity.this, LoginActivity.class);
         startActivity(intent);
     }
-//
-//    @Override
-//    protected void onResume() {
-//        accountDataSource.openToWrite();
-//        super.onResume();
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        accountDataSource.close();
-//        super.onPause();
-//    }
+
 }
