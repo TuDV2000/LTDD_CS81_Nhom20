@@ -79,7 +79,6 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-        fakeBillDb();
     }
 
     public View getViewEndAnimation() {
