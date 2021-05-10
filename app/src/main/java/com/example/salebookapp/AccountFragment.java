@@ -83,6 +83,8 @@ public class AccountFragment extends Fragment {
                                 Utils.accLogin = l.get(0);
                                 getActivity().finish();
                                 startActivity(new Intent(getContext(), HomeActivity.class));
+                            } else {
+                                System.out.println("=========================================du moa chua them dc");
                             }
                         }
                     });

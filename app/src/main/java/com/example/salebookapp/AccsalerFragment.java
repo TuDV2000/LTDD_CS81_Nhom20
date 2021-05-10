@@ -31,6 +31,12 @@ public class AccsalerFragment extends Fragment {
                 startActivity(new Intent(getContext(),HomeActivity.class));
             }
         });
+        btnStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), AddBookActivity.class));
+            }
+        });
 
         return view;
     }

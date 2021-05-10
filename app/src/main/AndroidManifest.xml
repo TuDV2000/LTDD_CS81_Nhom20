@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.salebookapp">
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,13 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SaleBookApp">
-        <activity android:name=".OrderHistoryActivity"></activity>
-        <activity android:name=".BookDetailActivity"></activity>
-        <activity android:name=".BuyerBillsActivity"></activity>
+        <activity android:name=".AddBookActivity">
+
+        </activity>
+        <activity android:name=".OrderHistoryActivity" />
+        <activity android:name=".BookDetailActivity" />
+        <activity android:name=".BuyerBillsActivity" />
         <activity android:name=".PaymentActivity" />
         <activity
             android:name=".ConfirmActivity"
-            android:parentActivityName=".RegistActivity"/>
+            android:parentActivityName=".RegistActivity" />
         <activity
             android:name=".LoginActivity"
             android:parentActivityName=".HomeActivity" />

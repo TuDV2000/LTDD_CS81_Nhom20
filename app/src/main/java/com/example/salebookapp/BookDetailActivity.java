@@ -2,6 +2,7 @@ package com.example.salebookapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -50,7 +51,11 @@ public class BookDetailActivity extends AppCompatActivity {
         btnAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.cart.addToCart(book, quantities);
+                if (quantities > 0){
+                    Utils.cart.addToCart(book, quantities);
+                    finish();
+                }
+                finish();
             }
         });
     }

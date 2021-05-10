@@ -64,8 +64,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.tvBookName.setText(book.getBookName());
         holder.tvDescription.setText(book.getDescribe());
         holder.tvPrice.setText(String.valueOf(book.getPrice()));
-        holder.tvQuantity.setText("X " + String.valueOf(book.getAmount()));
-
+        Book bookCart = Utils.cart.getCart().get(book.getBookID());
+        holder.tvQuantity.setText("X " + String.valueOf(bookCart != null  ? bookCart.getAmount(): 0));
+        //System.out.println("boooke 1" +book.getAmount());
         holder.btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +88,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         });
     }
 
-
+    public List<Book> getmListBook() {
+        return mListBook;
+    }
 
     @Override
     public int getItemCount() {
@@ -181,5 +184,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         public void setBtnMinus(Button btnMinus) {
             this.btnMinus = btnMinus;
         }
+
+
     }
 }

@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -47,6 +48,8 @@ public class HomeActivity extends AppCompatActivity {
 
         //Load book list
         setBookList();
+
+        Utils.context = this;
 
         adapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         ahBottomNavigationViewPager.setAdapter(adapter);
@@ -138,6 +141,9 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 bookList = AppDatabase.getDatabase(getApplicationContext()).dao().getAllBook();
             }
+
         });
     }
+
+
 }
