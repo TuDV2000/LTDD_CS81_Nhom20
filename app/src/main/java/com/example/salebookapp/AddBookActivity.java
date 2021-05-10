@@ -76,9 +76,6 @@ public class AddBookActivity extends AppCompatActivity {
                     edtRepublish.setText("");
                     edtQuantity.setText("");
                     edtDecribe.setText("");
-                    System.out.println("================Thêm được rồi nè================");
-                }else{
-                    System.out.println("================Thêm được qq================");
                 }
 
             }
@@ -95,9 +92,14 @@ public class AddBookActivity extends AppCompatActivity {
         });
     }
     public boolean addValid(){
+        if (edtBookName.getText().toString().length() == 0 && edtPublication_Date.getText().toString().length() == 0
+        && edtPrice.getText().toString().length() == 0 && edtRepublish.getText().toString().length() == 0
+        && edtQuantity.getText().toString().length() == 0 && edtDecribe.getText().toString().length() == 0){
+            Toast.makeText(this,"Yêu cầu điền đầy đủ thông tin",Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if(edtBookName.getText().toString().length() == 0){
             Toast.makeText(this,"Yêu cầu nhập tên sách",Toast.LENGTH_SHORT).show();
-            System.out.println("======== Vo day ne =====" + edtBookName.getText().toString());
             return false;
         }
         if(edtPublication_Date.getText().toString().length() == 0){

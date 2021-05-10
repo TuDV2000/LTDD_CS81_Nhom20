@@ -121,7 +121,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (AppDatabase.getDatabase(getApplicationContext())
-                        .dao().getAccount("admin@gmail.com").size() == 0) {
+                        .dao().getAccount("admin").size() == 0) {
                     AppDatabase.getDatabase(getApplicationContext())
                             .dao().customerInsert(new Customer("Admin", "0123456789"
                             , "371 Nguyễn kiệm, Q.Gò Vấp, TPHCM"));
