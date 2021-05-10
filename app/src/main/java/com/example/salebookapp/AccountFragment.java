@@ -102,6 +102,7 @@ public class AccountFragment extends Fragment {
         });
     }
 
+
     void setUp() {
         edt_user = view.findViewById(R.id.edt_fusername);
         edt_pass = view.findViewById(R.id.edt_fpassword);
