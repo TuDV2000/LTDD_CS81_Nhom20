@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.salebookapp.entities.Bill;
+import com.example.salebookapp.entities.BillDetail;
 import com.example.salebookapp.entities.Book;
 
 import java.util.Date;
@@ -64,25 +65,12 @@ public class CartFragment extends Fragment {
             public void onClick(View v) {
                 if (!Utils.cart.getCart().isEmpty()) {
                     if (Utils.accLogin != null) {
-                        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                Date date = new Date();
-                                String d = String.format("%d-%d-%d", date.getDate(), date.getMonth() + 1,
-                                                            date.getYear() + 1900);
-                                AppDatabase.getDatabase(getActivity().getApplicationContext())
-                                        .dao().billInsert(new Bill(Utils.accLogin.getAccID(),
-                                        Utils.cart.getTotalPrice(), d));
-                                for (Book b : Utils.cart.getCartItemAll()) {
-
-                                }
-                            }
-                        });
+                        startActivity(new Intent(getContext(), PaymentActivity.class));
                     } else {
-                        Toast.makeText(mainActivity, "Bạn chưa đăng nhập !!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Bạn chưa đăng nhập !!!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(mainActivity, "Không có gì trong giỏ !!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Không có gì trong giỏ !!!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

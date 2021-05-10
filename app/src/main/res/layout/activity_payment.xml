@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="30dp"
-        android:text="CHI TIẾT ĐƠN HÀNG" />
+        android:text="CHI TIẾT ĐƠN HÀNG"
+        android:textColor="#088595"/>
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -29,79 +30,101 @@
             android:layout_height="match_parent"/>
     </ScrollView>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_order"
-        android:orientation="vertical">
+        android:layout_above="@+id/btn_order">
 
         <LinearLayout
+            android:id="@+id/ll_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Tên: "
-                android:textSize="16dp"/>
+                android:text="Tổng tiền: "
+                android:textSize="20dp"/>
 
             <TextView
-                android:id="@+id/tv_cus_name"
+                android:id="@+id/tv_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Huynh Nguyen Bac Giang"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:text="1000000đ"
+                android:textSize="18dp"
+                android:textStyle="bold"/>
+
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_thongtin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="Thông tin của bạn"
+            android:textSize="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/ll_total"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Địa chỉ: "
-                android:textSize="16dp"/>
-
-            <TextView
-                android:id="@+id/tv_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1851050037giang@ou.edu.vn"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginLeft="20dp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:text="Tên: "
+            android:textSize="16dp"
+            android:layout_below="@+id/tv_thongtin"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Số điện thoại"
-                android:textSize="16dp"/>
+        <TextView
+            android:id="@+id/tv_cus_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Huynh Nguyen Bac Giang"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_thongtin"/>
 
-            <TextView
-                android:id="@+id/tv_number_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1851050037"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginLeft="20dp"/>
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Địa chỉ: "
+            android:textSize="16dp"
+            android:layout_below="@+id/tv_cus_name"/>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_cus_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1851050037giang@ou.edu.vn"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_cus_name"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Số điện thoại"
+            android:textSize="16dp"
+            android:layout_below="@+id/tv_cus_address"/>
+
+        <TextView
+            android:id="@+id/tv_cus_number_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1851050037"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_cus_address"/>
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btn_order"
@@ -109,5 +132,6 @@
         android:layout_height="wrap_content"
         android:text="đặt hàng"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#31A89D"/>
 </RelativeLayout>

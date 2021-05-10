@@ -123,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
                             .dao().customerInsert(new Customer("Admin", "0123456789"
                             , "371 Nguyễn kiệm, Q.Gò Vấp, TPHCM"));
                     AppDatabase.getDatabase(getApplicationContext())
-                            .dao().accountInsert(new Account("admin@gmail.com", "Admin123", "Saler"));
+                            .dao().accountInsert(new Account("admin", "admin", "Saler"));
                 }
 
                 if (AppDatabase.getDatabase(getApplicationContext()).dao().getAllBook().size() == 0) {

@@ -47,14 +47,6 @@ public class AccbuyerFragment extends Fragment {
         setUp();
 
         setData();
-//        btnBuyerBill.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-
-
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +88,13 @@ public class AccbuyerFragment extends Fragment {
             }
         });
 
+        btnBuyerBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), OrderHistoryActivity.class));
+            }
+        });
+
         // Inflate the layout for this fragment
         return view;
     }
@@ -104,7 +103,7 @@ public class AccbuyerFragment extends Fragment {
         btnEdit = view.findViewById(R.id.btn_editAcc);
         btnLogout = view.findViewById(R.id.btn_logOut);
         btnSaveEdit = view.findViewById(R.id.btn_saveEdit);
-        btnBuyerBill = view.findViewById(R.id.btn_salerBill);
+        btnBuyerBill = view.findViewById(R.id.btn_buyerBill);
         edtEditAddress = view.findViewById(R.id.edt_addressEdit);
         edtEditPhone = view.findViewById(R.id.edt_phoneEdit);
         tvAccountEmail = view.findViewById(R.id.tv_accountEmail);

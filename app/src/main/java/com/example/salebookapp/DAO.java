@@ -61,6 +61,10 @@ public interface DAO {
     public void billDelete(Bill bill);
     @Query("select * from bills where bill_id = :id")
     public Bill getBillById(int id);
+    @Query("select * from bills")
+    public List<Bill> getAllBill();
+    @Query("select * from bills where fk_cus_id = :id")
+    public List<Bill> getBillByCusId(int id);
 //    @Transaction
 //    @Query("select * from bills where bill_id = :id")
 //    public List<BillAndDetail> getDetailByBillId(int id);

@@ -31,11 +31,14 @@ public class BillDetail {
     private int fkBookID;
     @ColumnInfo(name = "price")
     private double price;
+    @ColumnInfo(name = "bought_quatities")
+    private int bought_quatities;
 
-    public BillDetail(int fkBillID, int fkBookID, double price) {
+    public BillDetail(int fkBillID, int fkBookID, double price, int bought_quatities) {
         this.fkBillID = fkBillID;
         this.fkBookID = fkBookID;
         this.price = price;
+        this.bought_quatities = bought_quatities;
     }
 
     //get and set
@@ -61,5 +64,13 @@ public class BillDetail {
 
     public void setFkBookID(int fkBookID) {
         this.fkBookID = fkBookID;
+    }
+
+    public int getBought_quatities() {
+        return bought_quatities;
+    }
+
+    public void setBought_quatities(int bought_quatities) {
+        this.bought_quatities = bought_quatities;
     }
 }
