@@ -117,7 +117,10 @@ public class CartFragment extends Fragment {
             @Override
             public void onClickRemoveFromCart(Book book, BookAdapter.BookViewHolder holder) {
                 Utils.cart.removeFromCart(book);
-                holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
+                if(Utils.cart.getCart().get(book.getBookID()) != null){
+                    holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
+                } else holder.getTvQuantity().setText("X 0" );
+
                 tvTotalPrice.setText("Tổng tiền: " + Utils.cart.getTotalPrice());
             }
         });

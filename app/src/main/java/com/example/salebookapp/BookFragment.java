@@ -53,8 +53,7 @@ public class BookFragment extends Fragment {
             @Override
             public void onClickAddToCart(ImageView imgBook, Book book, BookAdapter.BookViewHolder holder) {
                 Utils.cart.addToCart(book);
-
-//                holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
+                holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
 
                 AnimationUtil.translateAnimation(mainActivity.getViewAnimation(), imgBook,
                         mainActivity.getViewEndAnimation(), new Animation.AnimationListener() {
@@ -88,12 +87,34 @@ public class BookFragment extends Fragment {
         }, new BookAdapter.IClickRemoveFromCartListener() {
             @Override
             public void onClickRemoveFromCart(Book book, BookAdapter.BookViewHolder holder) {
+                Book bookCart = Utils.cart.getCart().get(book.getBookID());
+                System.out.println("remove " + bookCart);
                 Utils.cart.removeFromCart(book);
+                holder.getTvQuantity().setText("X " + (bookCart != null ? bookCart.getAmount() : 0) );
             }
         });
 
         rcvBook.setAdapter(bookAdapter);
 
         return mView;
+    }
+    static int dem = 0;
+    @Override
+    public void onResume() {
+
+        super.onResume();
+//        bookAdapter.notify();
+        System.out.println("laan:" + dem++);
+        bookAdapter.notifyDataSetChanged();
+        for(Book book: Utils.cart.getCart().values()){
+            System.out.println(book);
+        }
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        bookAdapter.notifyDataSetChanged();
     }
 }

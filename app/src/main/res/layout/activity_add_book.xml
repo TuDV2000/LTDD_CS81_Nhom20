@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddBookActivity"
+    android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Addbook"
+            android:textSize="24dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/edt_add_bookname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên sách"
+            android:textSize="24dp"
+            />
+
+        <EditText
+            android:id="@+id/edt_add_publication_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ngày xuất bản"
+            android:inputType="date"
+            android:textSize="24dp"
+            />
+        <EditText
+            android:id="@+id/edt_add_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Giá"
+            android:inputType="number"
+            android:textSize="24dp"
+            />
+        <EditText
+            android:id="@+id/edt_add_republish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Lần tái bản"
+            android:inputType="number"
+            android:textSize="24dp" />
+
+        <EditText
+            android:id="@+id/edt_add_Quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Số lượng"
+            android:textSize="24dp" />
+
+
+<!--        <ImageView-->
+<!--            android:id="@+id/img_book"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:src="@drawable/ic_baseline_image_24"/>-->
+        <EditText
+            android:id="@+id/edt_add_decribe_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Miêu tả"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/btn_add_book"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Thêm sách"/>
+
+
+</LinearLayout>

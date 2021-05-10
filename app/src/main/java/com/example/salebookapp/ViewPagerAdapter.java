@@ -21,14 +21,14 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @NonNull
     @Override
-    public Fragment getItem(int position) {
+    public Fragment getItem(int position)  {
         switch (position){
             case 0:
-                if (!fms.containsKey("0"))
-                    fms.put("0", new BookFragment());
-
-                return fms.get("0");
-//                return new BookFragment();
+//                if (!fms.containsKey("0"))
+//                    fms.put("0", new BookFragment());
+//
+//                return fms.get("0");
+                return new BookFragment();
             case 1:
                 return new CartFragment();
             case 2:

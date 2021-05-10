@@ -139,4 +139,19 @@ public class Book {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookID=" + bookID +
+                ", bookName='" + bookName + '\'' +
+                ", publicationDate='" + publicationDate + '\'' +
+                ", price=" + price +
+                ", republish=" + republish +
+                ", quantities=" + quantities +
+                ", describe='" + describe + '\'' +
+                ", image='" + image + '\'' +
+                ", amount=" + amount +
+                '}';
+    }
 }

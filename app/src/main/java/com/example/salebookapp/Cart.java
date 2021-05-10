@@ -1,5 +1,7 @@
 package com.example.salebookapp;
 
+import android.content.Intent;
+
 import com.example.salebookapp.entities.Book;
 
 import java.util.ArrayList;
@@ -33,13 +35,20 @@ public class Cart {
 
     public void removeFromCart(Book book){
         if(cart.containsKey(book.getBookID())){
-            if(book.getAmount() > 0){
-                book.setAmount(book.getAmount()-1);
+            Book item = cart.get(book.getBookID());
+            if(item.getAmount() >1){
+                item.setAmount(item.getAmount()-1);
                 totalPrice -= book.getPrice();
-                cart.put(book.getBookID(),book);
-                return;
+                cart.put(book.getBookID(),item);
+
             }
-            return;
+            else {
+                item.setAmount(item.getAmount()-1);
+                if(totalPrice > 0)
+                    totalPrice -= book.getPrice();
+                cart.remove(book.getBookID());
+            }
+
         }
     }
 
