@@ -80,11 +80,18 @@ public class AccountFragment extends Fragment {
                             List<Account> l = AppDatabase.getDatabase(getContext().getApplicationContext())
                                     .dao().getAccount(user);
                             if (l.size() > 0) {
-                                Utils.accLogin = l.get(0);
-                                getActivity().finish();
-                                startActivity(new Intent(getContext(), HomeActivity.class));
+                                if (l.get(0).getPassword().equals(pass)) {
+                                    Utils.accLogin = l.get(0);
+                                    Intent intent = new Intent(getContext(), HomeActivity.class);
+                                    getActivity().finish();
+                                    startActivity(intent);
+                                } else {
+                                    System.out.println("Mật khẩu chưa chính xác.");
+                                    //Toast.makeText(getContext(), "Mật khẩu chưa chính xác.", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
-                                System.out.println("=========================================du moa chua them dc");
+//                                System.out.println("Tài khoản hoặc mật khẩu chưa chính xác.");
+                                Toast.makeText(getContext(), "Tài khoản hoặc mật khẩu chưa chính xác.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
