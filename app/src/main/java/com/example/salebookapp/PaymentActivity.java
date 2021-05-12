@@ -124,6 +124,11 @@ public class PaymentActivity extends AppCompatActivity {
             public void onClickRemoveFromCart(Book book, BookAdapter.BookViewHolder holder) {
 
             }
+        }, new BookAdapter.IClickRemoveBookFromCartListener() {
+            @Override
+            public void onClickRemoveBookFromCart(Book book, BookAdapter.BookViewHolder holder) {
+
+            }
         });
 
         rcvCart.setAdapter(bookAdapter);

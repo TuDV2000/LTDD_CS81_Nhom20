@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     private IClickAddToCartListener  iClickAddToCartListener;
     private IClickGoToDetailListener iClickGoToDetailListener;
     private IClickRemoveFromCartListener iClickRemoveFromCartListener;
+    private IClickRemoveBookFromCartListener iClickRemoveBookFromCartListener;
 
     public interface IClickAddToCartListener{
         void onClickAddToCart(ImageView imgBook, Book book,BookViewHolder holder);
@@ -35,12 +37,18 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         void onClickRemoveFromCart(Book book, BookViewHolder holder);
     }
 
+    public interface IClickRemoveBookFromCartListener{
+        void onClickRemoveBookFromCart(Book book, BookViewHolder holder);
+    }
+
     public void setData(List<Book> list, IClickAddToCartListener listener,
-                        IClickGoToDetailListener listener1, IClickRemoveFromCartListener listener2){
+                        IClickGoToDetailListener listener1, IClickRemoveFromCartListener listener2,
+                        IClickRemoveBookFromCartListener listener3){
         this.mListBook = list;
         this.iClickAddToCartListener = listener;
         this.iClickGoToDetailListener = listener1;
         this.iClickRemoveFromCartListener = listener2;
+        this.iClickRemoveBookFromCartListener = listener3;
         notifyDataSetChanged();
     }
 
@@ -48,7 +56,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book, parent, false);
-
         return new BookViewHolder(view);
     }
 
@@ -61,11 +68,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         }
 
         holder.imgBook.setImageResource(Integer.parseInt(book.getImage().substring(book.getImage().lastIndexOf('/') + 1)));
-        holder.tvBookName.setText(book.getBookName());
+        if(book.getBookName().length() >= 20){
+            holder.tvBookName.setText(book.getBookName().substring(0,18)+"...");
+        }else {
+            holder.tvBookName.setText(book.getBookName());
+        }
 //        holder.tvDescription.setText(book.getDescribe());
         holder.tvPrice.setText(String.valueOf(book.getPrice()));
         Book bookCart = Utils.cart.getCart().get(book.getBookID());
-        holder.tvQuantity.setText("X " + String.valueOf(bookCart != null  ? bookCart.getAmount(): 0));
+        holder.tvQuantity.setText("Số lượng: " + String.valueOf(bookCart != null  ? bookCart.getAmount(): 0));
         //System.out.println("boooke 1" +book.getAmount());
         holder.btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +97,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 iClickRemoveFromCartListener.onClickRemoveFromCart(book, holder);
             }
         });
+        holder.btnBookClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iClickRemoveBookFromCartListener.onClickRemoveBookFromCart(book,holder);
+            }
+        });
     }
 
     public List<Book> getmListBook() {
@@ -104,9 +121,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         private ImageView imgBook;
         private TextView tvBookName, tvDescription, tvPrice, tvQuantity;
+        private ImageButton btnBookClose;
         private Button btnPlus;
         private Button btnMinus;
         private RelativeLayout item;
+
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -117,6 +136,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 //            tvDescription = itemView.findViewById(R.id.tv_description);
             tvPrice = itemView.findViewById(R.id.tv_price);
             tvQuantity = itemView.findViewById(R.id.tv_quantity);
+            btnBookClose = itemView.findViewById(R.id.btn_book_close);
             setBtnPlus(itemView.findViewById(R.id.btn_plus));
             setBtnMinus(itemView.findViewById(R.id.btn_minus));
         }

@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.example.salebookapp.entities.Bill;
 import com.example.salebookapp.entities.BillDetail;
 import com.example.salebookapp.entities.Book;
@@ -93,7 +94,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onClickAddToCart(ImageView imgAddToCart, Book book, BookAdapter.BookViewHolder holder) {
                 Utils.cart.addToCart(book);
-                holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
+                holder.getTvQuantity().setText("Số lượng: " + Utils.cart.getCart().get(book.getBookID()).getAmount());
                 tvTotalPrice.setText("Tổng tiền: " + Utils.cart.getTotalPrice());
             }
         }, new BookAdapter.IClickGoToDetailListener() {
@@ -105,11 +106,19 @@ public class CartFragment extends Fragment {
             @Override
             public void onClickRemoveFromCart(Book book, BookAdapter.BookViewHolder holder) {
                 Utils.cart.removeFromCart(book);
-                if(Utils.cart.getCart().get(book.getBookID()) != null){
-                    holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
-                } else holder.getTvQuantity().setText("X 0" );
+                if (Utils.cart.getCart().get(book.getBookID()) != null) {
+                    holder.getTvQuantity().setText("Số lượng: " + Utils.cart.getCart().get(book.getBookID()).getAmount());
+                } else holder.getTvQuantity().setText("X 0");
 
                 tvTotalPrice.setText("Tổng tiền: " + Utils.cart.getTotalPrice());
+            }
+        }, new BookAdapter.IClickRemoveBookFromCartListener() {
+            @Override
+            public void onClickRemoveBookFromCart(Book book, BookAdapter.BookViewHolder holder) {
+                Utils.cart.removeBookFromCart(book);
+                Intent intent = new Intent(getContext(), HomeActivity.class);
+                getActivity().finish();
+                startActivity(intent);
             }
         });
 

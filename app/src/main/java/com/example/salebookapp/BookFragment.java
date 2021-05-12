@@ -90,7 +90,12 @@ public class BookFragment extends Fragment {
                 Book bookCart = Utils.cart.getCart().get(book.getBookID());
                 System.out.println("remove " + bookCart);
                 Utils.cart.removeFromCart(book);
-                holder.getTvQuantity().setText("X " + (bookCart != null ? bookCart.getAmount() : 0) );
+                holder.getTvQuantity().setText("X " + (bookCart != null ? bookCart.getAmount() : 0));
+            }
+        }, new BookAdapter.IClickRemoveBookFromCartListener() {
+            @Override
+            public void onClickRemoveBookFromCart(Book book, BookAdapter.BookViewHolder holder) {
+
             }
         });
 

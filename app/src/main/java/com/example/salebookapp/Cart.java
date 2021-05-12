@@ -51,6 +51,10 @@ public class Cart {
 
         }
     }
+    public void removeBookFromCart(Book book){
+        cart.remove(book.getBookID());
+        totalPrice -= book.getPrice() * book.getAmount();
+    }
 
     public void addToCart(Book book,int quantities){
         Book item = cart.get(book.getBookID());

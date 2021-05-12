@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp">
+
+    <RelativeLayout
+        android:id="@+id/book_item"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="#8DD0E1E1"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/img_book_home"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:src="@drawable/book1"/>
+
+        <TextView
+            android:id="@+id/tv_book_name_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="25dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_toRightOf="@id/img_book_home"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/tv_price_book_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="120000đ"
+            android:textColor="#FF5722"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="5dp"
+            android:layout_below="@id/tv_book_name_home"
+            android:layout_toRightOf="@id/img_book_home"
+            android:textAlignment="textEnd" />
+        <TextView
+            android:id="@+id/tv_book_quantities_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="Còn 2 sản phẩm"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_below="@id/tv_price_book_home"
+            android:layout_toRightOf="@id/img_book_home"/>
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>
