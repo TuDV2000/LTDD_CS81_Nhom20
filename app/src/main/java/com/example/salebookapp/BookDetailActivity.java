@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.salebookapp.entities.Book;
 
@@ -20,6 +22,7 @@ public class BookDetailActivity extends AppCompatActivity {
     Intent intent;
     int bookID;
     int quantities = 0;
+    int dbquantities;
     Book book;
 
     @Override
@@ -33,25 +36,38 @@ public class BookDetailActivity extends AppCompatActivity {
         //quantities = intent.getIntExtra("amount",0);
         setdata();
 
+        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                dbquantities = AppDatabase.getDatabase(getApplicationContext()).dao().getBookByID(bookID).getQuantities();
+            }
+        });
+
         btnPlus.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                quantities += 1;
-                tvQuantities.setText(String.valueOf(quantities));
+                if (dbquantities == quantities) {
+                    System.out.println("Vượt quá số lượng sản phẩm trong kho : " + String.valueOf(dbquantities));
+                    Toast.makeText(BookDetailActivity.this, "Vượt quá số lượng sản phẩm trong kho : " + String.valueOf(dbquantities), Toast.LENGTH_SHORT);
+                } else {
+                    quantities += 1;
+                    tvQuantities.setText(String.valueOf(quantities));
+                }
             }
         });
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(quantities > 0)
-                quantities -= 1;
+                if (quantities > 0)
+                    quantities -= 1;
                 tvQuantities.setText(String.valueOf(quantities));
             }
         });
         btnAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quantities > 0){
+                if (quantities > 0) {
                     Utils.cart.addToCart(book, quantities);
                     finish();
                 }

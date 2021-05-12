@@ -21,26 +21,12 @@ public class BookHomeAdapter extends RecyclerView.Adapter<BookHomeAdapter.BookVi
     private List<Book> mListBook;
     private IClickGoToDetailListener iClickGoToDetailListener;
 
-    public interface IClickAddToCartListener{
-        void onClickAddToCart(ImageView imgBook, Book book,BookViewHolder holder);
-
-    }
-
     public interface IClickGoToDetailListener{
         void onClickGoToDetail(Book book);
     }
 
-    public interface IClickRemoveFromCartListener{
-        void onClickRemoveFromCart(Book book, BookViewHolder holder);
-    }
 
-    public interface IClickRemoveBookFromCartListener{
-        void onClickRemoveBookFromCart(Book book, BookViewHolder holder);
-    }
-
-    public void setData(List<Book> list, IClickAddToCartListener listener,
-                        IClickGoToDetailListener listener1, IClickRemoveFromCartListener listener2,
-                        IClickRemoveBookFromCartListener listener3){
+    public void setData(List<Book> list,IClickGoToDetailListener listener1){
         this.mListBook = list;
         this.iClickGoToDetailListener = listener1;
         notifyDataSetChanged();
@@ -50,6 +36,7 @@ public class BookHomeAdapter extends RecyclerView.Adapter<BookHomeAdapter.BookVi
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book_home, parent, false);
+
         return new BookViewHolder(view);
     }
 
@@ -67,11 +54,9 @@ public class BookHomeAdapter extends RecyclerView.Adapter<BookHomeAdapter.BookVi
         }else {
             holder.tvBookName.setText(book.getBookName());
         }
-//        holder.tvDescription.setText(book.getDescribe());
-        holder.tvPrice.setText(String.valueOf(book.getPrice()));
-        Book bookCart = Utils.cart.getCart().get(book.getBookID());
-        holder.tvQuantity.setText("Số lượng: " + String.valueOf(bookCart != null  ? bookCart.getAmount(): 0));
-        //System.out.println("boooke 1" +book.getAmount());
+        holder.tvBookPrice.setText(String.valueOf(book.getPrice()));
+        //Book bookCart = Utils.cart.getCart().get(book.getBookID());
+        holder.tvBookQuantities.setText("Còn " + book.getQuantities() + " sản phẩm");
 
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,13 +81,19 @@ public class BookHomeAdapter extends RecyclerView.Adapter<BookHomeAdapter.BookVi
 
     public class BookViewHolder extends RecyclerView.ViewHolder{
 
-        //Khai báo
-
+        TextView tvBookName, tvBookPrice, tvBookQuantities;
+        ImageView imgBook;
+        RelativeLayout item;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            //Ánh xạ
+            item = itemView.findViewById(R.id.book_item_home);
+            imgBook =itemView.findViewById(R.id.img_book_home);
+            tvBookName = itemView.findViewById(R.id.tv_book_name_home);
+            tvBookPrice = itemView.findViewById(R.id.tv_price_book_home);
+            tvBookQuantities = itemView.findViewById(R.id.tv_book_quantities_home);
+
         }
 
 

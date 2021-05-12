@@ -31,7 +31,7 @@ public class BookFragment extends Fragment {
     private RecyclerView rcvBook;
     private View mView;
     private HomeActivity mainActivity;
-    private BookAdapter bookAdapter;
+    private BookHomeAdapter bookHomeAdapter;
 
     public BookFragment() {
 
@@ -47,70 +47,30 @@ public class BookFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mainActivity);
         rcvBook.setLayoutManager(linearLayoutManager);
 
-        bookAdapter = new BookAdapter();
+        bookHomeAdapter = new BookHomeAdapter();
 
-        bookAdapter.setData(HomeActivity.bookList, new BookAdapter.IClickAddToCartListener() {
-            @Override
-            public void onClickAddToCart(ImageView imgBook, Book book, BookAdapter.BookViewHolder holder) {
-                Utils.cart.addToCart(book);
-                holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
 
-                AnimationUtil.translateAnimation(mainActivity.getViewAnimation(), imgBook,
-                        mainActivity.getViewEndAnimation(), new Animation.AnimationListener() {
-                            @Override
-                            public void onAnimationStart(Animation animation) {
 
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-
-                            }
-
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {
-                                bookAdapter.notifyDataSetChanged();
-                                mainActivity.setCountProductInCart(mainActivity.getCountBook() + 1);
-                            }
-                        });
-            }
-        }, new BookAdapter.IClickGoToDetailListener() {
+        bookHomeAdapter.setData(HomeActivity.bookList, new BookHomeAdapter.IClickGoToDetailListener() {
             @Override
             public void onClickGoToDetail(Book book) {
                 Intent intent = new Intent(getContext(), BookDetailActivity.class);
 
                 intent.putExtra("bookID", book.getBookID());
-//                intent.putExtra("amount", Utils.cart.getCart().get(book.getBookID()).getAmount());
 
                 startActivity(intent);
             }
-        }, new BookAdapter.IClickRemoveFromCartListener() {
-            @Override
-            public void onClickRemoveFromCart(Book book, BookAdapter.BookViewHolder holder) {
-                Book bookCart = Utils.cart.getCart().get(book.getBookID());
-                System.out.println("remove " + bookCart);
-                Utils.cart.removeFromCart(book);
-                holder.getTvQuantity().setText("X " + (bookCart != null ? bookCart.getAmount() : 0));
-            }
-        }, new BookAdapter.IClickRemoveBookFromCartListener() {
-            @Override
-            public void onClickRemoveBookFromCart(Book book, BookAdapter.BookViewHolder holder) {
-
-            }
         });
-
-        rcvBook.setAdapter(bookAdapter);
+        rcvBook.setAdapter(bookHomeAdapter);
 
         return mView;
     }
-    static int dem = 0;
+
     @Override
     public void onResume() {
-
         super.onResume();
-//        bookAdapter.notify();
-        System.out.println("laan:" + dem++);
-        bookAdapter.notifyDataSetChanged();
+
+        bookHomeAdapter.notifyDataSetChanged();
         for(Book book: Utils.cart.getCart().values()){
             System.out.println(book);
         }
@@ -120,6 +80,6 @@ public class BookFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        bookAdapter.notifyDataSetChanged();
+        bookHomeAdapter.notifyDataSetChanged();
     }
 }

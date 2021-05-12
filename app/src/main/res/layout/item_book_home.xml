@@ -9,7 +9,7 @@
     android:layout_marginStart="10dp">
 
     <RelativeLayout
-        android:id="@+id/book_item"
+        android:id="@+id/book_item_home"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="#8DD0E1E1"

@@ -108,7 +108,7 @@ public class CartFragment extends Fragment {
                 Utils.cart.removeFromCart(book);
                 if (Utils.cart.getCart().get(book.getBookID()) != null) {
                     holder.getTvQuantity().setText("Số lượng: " + Utils.cart.getCart().get(book.getBookID()).getAmount());
-                } else holder.getTvQuantity().setText("X 0");
+                } else holder.getTvQuantity().setText("Số lượng: 0");
 
                 tvTotalPrice.setText("Tổng tiền: " + Utils.cart.getTotalPrice());
             }
@@ -116,9 +116,10 @@ public class CartFragment extends Fragment {
             @Override
             public void onClickRemoveBookFromCart(Book book, BookAdapter.BookViewHolder holder) {
                 Utils.cart.removeBookFromCart(book);
-                Intent intent = new Intent(getContext(), HomeActivity.class);
-                getActivity().finish();
-                startActivity(intent);
+                Intent intent = new Intent(getContext(),getContext().getClass() );
+               // getActivity().recreate();
+                //startActivity(intent);
+                onResume();
             }
         });
 
