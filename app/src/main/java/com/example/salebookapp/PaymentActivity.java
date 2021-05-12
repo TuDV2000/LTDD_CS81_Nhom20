@@ -66,6 +66,7 @@ public class PaymentActivity extends AppCompatActivity {
                     }
                 });
                 Toast.makeText(PaymentActivity.this,"Đặt hàng thành công !!!!",Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 

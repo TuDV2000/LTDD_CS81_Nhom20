@@ -21,8 +21,7 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
             android:layout_marginLeft="116dp"
-            android:layout_marginTop="-7dp"
-            android:background="@drawable/book1" />
+            android:layout_marginTop="-7dp" />
 
         <TextView
             android:id="@+id/tv_detail_book_name"
@@ -51,7 +50,7 @@
             android:id="@+id/tview_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chi tiết"
+            android:text="Mô tả"
             android:textStyle="bold"
             android:textSize="25dp"
             android:layout_marginVertical="10dp"
@@ -66,7 +65,7 @@
                 android:id="@+id/tv_detail_book_describe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:textSize="18dp"/>
         </ScrollView>
         <TextView
             android:id="@+id/tv_soLuong"

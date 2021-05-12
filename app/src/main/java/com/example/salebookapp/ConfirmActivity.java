@@ -58,7 +58,8 @@ public class ConfirmActivity extends AppCompatActivity {
                     String address = intent.getExtras().getString("address");
 
                     Customer cus = new Customer(fullName, phone, address);
-                    Account acc = new Account(user, pass, type);
+
+                    Account acc = new Account(user, Utils.byPass(pass), type);
 
                     try {
                         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
