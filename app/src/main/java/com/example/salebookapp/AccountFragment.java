@@ -21,6 +21,7 @@ import com.example.salebookapp.entities.Account;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -30,6 +31,7 @@ public class AccountFragment extends Fragment {
     Button btn_signin, btn_signup, btn_quit;
     AwesomeValidation awesomeValidation;
     View view;
+    String message = "";
 
 
     @Override
@@ -73,21 +75,30 @@ public class AccountFragment extends Fragment {
                 String user = edt_user.getText().toString();
                 String pass = edt_pass.getText().toString();
 
+                message = "Tài khoản hoặc mật khẩu chưa chính xác.";
                 if (user.length() != 0 && pass.length() != 0){
-                    AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                   AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                         @Override
-                        public void run() {
+                      public void run() {
                             List<Account> l = AppDatabase.getDatabase(getContext().getApplicationContext())
                                     .dao().getAccount(user);
+                            System.out.println(l);
                             if (l.size() > 0) {
-                                Utils.accLogin = l.get(0);
-                                getActivity().finish();
-                                startActivity(new Intent(getContext(), HomeActivity.class));
-                            } else {
-                                System.out.println("=========================================du moa chua them dc");
+                                System.out.println("pass : " + l.get(0).getPassword());
+                                System.out.println("passsss : " + Utils.byPass(pass) );
+                                if (l.get(0).getPassword().equals(Utils.byPass(pass))) {
+                                    Utils.accLogin = l.get(0);
+                                    Intent intent = new Intent(getContext(), HomeActivity.class);
+                                    message = "Đăng nhập thành công";
+                                    getActivity().finish();
+                                    startActivity(intent);
+                                } else {
+                                    message = "Mật khẩu chưa chính xác.";
+                                }
                             }
                         }
                     });
+                    Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getContext(),"Mời bạn nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
                 }

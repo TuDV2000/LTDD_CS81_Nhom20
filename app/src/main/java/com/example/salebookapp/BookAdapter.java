@@ -62,7 +62,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         holder.imgBook.setImageResource(Integer.parseInt(book.getImage().substring(book.getImage().lastIndexOf('/') + 1)));
         holder.tvBookName.setText(book.getBookName());
-        holder.tvDescription.setText(book.getDescribe());
+//        holder.tvDescription.setText(book.getDescribe());
         holder.tvPrice.setText(String.valueOf(book.getPrice()));
         Book bookCart = Utils.cart.getCart().get(book.getBookID());
         holder.tvQuantity.setText("X " + String.valueOf(bookCart != null  ? bookCart.getAmount(): 0));
@@ -114,7 +114,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             item = itemView.findViewById(R.id.book_item);
             imgBook = itemView.findViewById(R.id.img_book);
             tvBookName = itemView.findViewById(R.id.tv_book_name);
-            tvDescription = itemView.findViewById(R.id.tv_description);
+//            tvDescription = itemView.findViewById(R.id.tv_description);
             tvPrice = itemView.findViewById(R.id.tv_price);
             tvQuantity = itemView.findViewById(R.id.tv_quantity);
             setBtnPlus(itemView.findViewById(R.id.btn_plus));

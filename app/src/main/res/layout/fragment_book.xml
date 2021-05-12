@@ -4,12 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BookFragment">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_book"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_book"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="10dp"/>
+    </ScrollView>
 </FrameLayout>
