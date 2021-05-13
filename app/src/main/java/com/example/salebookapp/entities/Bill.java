@@ -25,11 +25,14 @@ public class Bill {
     private double total;
     @ColumnInfo(name = "date_of_export")
     private String dateOfExport;
+    @ColumnInfo(name = "status")
+    private int status;
 
     public Bill(int fkCusID, double total, String dateOfExport) {
         this.fkCusID = fkCusID;
         this.total = total;
         this.dateOfExport = dateOfExport;
+        this.status = 0;
     }
 
     //get and set
@@ -63,5 +66,13 @@ public class Bill {
 
     public void setDateOfExport(String dateOfExport) {
         this.dateOfExport = dateOfExport;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

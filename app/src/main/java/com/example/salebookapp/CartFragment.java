@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -105,9 +106,9 @@ public class CartFragment extends Fragment {
             @Override
             public void onClickRemoveFromCart(Book book, BookAdapter.BookViewHolder holder) {
                 Utils.cart.removeFromCart(book);
-                if(Utils.cart.getCart().get(book.getBookID()) != null){
+                if (Utils.cart.getCart().get(book.getBookID()) != null) {
                     holder.getTvQuantity().setText("X " + Utils.cart.getCart().get(book.getBookID()).getAmount());
-                } else holder.getTvQuantity().setText("X 0" );
+                } else holder.getTvQuantity().setText("X 0");
 
                 tvTotalPrice.setText("Tổng tiền: " + Utils.cart.getTotalPrice());
             }

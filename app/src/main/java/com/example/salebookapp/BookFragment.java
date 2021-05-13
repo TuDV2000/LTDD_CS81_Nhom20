@@ -80,7 +80,6 @@ public class BookFragment extends Fragment {
                 Intent intent = new Intent(getContext(), BookDetailActivity.class);
 
                 intent.putExtra("bookID", book.getBookID());
-//                intent.putExtra("amount", Utils.cart.getCart().get(book.getBookID()).getAmount());
 
                 startActivity(intent);
             }

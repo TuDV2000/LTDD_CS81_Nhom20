@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,8 @@ public class AccountFragment extends Fragment {
         btn_quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_DeviceDefault_Light_Dialog);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),
+                        android.R.style.Theme_DeviceDefault_Light_Dialog);
                 builder.setTitle("Bạn có chắc muốn thoát !");
                 builder.setIcon(android.R.drawable.ic_dialog_alert);
                 builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
@@ -76,16 +78,14 @@ public class AccountFragment extends Fragment {
                 String pass = edt_pass.getText().toString();
 
                 message = "Tài khoản hoặc mật khẩu chưa chính xác.";
-                if (user.length() != 0 && pass.length() != 0){
-                   AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                if (user.length() != 0 && pass.length() != 0) {
+                    AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                         @Override
-                      public void run() {
+                        public void run() {
                             List<Account> l = AppDatabase.getDatabase(getContext().getApplicationContext())
                                     .dao().getAccount(user);
-                            System.out.println(l);
+
                             if (l.size() > 0) {
-                                System.out.println("pass : " + l.get(0).getPassword());
-                                System.out.println("passsss : " + Utils.byPass(pass) );
                                 if (l.get(0).getPassword().equals(Utils.byPass(pass))) {
                                     Utils.accLogin = l.get(0);
                                     Intent intent = new Intent(getContext(), HomeActivity.class);
@@ -98,9 +98,18 @@ public class AccountFragment extends Fragment {
                             }
                         }
                     });
-                    Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
+
+                    (new Handler()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getContext(), message,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }, 500);
+
                 } else {
-                    Toast.makeText(getContext(),"Mời bạn nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),
+                            "Mời bạn nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -121,8 +130,6 @@ public class AccountFragment extends Fragment {
         btn_signin = view.findViewById(R.id.btn_fsignin);
         btn_quit = view.findViewById(R.id.btn_fquit);
     }
-
-
 
 
 }

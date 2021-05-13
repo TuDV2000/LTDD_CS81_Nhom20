@@ -24,7 +24,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     public interface IClickAddToCartListener{
         void onClickAddToCart(ImageView imgBook, Book book,BookViewHolder holder);
-
     }
 
     public interface IClickGoToDetailListener{
@@ -62,11 +61,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         holder.imgBook.setImageResource(Integer.parseInt(book.getImage().substring(book.getImage().lastIndexOf('/') + 1)));
         holder.tvBookName.setText(book.getBookName());
-//        holder.tvDescription.setText(book.getDescribe());
         holder.tvPrice.setText(String.valueOf(book.getPrice()));
         Book bookCart = Utils.cart.getCart().get(book.getBookID());
         holder.tvQuantity.setText("X " + String.valueOf(bookCart != null  ? bookCart.getAmount(): 0));
-        //System.out.println("boooke 1" +book.getAmount());
+
         holder.btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +101,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public class BookViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView imgBook;
-        private TextView tvBookName, tvDescription, tvPrice, tvQuantity;
+        private TextView tvBookName, tvPrice, tvQuantity;
         private Button btnPlus;
         private Button btnMinus;
         private RelativeLayout item;
@@ -114,7 +112,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             item = itemView.findViewById(R.id.book_item);
             imgBook = itemView.findViewById(R.id.img_book);
             tvBookName = itemView.findViewById(R.id.tv_book_name);
-//            tvDescription = itemView.findViewById(R.id.tv_description);
             tvPrice = itemView.findViewById(R.id.tv_price);
             tvQuantity = itemView.findViewById(R.id.tv_quantity);
             setBtnPlus(itemView.findViewById(R.id.btn_plus));
@@ -135,14 +132,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         public void setTvBookName(TextView tvBookName) {
             this.tvBookName = tvBookName;
-        }
-
-        public TextView getTvDescription() {
-            return tvDescription;
-        }
-
-        public void setTvDescription(TextView tvDescription) {
-            this.tvDescription = tvDescription;
         }
 
         public TextView getTvPrice() {

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.util.Patterns;
 import android.view.View;
@@ -38,11 +39,12 @@ import static com.basgeekball.awesomevalidation.ValidationStyle.UNDERLABEL;
 
 public class RegistActivity extends AppCompatActivity {
 
-    EditText edtFullName, edtUserName, edtPassword,edtCellPhone,edtAddress,edtConfirmPass;
+    EditText edtFullName, edtUserName, edtPassword, edtCellPhone, edtAddress, edtConfirmPass;
     TextView txtChangeLogin;
     CheckBox cbAgree;
     Button btnCreate;
     AwesomeValidation awesomeValidation;
+    String message = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +52,10 @@ public class RegistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_regist);
 
         setup();
-        //setItem();
         addValidation();
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("REGIST");
+        actionBar.setTitle("Đăng ký");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         //Điều khoản
@@ -83,17 +84,26 @@ public class RegistActivity extends AppCompatActivity {
                    intent.putExtra("phone", edtCellPhone.getText().toString());
                    intent.putExtra("address", edtAddress.getText().toString());
 
-                   System.out.println(edtUserName.getText().toString());
                    AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                        @Override
                        public void run() {
-                           if (AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(edtUserName.getText().toString()).size() == 0) {
+                           if (AppDatabase.getDatabase(getApplicationContext())
+                                   .dao().getAccount(edtUserName.getText().toString()).size() == 0) {
+                               message = "Xác thực tài khoản để hoàn tất đăng ký";
                                startActivity(intent);
                            } else {
-                               Toast.makeText(RegistActivity.this, "Tài khoản đã được sử dụng", Toast.LENGTH_SHORT).show();
+                               message = "Tài khoản đã được tồn tại";
                            }
                        }
                    });
+                   (new Handler()).postDelayed(new Runnable() {
+                       @Override
+                       public void run() {
+                           Toast.makeText(RegistActivity.this, message,
+                                   Toast.LENGTH_SHORT).show();
+                           System.out.println(message);
+                       }
+                   }, 500);
                }
             }
         });
@@ -210,13 +220,5 @@ public class RegistActivity extends AppCompatActivity {
 
     public void setBtnCreate(Button btnCreate) {
         this.btnCreate = btnCreate;
-    }
-
-    public AwesomeValidation getAwesomeValidation() {
-        return awesomeValidation;
-    }
-
-    public void setAwesomeValidation(AwesomeValidation awesomeValidation) {
-        this.awesomeValidation = awesomeValidation;
     }
 }

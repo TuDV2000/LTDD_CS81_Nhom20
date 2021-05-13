@@ -63,8 +63,12 @@ public interface DAO {
     public Bill getBillById(int id);
     @Query("select * from bills")
     public List<Bill> getAllBill();
-    @Query("select * from bills where fk_cus_id = :id")
+    @Query("select * from bills where fk_cus_id = :id order by status")
     public List<Bill> getBillByCusId(int id);
+    @Query("select * from bills where status = :status")
+    public List<Bill> getBillByStatus(int status);
+    @Query("update bills set status = :status where bill_id = :billId")
+    public void updateStatusBill(int billId, int status);
 //    @Transaction
 //    @Query("select * from bills where bill_id = :id")
 //    public List<BillAndDetail> getDetailByBillId(int id);

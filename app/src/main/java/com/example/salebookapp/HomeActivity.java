@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -100,7 +101,7 @@ public class HomeActivity extends AppCompatActivity {
         return viewAnimation;
     }
 
-    public void setCountProductInCart(int count){
+    public void setCountProductInCart(int count) {
         mCountBook = count;
         AHNotification notification = new AHNotification.Builder()
                 .setText("1")

@@ -16,18 +16,12 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
-    private Map<String, Fragment> fms = new HashMap<>();
-
 
     @NonNull
     @Override
     public Fragment getItem(int position)  {
         switch (position){
             case 0:
-//                if (!fms.containsKey("0"))
-//                    fms.put("0", new BookFragment());
-//
-//                return fms.get("0");
                 return new BookFragment();
             case 1:
                 return new CartFragment();

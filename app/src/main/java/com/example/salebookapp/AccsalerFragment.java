@@ -17,12 +17,15 @@ public class AccsalerFragment extends Fragment {
     TextView tvAccountName, tvAccountEmail;
     Button btnStore, btnSalerBill, btnLogout;
     View view;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_accsaler, container, false);
+
         setUp();
         setData();
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,8 +41,16 @@ public class AccsalerFragment extends Fragment {
             }
         });
 
+        btnSalerBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), BillManagerActivity.class));
+            }
+        });
+
         return view;
     }
+
     private void setUp() {
         tvAccountEmail = view.findViewById(R.id.tv_accountEmail);
         tvAccountName = view.findViewById(R.id.tv_accountName);
@@ -47,6 +58,7 @@ public class AccsalerFragment extends Fragment {
         btnSalerBill = view.findViewById(R.id.btn_salerBill);
         btnLogout = view.findViewById(R.id.btn_logOut);
     }
+
     private void setData(){
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
