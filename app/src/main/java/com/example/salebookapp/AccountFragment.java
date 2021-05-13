@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.salebookapp.entities.Account;
@@ -28,7 +30,8 @@ import java.util.List;
 public class AccountFragment extends Fragment {
 
     EditText edt_user, edt_pass;
-    Button btn_signin, btn_signup, btn_quit;
+    Button btn_signin, btn_quit;
+    TextView tv_signup;
     AwesomeValidation awesomeValidation;
     View view;
     String message = "";
@@ -37,7 +40,7 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_account, container, false);
+        view = inflater.inflate(R.layout.activity_login_design, container, false);
 
         setUp();
         ControlButton();
@@ -104,7 +107,7 @@ public class AccountFragment extends Fragment {
                 }
             }
         });
-        btn_signup.setOnClickListener(new View.OnClickListener() {
+        tv_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), RegistActivity.class);
@@ -113,12 +116,10 @@ public class AccountFragment extends Fragment {
         });
     }
 
-
     void setUp() {
         edt_user = view.findViewById(R.id.edt_fusername);
         edt_pass = view.findViewById(R.id.edt_fpassword);
-
-        btn_signup = view.findViewById(R.id.btn_fsignup);
+        tv_signup = view.findViewById(R.id.tv_fsignup);
         btn_signin = view.findViewById(R.id.btn_fsignin);
         btn_quit = view.findViewById(R.id.btn_fquit);
     }

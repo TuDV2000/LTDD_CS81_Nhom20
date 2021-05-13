@@ -52,11 +52,6 @@ public class RegistActivity extends AppCompatActivity {
         setup();
         //setItem();
         addValidation();
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("REGIST");
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
         //Điều khoản
         cbAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -136,7 +131,7 @@ public class RegistActivity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-        Intent intent = new Intent(RegistActivity.this, LoginActivity.class);
+        Intent intent = new Intent(RegistActivity.this, AccountFragment.class);
         startActivity(intent);
     }
 
