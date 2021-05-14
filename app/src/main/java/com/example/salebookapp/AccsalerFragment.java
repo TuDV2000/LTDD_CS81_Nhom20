@@ -15,7 +15,7 @@ import com.example.salebookapp.entities.Customer;
 public class AccsalerFragment extends Fragment {
 
     TextView tvAccountName, tvAccountEmail;
-    Button btnStore, btnSalerBill, btnLogout;
+    Button btnStore, btnLogout;
     View view;
 
     @Override
@@ -41,13 +41,6 @@ public class AccsalerFragment extends Fragment {
             }
         });
 
-        btnSalerBill.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), BillManagerActivity.class));
-            }
-        });
-
         return view;
     }
 
@@ -55,7 +48,6 @@ public class AccsalerFragment extends Fragment {
         tvAccountEmail = view.findViewById(R.id.tv_accountEmail);
         tvAccountName = view.findViewById(R.id.tv_accountName);
         btnStore = view.findViewById(R.id.btn_store);
-        btnSalerBill = view.findViewById(R.id.btn_salerBill);
         btnLogout = view.findViewById(R.id.btn_logOut);
     }
 

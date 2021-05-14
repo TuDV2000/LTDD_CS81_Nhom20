@@ -3,6 +3,7 @@ package com.example.salebookapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,12 +45,10 @@ public class BookDetailActivity extends AppCompatActivity {
         });
 
         btnPlus.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 if (dbquantities == quantities) {
-                    System.out.println("Vượt quá số lượng sản phẩm trong kho : " + String.valueOf(dbquantities));
-                    Toast.makeText(BookDetailActivity.this, "Vượt quá số lượng sản phẩm trong kho : " + String.valueOf(dbquantities), Toast.LENGTH_SHORT);
+//                    Toast.makeText(getContextThis(), "Đã hết hàng", Toast.LENGTH_SHORT);
                 } else {
                     quantities += 1;
                     tvQuantities.setText(String.valueOf(quantities));
@@ -87,6 +86,10 @@ public class BookDetailActivity extends AppCompatActivity {
                 tvDescribe.setText(book.getDescribe());
             }
         });
+    }
+
+    Context getContextThis() {
+        return this;
     }
 
     private void anhxa() {
