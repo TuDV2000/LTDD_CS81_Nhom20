@@ -118,8 +118,7 @@ public class CartFragment extends Fragment {
             public void onClickRemoveBookFromCart(Book book, BookAdapter.BookViewHolder holder) {
                 Utils.cart.removeBookFromCart(book);
                 Intent intent = new Intent(getContext(),getContext().getClass() );
-               // getActivity().recreate();
-                //startActivity(intent);
+
                 onResume();
             }
         });

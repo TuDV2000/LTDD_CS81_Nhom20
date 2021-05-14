@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.salebookapp.entities.Account;
 import com.example.salebookapp.entities.Book;
 import com.example.salebookapp.entities.Customer;
 
@@ -32,6 +34,7 @@ public class BookFragment extends Fragment {
     private View mView;
     private HomeActivity mainActivity;
     private BookHomeAdapter bookHomeAdapter;
+    private List<Book> bookList = HomeActivity.bookList;
 
     public BookFragment() {
 
@@ -42,6 +45,7 @@ public class BookFragment extends Fragment {
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_book, container, false);
         rcvBook = mView.findViewById(R.id.rcv_book);
+
         mainActivity = (HomeActivity) getActivity();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mainActivity);
@@ -49,9 +53,7 @@ public class BookFragment extends Fragment {
 
         bookHomeAdapter = new BookHomeAdapter();
 
-
-
-        bookHomeAdapter.setData(HomeActivity.bookList, new BookHomeAdapter.IClickGoToDetailListener() {
+        bookHomeAdapter.setData(bookList, new BookHomeAdapter.IClickGoToDetailListener() {
             @Override
             public void onClickGoToDetail(Book book) {
                 Intent intent = new Intent(getContext(), BookDetailActivity.class);
@@ -61,6 +63,7 @@ public class BookFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
         rcvBook.setAdapter(bookHomeAdapter);
 
         return mView;
@@ -70,16 +73,31 @@ public class BookFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        bookHomeAdapter.notifyDataSetChanged();
-        for(Book book: Utils.cart.getCart().values()){
-            System.out.println(book);
-        }
+        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                bookList = AppDatabase.getDatabase(getContext().getApplicationContext()).dao().getAllBook();
+            }
+        });
+        (new Handler()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                bookHomeAdapter.setData(bookList, new BookHomeAdapter.IClickGoToDetailListener() {
+                    @Override
+                    public void onClickGoToDetail(Book book) {
+                        Intent intent = new Intent(getContext(), BookDetailActivity.class);
 
+                        intent.putExtra("bookID", book.getBookID());
+
+                        startActivity(intent);
+                    }
+                });
+            }
+        }, 200);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        bookHomeAdapter.notifyDataSetChanged();
     }
 }

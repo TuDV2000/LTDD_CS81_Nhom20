@@ -77,8 +77,6 @@ public interface DAO {
     public void typeDelete(BookType bookType);
     @Query("select * from booktypes")
     public List<BookType> getAllType();
-    @Query("update books set quantities =  :newQuantities where book_id  = :id")
-    public void updateQuantitiesOfBook(int newQuantities, int id);
 
 
     //AuthorDao
@@ -110,4 +108,6 @@ public interface DAO {
     public List<Book> getAllBook();
     @Query("select * from books where book_id = :id")
     public Book getBookByID(int id);
+    @Query("update books set quantities =  :newQuantities where book_id  = :id")
+    public void updateQuantitiesOfBook(int newQuantities, int id);
 }

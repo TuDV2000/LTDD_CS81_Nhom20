@@ -43,7 +43,7 @@ public class PaymentActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Date date = new Date();
-                        int idBill;
+                        int idBill, quantities = 0;
                         String d = String.format("%d-%d-%d", date.getDate(), date.getMonth() + 1,
                                 date.getYear() + 1900);
 
@@ -53,6 +53,9 @@ public class PaymentActivity extends AppCompatActivity {
                         idBill = AppDatabase.getDatabase(getApplicationContext())
                                 .dao().getAllBill().size();
                         for (Book b : Utils.cart.getCartItemAll()) {
+                            quantities = AppDatabase.getDatabase(getApplicationContext())
+                                    .dao().getBookByID(b.getBookID()).getQuantities();
+
                             AppDatabase.getDatabase(getApplicationContext())
                                     .dao()
                                     .billDetailInsert(new BillDetail(idBill,
@@ -60,12 +63,18 @@ public class PaymentActivity extends AppCompatActivity {
                                             b.getPrice(),
                                             b.getAmount())
                                     );
+
+                            AppDatabase.getDatabase(getApplicationContext())
+                                    .dao()
+                                    .updateQuantitiesOfBook(quantities - b.getAmount(),
+                                            b.getBookID());
                         }
                         Utils.cart.getCart().clear();
                         Utils.cart.setTotalPrice(0);
                     }
                 });
-                Toast.makeText(PaymentActivity.this,"Đặt hàng thành công !!!!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(PaymentActivity.this, "Đặt hàng thành công !!!!",
+                        Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

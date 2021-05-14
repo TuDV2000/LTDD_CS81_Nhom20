@@ -24,10 +24,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position)  {
         switch (position){
             case 0:
-//                if (!fms.containsKey("0"))
-//                    fms.put("0", new BookFragment());
-//
-//                return fms.get("0");
                 return new BookFragment();
             case 1:
                 return new CartFragment();

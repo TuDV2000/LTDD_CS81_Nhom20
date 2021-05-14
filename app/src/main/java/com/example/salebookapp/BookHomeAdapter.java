@@ -55,7 +55,6 @@ public class BookHomeAdapter extends RecyclerView.Adapter<BookHomeAdapter.BookVi
             holder.tvBookName.setText(book.getBookName());
         }
         holder.tvBookPrice.setText(String.valueOf(book.getPrice()));
-        //Book bookCart = Utils.cart.getCart().get(book.getBookID());
         holder.tvBookQuantities.setText("Còn " + book.getQuantities() + " sản phẩm");
 
         holder.item.setOnClickListener(new View.OnClickListener() {

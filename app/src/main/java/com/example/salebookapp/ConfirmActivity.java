@@ -35,11 +35,11 @@ public class ConfirmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_confirm);
 
         intent = getIntent();
-        ActionBar actionBar = getSupportActionBar();
-
-
-        actionBar.setTitle("CONFIRM");
-        actionBar.setDisplayHomeAsUpEnabled(true);
+//        ActionBar actionBar = getSupportActionBar();
+//
+//
+//        actionBar.setTitle("CONFIRM");
+//        actionBar.setDisplayHomeAsUpEnabled(true);
         Anhxa();
 
         tvemail.setText(intent.getExtras().getString("email"));
