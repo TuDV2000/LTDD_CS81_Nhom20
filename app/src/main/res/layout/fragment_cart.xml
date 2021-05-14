@@ -29,19 +29,28 @@
             android:id="@+id/tv_total_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@id/btn_payment"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
             android:text="Tổng tiền: "
-            android:textSize="25dp"
-            android:textColor="#30D5C8"
             android:textAlignment="center"
-            android:layout_centerHorizontal="true"
-            android:layout_above="@id/btn_payment"/>
-        <Button
+            android:textColor="@color/theme_darkcolor"
+            android:textSize="25dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_payment"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thanh toán"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"/>
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/button_exit_border"
+            android:padding="10dp"
+            android:text="Thanh toán"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </RelativeLayout>
 
 </FrameLayout>

@@ -56,7 +56,7 @@ public class AccbuyerFragment extends Fragment {
                 edtEditAddress.setEnabled(true);
                 edtEditPhone.setEnabled(true);
                 btnEdit.setEnabled(false);
-                btnSaveEdit.setAlpha(1);
+                btnSaveEdit.setEnabled(true);
             }
         });
         btnSaveEdit.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +74,7 @@ public class AccbuyerFragment extends Fragment {
                     });
                     edtEditAddress.setEnabled(false);
                     edtEditPhone.setEnabled(false);
-                    btnSaveEdit.setAlpha(0);
+                    btnSaveEdit.setEnabled(false);
                     btnEdit.setEnabled(true);
                     }
                 }

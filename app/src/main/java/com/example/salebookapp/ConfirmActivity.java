@@ -35,11 +35,6 @@ public class ConfirmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_confirm);
 
         intent = getIntent();
-        ActionBar actionBar = getSupportActionBar();
-
-
-        actionBar.setTitle("CONFIRM");
-        actionBar.setDisplayHomeAsUpEnabled(true);
         Anhxa();
 
         tvemail.setText(intent.getExtras().getString("email"));
@@ -70,7 +65,7 @@ public class ConfirmActivity extends AppCompatActivity {
                             }
                         });
                         Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(ConfirmActivity.this, LoginActivity.class);
+                        Intent intent = new Intent(ConfirmActivity.this, AccountFragment.class);
                         startActivity(intent);
                     } catch (Exception ex) {
 
@@ -87,7 +82,7 @@ public class ConfirmActivity extends AppCompatActivity {
                 sendMail();
                 if(isConfirmTrue()){
                     Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(ConfirmActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(ConfirmActivity.this, AccountFragment.class);
                     startActivity(intent);
                 }else {
                     Toast.makeText(ConfirmActivity.this, "Xác thực không thành công", Toast.LENGTH_LONG).show();

@@ -4,173 +4,220 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".RegistActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
-        app:boxBackgroundColor="@color/white"
-        app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
-        app:hintAnimationEnabled="false">
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/button_exit_border"
+            android:text="Đăng ký"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/edt_fullname"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:drawablePadding="10dp"
-            android:hint="Full Name"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-            android:textSize="20dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        app:boxBackgroundColor="@color/white"
-        app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
-        app:hintAnimationEnabled="false">
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/round_border"
+            android:drawableStart="@drawable/ic_baseline_account_circle_24"
+            android:drawablePadding="16dp"
+            android:drawableTint="@color/theme_color"
+            android:ems="10"
+            android:hint="Họ và tên"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <EditText
             android:id="@+id/edt_username"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/round_border"
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:drawablePadding="16dp"
+            android:ems="10"
             android:hint="Email"
-            android:textSize="20dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:inputType="text"
+            android:padding="16dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_fullname" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        app:startIconDrawable="@drawable/ic_baseline_https_24"
-        app:passwordToggleEnabled="true"
-        app:hintAnimationEnabled="false">
-
-        <EditText
-            android:id="@+id/edt_password"
-            android:inputType="textPassword"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:hint="Password"
-            android:textSize="20dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        app:startIconDrawable="@drawable/ic_baseline_https_24"
-        app:hintAnimationEnabled="false">
+            android:layout_marginTop="16dp"
+            app:boxBackgroundMode="none"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_username"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/theme_color"
+            app:startIconDrawable="@drawable/ic_baseline_https_24"
+            app:startIconTint="@color/theme_color">
 
-        <EditText
-            android:id="@+id/edt_confirmpassword"
-            android:inputType="textPassword"
+            <EditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/round_border"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:textSize="20dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:hint="Confirm Password"
-            android:textSize="20dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="16dp"
+            app:boxBackgroundMode="none"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            app:passwordToggleContentDescription="Hiển thị mật khẩu"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/theme_color"
+            app:startIconDrawable="@drawable/ic_baseline_https_24"
+            app:startIconTint="@color/theme_color">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        app:boxBackgroundColor="@color/white"
-        app:startIconDrawable="@drawable/ic_baseline_smartphone_24"
-        app:hintAnimationEnabled="false">
+            <EditText
+                android:id="@+id/edt_confirmpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/round_border"
+                android:hint="Xác nhận mật khẩu"
+                android:inputType="textPassword"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:textSize="20dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <EditText
             android:id="@+id/edt_cellphone"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Cell Phone"
-            android:inputType="phone"
-            android:textSize="20dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/round_border"
+            android:drawableStart="@drawable/ic_baseline_smartphone_24"
+            android:drawablePadding="16dp"
+            android:drawableTint="@color/theme_color"
+            android:ems="10"
+            android:hint="Số điện thoại"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        app:boxBackgroundColor="@color/white"
-        app:startIconDrawable="@drawable/ic_baseline_location_city_24"
-        app:hintAnimationEnabled="false">
 
         <EditText
             android:id="@+id/edt_address"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:drawablePadding="10dp"
-            android:hint="Address"
-            android:textSize="20dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/round_border"
+            android:drawableStart="@drawable/ic_baseline_location_city_24"
+            android:drawablePadding="16dp"
+            android:drawableTint="@color/theme_color"
+            android:ems="10"
+            android:hint="Địa chỉ"
+            android:inputType="text"
+            android:padding="16dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_cellphone" />
 
-<!--    <LinearLayout-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:layout_marginRight="20dp"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal">-->
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:text="You are"-->
-<!--            android:textSize="20dp"/>-->
+        <CheckBox
+            android:id="@+id/cb_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:alpha=".7"
+            android:text="Đồng ý với điều khoản ứng dụng"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/theme_darkcolor"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_address" />
 
-<!--        <Spinner-->
-<!--            android:id="@+id/sp_role"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:layout_width="100dp"-->
-<!--            android:layout_height="35dp"-->
-<!--            />-->
-<!--    </LinearLayout>-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_create"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/button_round_border"
+            android:enabled="false"
+            android:text="Create Account"
+            android:textColor="#FFFFFF"
+            android:textSize="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cb_agree" />
 
-    <CheckBox
-        android:id="@+id/cb_agree"
-        android:layout_marginLeft="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I Agree"
-        android:textSize="20dp"
-        android:alpha=".7"/>
-
-    <Button
-        android:id="@+id/btn_create"
-        android:layout_marginTop="30dp"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Create Account"
-        android:enabled="false"
-        android:textSize="25dp"
-        android:backgroundTint="#6495ED"/>
-
-    <TextView
-        android:id="@+id/txt_change_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I have account , sign in now"
-        android:textSize="18dp"
-        android:clickable="true"
-        android:onClick="onClick"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/txt_change_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:text="Đã có tài khoản, đăng nhập ngay"
+            android:textAlignment="center"
+            android:textColor="@color/theme_darkcolor"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_create" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

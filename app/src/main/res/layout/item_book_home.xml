@@ -42,7 +42,7 @@
             android:padding="5dp"
             android:text="120000đ"
             android:textAlignment="textEnd"
-            android:textColor="#22B2FF"
+            android:textColor="@color/theme_darkcolor"
             android:textSize="15dp"
             android:textStyle="bold" />
 
