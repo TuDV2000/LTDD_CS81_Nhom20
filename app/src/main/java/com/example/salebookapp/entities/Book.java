@@ -2,42 +2,13 @@ package com.example.salebookapp.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import static androidx.room.ForeignKey.CASCADE;
-
 @Entity(tableName = "books")
-//        foreignKeys = {
-//            @ForeignKey(
-//                    entity = BookType.class,
-//                    parentColumns = "type_id",
-//                    childColumns = "fk_book_type_id",
-//                    onDelete = CASCADE,
-//                    onUpdate = CASCADE),
-//            @ForeignKey(
-//                    entity = Author.class,
-//                    parentColumns = "author_id",
-//                    childColumns = "fk_author_id",
-//                    onDelete = CASCADE,
-//                    onUpdate = CASCADE),
-//            @ForeignKey(
-//                    entity = Publisher.class,
-//                    parentColumns = "publisher_id",
-//                    childColumns = "fk_publisher_id",
-//                    onDelete = CASCADE,
-//                    onUpdate = CASCADE)
-//        }
 public class Book {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "book_id")
     private int bookID;
-//    @ColumnInfo(name = "fk_book_type_id")
-//    private int fkBookTypeID;
-//    @ColumnInfo(name = "fk_author_id")
-//    private int fkAuthorID;
-//    @ColumnInfo(name = "fk_publisher_id")
-//    private int fkPublisherID;
     @ColumnInfo(name = "book_name")
     private String bookName;
     @ColumnInfo(name = "publication_date")

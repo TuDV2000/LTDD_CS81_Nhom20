@@ -9,6 +9,7 @@
     android:backgroundTint="#CBE6F3">
 
     <RelativeLayout
+        android:id="@+id/card_bill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp">
@@ -35,28 +36,44 @@
             android:id="@+id/tv_bill_day_export"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10-10-2020"
+            android:text="Ngày đặt: 10-10-2020"
             android:textSize="18dp"
             android:layout_marginLeft="10dp"
             android:layout_below="@id/tv_bill_id"/>
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trạng thái: Chờ xác nhận"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/tv_bill_day_export"/>
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xác nhận"
+            android:backgroundTint="#6495ED"
+            android:layout_below="@+id/tv_bill_total"
+            android:layout_alignParentRight="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tổng tiền:"
             android:textSize="18dp"
-            android:layout_toLeftOf="@+id/tv_bill_total"
-            android:layout_below="@+id/tv_bill_id"/>
+            android:layout_toLeftOf="@+id/tv_bill_total"/>
 
         <TextView
             android:id="@+id/tv_bill_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100000"
-            android:textSize="18dp"
-            android:layout_marginHorizontal="10dp"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/tv_bill_id"/>
+            android:layout_marginHorizontal="10dp"
+            android:text="100000"
+            android:textSize="18dp" />
 
     </RelativeLayout>
 

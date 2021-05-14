@@ -16,8 +16,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
-    private Map<String, Fragment> fms = new HashMap<>();
-
 
     @NonNull
     @Override
