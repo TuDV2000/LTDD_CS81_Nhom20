@@ -31,7 +31,7 @@ public interface DAO {
     @Delete
     public void accountDelete(Account account);
     @Query("select * from accounts where username = :username")
-    public List<Account> getAccount(String username);
+    public Account getAccount(String username);
 
 
     //CustomerDao

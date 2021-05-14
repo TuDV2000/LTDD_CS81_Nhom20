@@ -85,12 +85,12 @@ public class AccountFragment extends Fragment {
                     AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                         @Override
                         public void run() {
-                            List<Account> l = AppDatabase.getDatabase(getContext().getApplicationContext())
+                            Account acc = AppDatabase.getDatabase(getContext().getApplicationContext())
                                     .dao().getAccount(user);
 
-                            if (l.size() > 0) {
-                                if (l.get(0).getPassword().equals(Utils.byPass(pass))) {
-                                    Utils.accLogin = l.get(0);
+                            if (acc != null) {
+                                if (acc.getPassword().equals(Utils.byPass(pass))) {
+                                    Utils.accLogin = acc;
                                     Intent intent = new Intent(getContext(), HomeActivity.class);
                                     message = "Đăng nhập thành công";
                                     getActivity().finish();
@@ -108,7 +108,7 @@ public class AccountFragment extends Fragment {
                             Toast.makeText(getContext(), message,
                                     Toast.LENGTH_SHORT).show();
                         }
-                    }, 500);
+                    }, 200);
 
                 } else {
                     Toast.makeText(getContext(),

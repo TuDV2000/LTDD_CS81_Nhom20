@@ -61,20 +61,20 @@ public class ConfirmActivity extends AppCompatActivity {
 
                     Account acc = new Account(user, Utils.byPass(pass), type);
 
-                    try {
-                        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
-                            @Override
-                            public void run() {
+                    AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+                        @Override
+                        public void run() {
                             AppDatabase.getDatabase(getApplicationContext()).dao().customerInsert(cus);
                             AppDatabase.getDatabase(getApplicationContext()).dao().accountInsert(acc);
-                            }
-                        });
-                        Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(ConfirmActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                    } catch (Exception ex) {
 
-                    }
+                            Utils.accLogin = AppDatabase.getDatabase(getApplicationContext())
+                                    .dao().getAccount(user);
+                        }
+                    });
+                    Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ConfirmActivity.this, HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }else {
                     Toast.makeText(ConfirmActivity.this, "Xác thực không thành công", Toast.LENGTH_LONG).show();
                 }

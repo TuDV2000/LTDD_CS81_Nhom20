@@ -71,10 +71,10 @@ public class LoginActivity extends AppCompatActivity {
                         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                             @Override
                             public void run() {
-                                if (AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user).size() > 0) {
-                                    Utils.accLogin = AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user).get(0);
+                                if (AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user) != null) {
+                                    Utils.accLogin = AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user);
                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                    LOGIN_ID = AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user).get(0).getAccID();
+                                    LOGIN_ID = AppDatabase.getDatabase(getApplicationContext()).dao().getAccount(user).getAccID();
                                     startActivity(intent);
                                 }
                             }

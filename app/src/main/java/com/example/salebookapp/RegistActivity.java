@@ -54,9 +54,9 @@ public class RegistActivity extends AppCompatActivity {
         setup();
         addValidation();
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Đăng ký");
-        actionBar.setDisplayHomeAsUpEnabled(true);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setTitle("Đăng ký");
+//        actionBar.setDisplayHomeAsUpEnabled(true);
 
         //Điều khoản
         cbAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -88,7 +88,7 @@ public class RegistActivity extends AppCompatActivity {
                        @Override
                        public void run() {
                            if (AppDatabase.getDatabase(getApplicationContext())
-                                   .dao().getAccount(edtUserName.getText().toString()).size() == 0) {
+                                   .dao().getAccount(edtUserName.getText().toString()) == null) {
                                message = "Xác thực tài khoản để hoàn tất đăng ký";
                                startActivity(intent);
                            } else {
