@@ -131,8 +131,7 @@ public class RegistActivity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-        Intent intent = new Intent(RegistActivity.this, AccountFragment.class);
-        startActivity(intent);
+        finish();
     }
 
     public EditText getEdtFullName() {
