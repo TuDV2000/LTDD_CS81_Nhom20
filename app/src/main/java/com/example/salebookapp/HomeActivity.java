@@ -5,10 +5,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -31,6 +29,10 @@ public class HomeActivity extends AppCompatActivity {
 
     private View viewEndAnimation;
     private ImageView viewAnimation;
+
+    AHBottomNavigationItem item1;
+    AHBottomNavigationItem item2;
+    AHBottomNavigationItem item3;
 
     private int mCountBook;
     public static List<Book> bookList;
@@ -57,12 +59,21 @@ public class HomeActivity extends AppCompatActivity {
         ahBottomNavigationViewPager.setAdapter(adapter);
 
         // Create items
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.baseline_menu_black_18,
+        item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.baseline_menu_black_18,
                 R.color.color_tab_1);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.baseline_shopping_cart_black_18,
-                R.color.color_tab_2);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_baseline_account_circle_24,
-                R.color.color_tab_3);
+        if (Utils.accLogin != null) {
+            if (Utils.accLogin.getAccType().equals("Buyer"))
+                item2 = new AHBottomNavigationItem(R.string.tab_2_buyer, R.drawable.baseline_shopping_cart_black_18,
+                        R.color.color_tab_2);
+            else
+                item2 = new AHBottomNavigationItem(R.string.tab_2_saler, R.drawable.baseline_bill,
+                        R.color.color_tab_2);
+        } else {
+            item2 = new AHBottomNavigationItem(R.string.tab_2_buyer, R.drawable.baseline_shopping_cart_black_18,
+                    R.color.color_tab_2);
+        }
+        item3 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_baseline_account_circle_24,
+                    R.color.color_tab_3);
 
         // Add items
         ahBottomNavigation.addItem(item1);

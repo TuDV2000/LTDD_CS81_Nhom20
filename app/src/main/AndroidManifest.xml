@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SaleBookApp">
-        <activity android:name=".BillManagerActivity"></activity>
+
         <activity android:name=".AddBookActivity"></activity>
         <activity android:name=".OrderHistoryActivity" />
         <activity android:name=".BookDetailActivity" />

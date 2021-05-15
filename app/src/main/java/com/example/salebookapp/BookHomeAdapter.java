@@ -57,6 +57,11 @@ public class BookHomeAdapter extends RecyclerView.Adapter<BookHomeAdapter.BookVi
         holder.tvBookPrice.setText(String.valueOf(book.getPrice()));
         holder.tvBookQuantities.setText("Còn " + book.getQuantities() + " sản phẩm");
 
+        if (book.getQuantities() == 0) {
+            holder.item.setAlpha((float) 0.6);
+            holder.item.setEnabled(false);
+        }
+
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +69,16 @@ public class BookHomeAdapter extends RecyclerView.Adapter<BookHomeAdapter.BookVi
             }
         });
 
+        if (Utils.accLogin != null) {
+            if (Utils.accLogin.getAccType().equals("Saler")) {
+                holder.item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+            }
+        }
     }
 
     public List<Book> getmListBook() {
