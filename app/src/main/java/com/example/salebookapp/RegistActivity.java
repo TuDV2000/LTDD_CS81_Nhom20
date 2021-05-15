@@ -53,11 +53,6 @@ public class RegistActivity extends AppCompatActivity {
 
         setup();
         addValidation();
-
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setTitle("Đăng ký");
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-
         //Điều khoản
         cbAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -84,6 +79,7 @@ public class RegistActivity extends AppCompatActivity {
                    intent.putExtra("phone", edtCellPhone.getText().toString());
                    intent.putExtra("address", edtAddress.getText().toString());
 
+                   System.out.println(edtUserName.getText().toString());
                    AppDatabase.databaseWriteExecutor.execute(new Runnable() {
                        @Override
                        public void run() {
@@ -146,8 +142,7 @@ public class RegistActivity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-        Intent intent = new Intent(RegistActivity.this, LoginActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     public EditText getEdtFullName() {
