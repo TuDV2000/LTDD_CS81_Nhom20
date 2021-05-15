@@ -34,25 +34,28 @@ public class BookDetailActivity extends AppCompatActivity {
         anhxa();
         intent = getIntent();
         bookID = intent.getIntExtra("bookID", 1);
-        //quantities = intent.getIntExtra("amount",0);
         setdata();
 
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                dbquantities = AppDatabase.getDatabase(getApplicationContext()).dao().getBookByID(bookID).getQuantities();
+                dbquantities = AppDatabase.getDatabase(getApplicationContext())
+                        .dao().getBookByID(bookID).getQuantities();
             }
         });
 
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dbquantities == quantities) {
-//                    Toast.makeText(getContextThis(), "Đã hết hàng", Toast.LENGTH_SHORT);
-                } else {
-                    quantities += 1;
-                    tvQuantities.setText(String.valueOf(quantities));
-                }
+                quantities++;
+                tvQuantities.setText(String.valueOf(quantities));
+//                if (dbquantities == Utils.cart.getCart().get(bookID).getAmount()) {
+//                    System.out.println("tang so luong");
+////                    Toast.makeText(getContextThis(), "Đã hết hàng", Toast.LENGTH_SHORT);
+//                } else {
+//                    quantities += 1;
+//
+//                }
             }
         });
         btnMinus.setOnClickListener(new View.OnClickListener() {
@@ -66,13 +69,39 @@ public class BookDetailActivity extends AppCompatActivity {
         btnAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quantities > 0) {
+                Book b = Utils.cart.getCart().get(bookID);
+                int i = (b==null?0:b.getAmount()) + quantities;
+                System.out.println(b);
+                if (isAddToCart(bookID, i, dbquantities)) {
                     Utils.cart.addToCart(book, quantities);
                     finish();
+                } else {
+                    System.out.println("Số lượng có thể thêm là " + (dbquantities - i + quantities));
+                    Toast.makeText(BookDetailActivity.this,
+                            "Số lượng có thể thêm là " + (dbquantities - i + quantities), Toast.LENGTH_SHORT).show();
                 }
-                finish();
+
+//                if (quantities > 0) {
+//
+//                }
+
             }
         });
+    }
+
+    /**
+     *
+     * @param bookID
+     * @param quantities
+     * @param dbquantities
+     * @return true khi so luong them vao gio hang be hon so luong trong kho, false thi nguoc lai
+     */
+    static boolean isAddToCart(int bookID, int quantities, int dbquantities) {
+        Book b = Utils.cart.getCart().get(bookID);
+
+        int i = (b==null?0:b.getAmount()) + quantities;
+
+        return i <= dbquantities;
     }
 
     private void setdata() {
@@ -102,4 +131,6 @@ public class BookDetailActivity extends AppCompatActivity {
         btnMinus = findViewById(R.id.btn_detail_minus_detail);
         btnAddCart = findViewById(R.id.btn_describe_addcart);
     }
+
+
 }

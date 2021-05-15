@@ -94,6 +94,15 @@ public class CartFragment extends Fragment {
         bookAdapter.setData(Utils.cart.getCartItemAll(), new BookAdapter.IClickAddToCartListener() {
             @Override
             public void onClickAddToCart(ImageView imgAddToCart, Book book, BookAdapter.BookViewHolder holder) {
+
+//                AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        dbquantities = AppDatabase.getDatabase(getContext())
+//                                .dao().getBookByID(book.getBookID()).getQuantities();
+//                    }
+//                });
+
                 Utils.cart.addToCart(book);
                 holder.getTvQuantity().setText("Số lượng: " + Utils.cart.getCart().get(book.getBookID()).getAmount());
                 tvTotalPrice.setText("Tổng tiền: " + Utils.cart.getTotalPrice());
