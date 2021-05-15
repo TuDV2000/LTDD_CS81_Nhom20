@@ -121,16 +121,16 @@ public class AccbuyerFragment extends Fragment {
             System.out.println("================Vui lòng nhập đúng số điện thoại=============");
             return false;
         }
-        if (newAddress.equals(oldAddress)){
-            Toast.makeText(getContext(), "Bạn không thay đổi số điện thoại", Toast.LENGTH_SHORT).show();
-            System.out.println("================Bạn không thay đổi số điện thoại=============");
-            return false;
-        }
-        if(newPhone.equals(oldPhone)){
-            Toast.makeText(getContext(), "Bạn không thay đổi địa chỉ", Toast.LENGTH_SHORT).show();
-            System.out.println("================Bạn không thay đổi địa chỉ=============");
-            return false;
-        }
+//        if (newAddress.equals(oldAddress)){
+//            Toast.makeText(getContext(), "Bạn không thay đổi số điện thoại", Toast.LENGTH_SHORT).show();
+//            System.out.println("================Bạn không thay đổi số điện thoại=============");
+//            return false;
+//        }
+//        if(newPhone.equals(oldPhone)){
+//            Toast.makeText(getContext(), "Bạn không thay đổi địa chỉ", Toast.LENGTH_SHORT).show();
+//            System.out.println("================Bạn không thay đổi địa chỉ=============");
+//            return false;
+//        }
         return true;
     }
     private void setData(){

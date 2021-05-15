@@ -64,7 +64,10 @@ public class Cart {
         } else {
             book.setAmount(item.getAmount() + quantities);
         }
-        totalPrice += book.getPrice() * book.getAmount();
+
+        System.out.println("book.getPrice() * quantities: "+book.getPrice() * quantities);
+        System.out.println("book.getPrice() * book.getAmount(): "+book.getPrice() * book.getAmount());
+        totalPrice += book.getPrice() * quantities;
         cart.put(book.getBookID(),book);
     }
 

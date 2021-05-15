@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,7 @@ import java.util.Date;
 public class PaymentActivity extends AppCompatActivity {
 
     private RecyclerView rcvCart;
-    private BookAdapter bookAdapter;
+    private BookHomeAdapter bookHomeAdapter;
     private TextView tvTotal, tvCusName, tvCusAddress, tvCusNumberPhone;
     private Button btnOrder;
 
@@ -116,31 +117,21 @@ public class PaymentActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rcvCart.setLayoutManager(linearLayoutManager);
 
-        bookAdapter = new BookAdapter();
+        bookHomeAdapter = new BookHomeAdapter();
 
-        bookAdapter.setData(Utils.cart.getCartItemAll(), new BookAdapter.IClickAddToCartListener() {
-            @Override
-            public void onClickAddToCart(ImageView imgAddToCart, Book book, BookAdapter.BookViewHolder holder) {
-
-            }
-        }, new BookAdapter.IClickGoToDetailListener() {
+        bookHomeAdapter.setData(Utils.cart.getCartItemAll(), new BookHomeAdapter.IClickGoToDetailListener() {
             @Override
             public void onClickGoToDetail(Book book) {
+                Intent intent = new Intent(PaymentActivity.this, BookDetailActivity.class);
 
+                intent.putExtra("bookID", book.getBookID());
+                intent.putExtra("flag", false);
+
+                startActivity(intent);
             }
-        }, new BookAdapter.IClickRemoveFromCartListener() {
-            @Override
-            public void onClickRemoveFromCart(Book book, BookAdapter.BookViewHolder holder) {
+        }, false);
 
-            }
-        }, new BookAdapter.IClickRemoveBookFromCartListener() {
-            @Override
-            public void onClickRemoveBookFromCart(Book book, BookAdapter.BookViewHolder holder) {
-
-            }
-        });
-
-        rcvCart.setAdapter(bookAdapter);
+        rcvCart.setAdapter(bookHomeAdapter);
     }
 
 }

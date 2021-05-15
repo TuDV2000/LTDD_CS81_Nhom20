@@ -18,13 +18,15 @@ import com.example.salebookapp.entities.Book;
 public class BookDetailActivity extends AppCompatActivity {
 
     ImageView imvBook;
-    TextView tvBookName, tvBookPrice, tvDescribe, tvQuantities;
+    TextView tvBookName, tvBookPrice, tvDescribe, tvQuantities, tvSL;
     Button btnPlus, btnMinus, btnAddCart;
     Intent intent;
     int bookID;
     int quantities = 0;
     int dbquantities;
     Book book;
+    boolean flag;
+    HomeActivity homeActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,20 @@ public class BookDetailActivity extends AppCompatActivity {
         anhxa();
         intent = getIntent();
         bookID = intent.getIntExtra("bookID", 1);
+        flag = intent.getBooleanExtra("flag", true);
         setdata();
+
+        if (!flag) {
+            btnPlus.setEnabled(false);
+            btnPlus.setAlpha(0);
+            btnMinus.setEnabled(false);
+            btnMinus.setAlpha(0);
+            tvQuantities.setAlpha(0);
+            btnAddCart.setEnabled(false);
+            btnAddCart.setAlpha(0);
+            tvSL.setAlpha(0);
+
+        }
 
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
@@ -49,13 +64,6 @@ public class BookDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 quantities++;
                 tvQuantities.setText(String.valueOf(quantities));
-//                if (dbquantities == Utils.cart.getCart().get(bookID).getAmount()) {
-//                    System.out.println("tang so luong");
-////                    Toast.makeText(getContextThis(), "Đã hết hàng", Toast.LENGTH_SHORT);
-//                } else {
-//                    quantities += 1;
-//
-//                }
             }
         });
         btnMinus.setOnClickListener(new View.OnClickListener() {
@@ -71,8 +79,8 @@ public class BookDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Book b = Utils.cart.getCart().get(bookID);
                 int i = (b==null?0:b.getAmount()) + quantities;
-                System.out.println(b);
-                if (isAddToCart(bookID, i, dbquantities)) {
+
+                if (isAddToCart(bookID, quantities, dbquantities)) {
                     Utils.cart.addToCart(book, quantities);
                     finish();
                 } else {
@@ -80,11 +88,6 @@ public class BookDetailActivity extends AppCompatActivity {
                     Toast.makeText(BookDetailActivity.this,
                             "Số lượng có thể thêm là " + (dbquantities - i + quantities), Toast.LENGTH_SHORT).show();
                 }
-
-//                if (quantities > 0) {
-//
-//                }
-
             }
         });
     }
@@ -130,6 +133,7 @@ public class BookDetailActivity extends AppCompatActivity {
         btnPlus = findViewById(R.id.btn_detail_plus_detail);
         btnMinus = findViewById(R.id.btn_detail_minus_detail);
         btnAddCart = findViewById(R.id.btn_describe_addcart);
+        tvSL = findViewById(R.id.tv_soLuong);
     }
 
 

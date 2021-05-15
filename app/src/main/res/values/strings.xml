@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">SaleBookApp</string>
-    <string name="err_fullname">Please enter valid name</string>
-    <string name="err_phone">Please enter valid phone number</string>
-    <string name="err_email">Please enter valid Email</string>
-    <string name="err_password">Minimum eight characters, at least one uppercase letter, one lowercase letter and one number</string>
+    <string name="err_fullname">Họ và tên không được trống!</string>
+    <string name="err_phone">Số điện thoại chưa chính xác!</string>
+    <string name="err_email">Email chưa chính xác!</string>
+    <string name="err_password">Mật khẩu tối thiểu 8 ký tự! Bao gồm: ký tự HOA, thường và số</string>
     <string name="err_value">Please enter value</string>
-    <string name="err_confirmpassword">Those passwords didn’t match. Try again.</string>
+    <string name="err_confirmpassword">Mật khẩu không trùng khớp! Hãy thử lại!</string>
+
     <string-array name="option">
         <item>Seller</item>
         <item>Buyer</item>

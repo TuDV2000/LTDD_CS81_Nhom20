@@ -1,5 +1,7 @@
 package com.example.salebookapp;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -62,7 +64,7 @@ public class BookFragment extends Fragment {
 
                 startActivity(intent);
             }
-        });
+        }, true);
 
         rcvBook.setAdapter(bookHomeAdapter);
 
@@ -88,12 +90,19 @@ public class BookFragment extends Fragment {
                         Intent intent = new Intent(getContext(), BookDetailActivity.class);
 
                         intent.putExtra("bookID", book.getBookID());
+                        intent.putExtra("flag", true);
 
                         startActivity(intent);
                     }
-                });
+                }, true);
             }
         }, 200);
+
+        if (Utils.cart.getCartItemAll() != null) {
+            mainActivity.setCountProductInCart(Utils.cart.getCartItemAll().size());
+        } else {
+            mainActivity.setCountProductInCart(0);
+        }
     }
 
     @Override

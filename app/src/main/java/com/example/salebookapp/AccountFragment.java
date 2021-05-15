@@ -36,6 +36,8 @@ public class AccountFragment extends Fragment {
     AwesomeValidation awesomeValidation;
     View view;
     String message = "";
+    private HomeActivity mainActivity;
+    boolean flag=false;
 
 
     @Override
@@ -48,6 +50,13 @@ public class AccountFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mainActivity = (HomeActivity) getActivity();
     }
 
     private void ControlButton() {
@@ -80,6 +89,7 @@ public class AccountFragment extends Fragment {
                 String user = edt_user.getText().toString();
                 String pass = edt_pass.getText().toString();
 
+
                 message = "Tài khoản hoặc mật khẩu chưa chính xác.";
                 if (user.length() != 0 && pass.length() != 0) {
                     AppDatabase.databaseWriteExecutor.execute(new Runnable() {
@@ -93,6 +103,11 @@ public class AccountFragment extends Fragment {
                                     Utils.accLogin = acc;
                                     Intent intent = new Intent(getContext(), HomeActivity.class);
                                     message = "Đăng nhập thành công";
+//                                    flag = true;
+//                                    if (Utils.fragmentCurrentId != 2) {
+//                                        getActivity().finish();
+//                                        startActivity(intent);
+//                                    }
                                     getActivity().finish();
                                     startActivity(intent);
                                 } else {
@@ -107,13 +122,17 @@ public class AccountFragment extends Fragment {
                         public void run() {
                             Toast.makeText(getContext(), message,
                                     Toast.LENGTH_SHORT).show();
-                        }
-                    }, 200);
 
+                        }
+                    }, 300);
                 } else {
                     Toast.makeText(getContext(),
                             "Mời bạn nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 }
+//                AccountFragment.this.notify();
+//                System.out.println("adada" + flag);
+//                if(flag) mainActivity.getAhBottomNavigationViewPager()
+//                        .setCurrentItem(Utils.fragmentCurrentId);
             }
         });
         tv_signup.setOnClickListener(new View.OnClickListener() {

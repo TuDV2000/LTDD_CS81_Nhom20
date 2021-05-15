@@ -19,8 +19,7 @@
             android:id="@+id/img_book_home"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:src="@drawable/book1" />
+            android:layout_centerVertical="true"/>
 
         <TextView
             android:id="@+id/tv_book_name_home"

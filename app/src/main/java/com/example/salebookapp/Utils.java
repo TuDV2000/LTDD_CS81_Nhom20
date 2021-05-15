@@ -15,6 +15,7 @@ public class Utils {
     public static Account accLogin = null;
     public static Context context;
     public static Cart cart = new Cart();
+    public static int fragmentCurrentId = 1;
 
     public static String byPass(String pass){
         String plaintext = pass;

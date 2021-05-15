@@ -17,7 +17,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/tv_detail_book_name"
@@ -26,7 +26,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="5dp"
-            android:text="Vuot qua tat ca"
+            android:text="Tên sách"
             android:textAlignment="textStart"
             android:textSize="30dp"
             android:textStyle="bold"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
-            android:text="100000đ"
+            android:text="Giá"
             android:textColor="@color/theme_darkcolor"
             android:textSize="25dp"
             android:textStyle="bold"

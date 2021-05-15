@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,7 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment{
 
     private RecyclerView rcvCart;
     private View mView;
@@ -42,6 +43,7 @@ public class CartFragment extends Fragment {
     private BookAdapter bookAdapter;
     private TextView tvTotalPrice, tvPrice;
     private Button btnPayment;
+    int id;
 
     public CartFragment() {
 
@@ -61,6 +63,7 @@ public class CartFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_cart, container, false);
 
         setUp();
+        id = getId();
 
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,12 +73,16 @@ public class CartFragment extends Fragment {
                         startActivity(new Intent(getContext(), PaymentActivity.class));
                     } else {
                         Toast.makeText(getContext(), "Bạn chưa đăng nhập !!!", Toast.LENGTH_SHORT).show();
+                        Utils.fragmentCurrentId = 2;
+                        mainActivity.getAhBottomNavigationViewPager().setCurrentItem(3);
+
                     }
                 } else {
                     Toast.makeText(getContext(), "Không có gì trong giỏ !!!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
 
         return mView;
     }
@@ -85,6 +92,12 @@ public class CartFragment extends Fragment {
         super.onResume();
 
         mainActivity = (HomeActivity) getActivity();
+
+        if (Utils.cart.getCartItemAll() != null) {
+            mainActivity.setCountProductInCart(Utils.cart.getCartItemAll().size());
+        } else {
+            mainActivity.setCountProductInCart(0);
+        }
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mainActivity);
         rcvCart.setLayoutManager(linearLayoutManager);
@@ -110,7 +123,12 @@ public class CartFragment extends Fragment {
         }, new BookAdapter.IClickGoToDetailListener() {
             @Override
             public void onClickGoToDetail(Book book) {
+                Intent intent = new Intent(getContext(), BookDetailActivity.class);
 
+                intent.putExtra("bookID", book.getBookID());
+                intent.putExtra("flag", false);
+
+                startActivity(intent);
             }
         }, new BookAdapter.IClickRemoveFromCartListener() {
             @Override
@@ -128,6 +146,11 @@ public class CartFragment extends Fragment {
                 Utils.cart.removeBookFromCart(book);
                 Intent intent = new Intent(getContext(),getContext().getClass() );
                 tvTotalPrice.setText("Tổng tiền: " + Utils.cart.getTotalPrice());
+                if (Utils.cart.getCartItemAll() != null) {
+                    mainActivity.setCountProductInCart(Utils.cart.getCartItemAll().size());
+                } else {
+                    mainActivity.setCountProductInCart(0);
+                }
                 onResume();
             }
         });

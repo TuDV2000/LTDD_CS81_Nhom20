@@ -118,12 +118,16 @@ public class HomeActivity extends AppCompatActivity {
 
     public void setCountProductInCart(int count) {
         mCountBook = count;
-        AHNotification notification = new AHNotification.Builder()
-                .setText("1")
-                .setBackgroundColor(ContextCompat.getColor(HomeActivity.this, R.color.red))
-                .setTextColor(ContextCompat.getColor(HomeActivity.this, R.color.white))
-                .build();
-        ahBottomNavigation.setNotification(notification, 1);
+        if (count == 0) {
+            ahBottomNavigation.setNotification(new AHNotification.Builder().build(), 1);
+        } else {
+            AHNotification notification = new AHNotification.Builder()
+                    .setText(String.valueOf(Utils.cart.getCartItemAll().size()))
+                    .setBackgroundColor(ContextCompat.getColor(HomeActivity.this, R.color.red))
+                    .setTextColor(ContextCompat.getColor(HomeActivity.this, R.color.white))
+                    .build();
+            ahBottomNavigation.setNotification(notification, 1);
+        }
     }
 
     public int getCountBook() {
@@ -171,5 +175,78 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+
+    public AHBottomNavigation getAhBottomNavigation() {
+        return ahBottomNavigation;
+    }
+
+    public void setAhBottomNavigation(AHBottomNavigation ahBottomNavigation) {
+        this.ahBottomNavigation = ahBottomNavigation;
+    }
+
+    public AHBottomNavigationViewPager getAhBottomNavigationViewPager() {
+        return ahBottomNavigationViewPager;
+    }
+
+    public void setAhBottomNavigationViewPager(AHBottomNavigationViewPager ahBottomNavigationViewPager) {
+        this.ahBottomNavigationViewPager = ahBottomNavigationViewPager;
+    }
+
+    public ViewPagerAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(ViewPagerAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    public void setViewEndAnimation(View viewEndAnimation) {
+        this.viewEndAnimation = viewEndAnimation;
+    }
+
+    public void setViewAnimation(ImageView viewAnimation) {
+        this.viewAnimation = viewAnimation;
+    }
+
+    public AHBottomNavigationItem getItem1() {
+        return item1;
+    }
+
+    public void setItem1(AHBottomNavigationItem item1) {
+        this.item1 = item1;
+    }
+
+    public AHBottomNavigationItem getItem2() {
+        return item2;
+    }
+
+    public void setItem2(AHBottomNavigationItem item2) {
+        this.item2 = item2;
+    }
+
+    public AHBottomNavigationItem getItem3() {
+        return item3;
+    }
+
+    public void setItem3(AHBottomNavigationItem item3) {
+        this.item3 = item3;
+    }
+
+    public int getmCountBook() {
+        return mCountBook;
+    }
+
+    public void setmCountBook(int mCountBook) {
+        this.mCountBook = mCountBook;
+    }
+
+    public static List<Book> getBookList() {
+        return bookList;
+    }
+
+    public static void setBookList(List<Book> bookList) {
+        HomeActivity.bookList = bookList;
     }
 }

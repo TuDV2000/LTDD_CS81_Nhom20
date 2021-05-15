@@ -61,9 +61,6 @@ public class ConfirmActivity extends AppCompatActivity {
                         public void run() {
                             AppDatabase.getDatabase(getApplicationContext()).dao().customerInsert(cus);
                             AppDatabase.getDatabase(getApplicationContext()).dao().accountInsert(acc);
-
-                            Utils.accLogin = AppDatabase.getDatabase(getApplicationContext())
-                                    .dao().getAccount(user);
                         }
                     });
                     Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
@@ -80,13 +77,13 @@ public class ConfirmActivity extends AppCompatActivity {
             public void onClick(View v) {
                 edtConfirmCode.setText("");
                 sendMail();
-                if(isConfirmTrue()){
-                    Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(ConfirmActivity.this, AccountFragment.class);
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(ConfirmActivity.this, "Xác thực không thành công", Toast.LENGTH_LONG).show();
-                }
+//                if(isConfirmTrue()){
+//                    Toast.makeText(ConfirmActivity.this, "Xác thực thành công", Toast.LENGTH_LONG).show();
+//                    Intent intent = new Intent(ConfirmActivity.this, AccountFragment.class);
+//                    startActivity(intent);
+//                }else {
+//                    Toast.makeText(ConfirmActivity.this, "Xác thực không thành công", Toast.LENGTH_LONG).show();
+//                }
             }
         });
     }

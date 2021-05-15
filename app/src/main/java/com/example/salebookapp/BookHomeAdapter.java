@@ -20,16 +20,18 @@ public class BookHomeAdapter extends RecyclerView.Adapter<BookHomeAdapter.BookVi
 
     private List<Book> mListBook;
     private IClickGoToDetailListener iClickGoToDetailListener;
+    private boolean flag;
 
     public interface IClickGoToDetailListener{
         void onClickGoToDetail(Book book);
     }
 
 
-    public void setData(List<Book> list,IClickGoToDetailListener listener1){
+    public void setData(List<Book> list,IClickGoToDetailListener listener1, boolean flag){
         this.mListBook = list;
         this.iClickGoToDetailListener = listener1;
         notifyDataSetChanged();
+        this.flag = flag;
     }
 
     @NonNull
@@ -55,8 +57,12 @@ public class BookHomeAdapter extends RecyclerView.Adapter<BookHomeAdapter.BookVi
             holder.tvBookName.setText(book.getBookName());
         }
         holder.tvBookPrice.setText(String.valueOf(book.getPrice()));
-        holder.tvBookQuantities.setText("Còn " + book.getQuantities() + " sản phẩm");
-
+        if (flag == true) {
+            holder.tvBookQuantities.setText("Còn " + book.getQuantities() + " sản phẩm");
+        } else {
+            holder.tvBookQuantities
+                    .setText("Số lượng: " + Utils.cart.getCart().get(book.getBookID()).getAmount());
+        }
         if (book.getQuantities() == 0) {
             holder.item.setAlpha((float) 0.6);
             holder.item.setEnabled(false);
